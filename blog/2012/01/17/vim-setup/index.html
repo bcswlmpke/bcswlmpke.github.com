@@ -9,7 +9,13 @@
   <meta name="author" content="Hank">
 
   
-  <meta name="description" content="產生Vim工作目錄 - mkdir bcswlmpke-vim - cd bcswlmpke-vim - git init - touch README - git add README - git commit -m 'first commit' - git remote add origin &hellip;">
+  <meta name="description" content="產生Vim工作目錄 - mkdir bcswlmpke-vim
+- cd bcswlmpke-vim
+- git init
+- touch README
+- git add README
+- git commit -m 'first commit'
+- git remote add origin &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -95,54 +101,64 @@
 <div class="entry-content"><ul>
 <li>產生Vim工作目錄
 
-<pre><code>  - mkdir bcswlmpke-vim
-  - cd bcswlmpke-vim
-  - git init
-  - touch README
-  - git add README
-  - git commit -m 'first commit'
-  - git remote add origin git@github.com:bcswlmpke/bcswlmpke-vim.git
-  - git push -u origin master
+<pre><code>- mkdir bcswlmpke-vim
+- cd bcswlmpke-vim
+- git init
+- touch README
+- git add README
+- git commit -m 'first commit'
+- git remote add origin git@github.com:bcswlmpke/bcswlmpke-vim.git
+- git push -u origin master
 </code></pre></li>
 <li>用 pathogen 來管理 Vim plugin
 
-<pre><code>  - 每個 plugin 都獨立安裝在 ~/.vim/bundle 下
-  - 每個 plugin 都以 git submodule 的方式來管理，請參考[Git Submodules and pathogen][1]
-  - cd bcswlmpke-vim
-  - touch vimrc
-  - touch gvimrc
-  - ln -s ~/bcswlmpke-vim/vimrc ~/.vimrc
-  - ln -s ~/bcswlmpke-vim/gvimrc ~/.gvimrc
-  - ln -s ~/bcswlmpke-vim ~/.vim
-  - 安裝 pathogen，下載 pathogen.vim 放到 .vim/autoload 
-  - Activate pathogen, 需要在 .vimrc 加入下列兩行：
-          - call pathogen#runtime_append_all_bundles()
-          - call pathogen#helptags()
-</code></pre></li>
-<li><p>以 Submodule 的方式安裝 plugins</p>
+<ul>
+<li>每個 plugin 都獨立安裝在 ~/.vim/bundle 下</li>
+<li>每個 plugin 都以 git submodule 的方式來管理，請參考<a href="http://vimcasts.org/episodes/synchronizing-plugins-with-git-submodules-and-pathogen" title="Git submodules and pathogen">Git Submodules and pathogen</a>
 
-<pre><code>  - cd bcswlmpke-vim
-  - mkdir bundle
-  - git submodule add https://github.com/fholgado/minibufexpl.vim.git bundle/minibufexpl.vim
-</code></pre></li>
-<li><p>安裝 Vim configuraton 到其它電腦</p>
+<ul>
+<li>cd bcswlmpke-vim</li>
+<li>touch vimrc</li>
+<li>touch gvimrc</li>
+<li>ln -s ~/bcswlmpke-vim/vimrc ~/.vimrc</li>
+<li>ln -s ~/bcswlmpke-vim/gvimrc ~/.gvimrc</li>
+<li>ln -s ~/bcswlmpke-vim ~/.vim</li>
+<li>安裝 pathogen，下載 pathogen.vim 放到 .vim/autoload</li>
+<li>Activate pathogen, 需要在 .vimrc 加入下列兩行：
 
-<pre><code>  - cd ~
-  - git clone http://github.com/username/dotvim.git ~/.vim
-  - ln -s ~/.vim/vimrc ~/.vimrc
-  - ln -s ~/.vim/gvimrc ~/.gvimrc
-  - cd ~/.vim
-  - git submodule init
-  - git submodule update
+<ul>
+<li>call pathogen#runtime_append_all_bundles()</li>
+<li>call pathogen#helptags()</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>以 Submodule 的方式安裝 plugins
+
+<pre><code>- cd bcswlmpke-vim
+- mkdir bundle
+- git submodule add https://github.com/fholgado/minibufexpl.vim.git bundle/minibufexpl.vim
+</code></pre></li>
+<li>安裝 Vim configuraton 到其它電腦
+
+<pre><code>- cd ~
+- git clone http://github.com/username/dotvim.git ~/.vim
+- ln -s ~/.vim/vimrc ~/.vimrc
+- ln -s ~/.vim/gvimrc ~/.gvimrc
+- cd ~/.vim
+- git submodule init
+- git submodule update
 </code></pre></li>
 <li>升級 plugin bundle
 
-<pre><code>  - cd minibufexpl.vim
-  - git pull origin master
+<pre><code>- cd minibufexpl.vim
+- git pull origin master
 </code></pre></li>
 <li>升級所有的 bundled plugins
 
-<pre><code>  - git submodule foreach git pull origin master
+<pre><code>- git submodule foreach git pull origin master
 </code></pre></li>
 </ul>
 
