@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Hank 學習筆記</title>
+  <title>管理Vim plugins - Hank 學習筆記</title>
   <meta name="author" content="Hank">
 
   
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://bcswlmpke.github.com">
+  <link rel="canonical" href="http://bcswlmpke.github.com/blog/2012/01/17/vim-setup">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -62,15 +62,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/01/17/vim-setup/">管理Vim Plugins</a></h1>
+      <h1 class="entry-title">管理Vim Plugins</h1>
     
     
       <p class="meta">
@@ -88,14 +85,14 @@
 
 <time datetime="2012-01-17T00:19:00+08:00" pubdate data-updated="true">Jan 17<span>th</span>, 2012</time>
         
-         | <a href="/blog/2012/01/17/vim-setup/#disqus_thread">Comments</a>
+         | <a href="#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><ul>
+<div class="entry-content"><ul>
 <li>產生Vim工作目錄
 
 <pre><code>  - mkdir bcswlmpke-vim
@@ -150,86 +147,16 @@
 </ul>
 
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/14/octopress-directory-structure/">Octopress的目錄結構</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">Hank</span></span>
 
-<time datetime="2012-01-14T00:21:00+08:00" pubdate data-updated="true">Jan 14<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/01/14/octopress-directory-structure/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul>
-<li>octopress/
-
-<ul>
-<li>_config.yml 可以做基本設定修改</li>
-</ul>
-</li>
-<li>octopress/plugins
-
-<ul>
-<li>放置外掛程式</li>
-</ul>
-</li>
-<li>octopress/source/_posts
-
-<ul>
-<li>放置你寫的文章</li>
-</ul>
-</li>
-<li>octopress/source/_includes/asides
-
-<ul>
-<li>修改_config.yml -> rake generate 會在這邊產生html檔案</li>
-</ul>
-</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/12/octopress-note/">How to Use Octopress</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -241,55 +168,44 @@
   
 
 
-<time datetime="2012-01-12T21:53:00+08:00" pubdate data-updated="true">Jan 12<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/01/12/octopress-note/#disqus_thread">Comments</a>
-        
-      </p>
+<time datetime="2012-01-17T00:19:00+08:00" pubdate data-updated="true">Jan 17<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/vim/'>Vim</a>
+  
+</span>
+
+
+    </p>
     
-  </header>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://bcswlmpke.github.com/blog/2012/01/17/vim-setup/" data-via="" data-counturl="http://bcswlmpke.github.com/blog/2012/01/17/vim-setup/" >Tweet</a>
+  
+  
+  
+</div>
 
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/01/14/octopress-directory-structure/" title="Previous Post: Octopress的目錄結構">&laquo; Octopress的目錄結構</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
-  <div class="entry-content"><ul>
-<li>安裝
-
-<ul>
-<li>請參考<a href="http://octopress.org/docs/setup/" title="Octopress Setup">Octopress官網</a></li>
-<li>設定Octopress請參考<a href="http://octopress.org/docs/configuring/" title="Configuring Octopress">Configuring Octopress</a></li>
-</ul>
-</li>
-<li>用 Markdown 寫文章
-
-<ul>
-<li>rake new_post[文章名稱]</li>
-<li>請參考<a href="http://markdown.tw" title="Markdown Syntax">Markdown中文文件</a></li>
-<li>rake generate -> rake preview -> 然後<a href="http://127.0.0.1:4000/">這裡</a>可以看到預覽畫面</li>
-</ul>
-</li>
-<li>發佈
-
-<ul>
-<li>git checkout source</li>
-<li>git push origin source</li>
-<li>rake generate</li>
-<li>rake deploy</li>
-</ul>
-</li>
-</ul>
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
-  
-  
 
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     <section>
@@ -321,6 +237,7 @@
   
 </aside>
 
+
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -335,7 +252,10 @@
       var disqus_shortname = 'bcswlmpke';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://bcswlmpke.github.com/blog/2012/01/17/vim-setup/';
+        var disqus_url = 'http://bcswlmpke.github.com/blog/2012/01/17/vim-setup/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
