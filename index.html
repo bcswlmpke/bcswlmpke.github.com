@@ -163,6 +163,37 @@
 
 <pre><code>- git submodule foreach git pull origin master
 </code></pre></li>
+<li>移除 Submodule
+
+<ul>
+<li>砍掉目錄
+
+<ul>
+<li>git rm &#8211;cached [要移除的目錄]</li>
+<li>rm -rf [要移除的目錄]</li>
+</ul>
+</li>
+<li>修改 .gitmodules
+
+<ul>
+<li>將相關內容移除</li>
+</ul>
+</li>
+<li>Commit
+
+<ul>
+<li>git add .gitmodules</li>
+<li>git commit -m &#8220;Remove submodule xxx&#8221;</li>
+</ul>
+</li>
+<li>Sync
+
+<ul>
+<li>git submodule sync</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
 </div>
