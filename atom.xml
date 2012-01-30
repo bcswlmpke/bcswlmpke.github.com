@@ -4,7 +4,7 @@
   <title><![CDATA[Hank 學習筆記]]></title>
   <link href="http://bcswlmpke.github.com/atom.xml" rel="self"/>
   <link href="http://bcswlmpke.github.com/"/>
-  <updated>2012-01-29T21:03:59+08:00</updated>
+  <updated>2012-01-30T23:11:26+08:00</updated>
   <id>http://bcswlmpke.github.com/</id>
   <author>
     <name><![CDATA[Hank]]></name>
@@ -12,6 +12,85 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[我的工具箱]]></title>
+    <link href="http://bcswlmpke.github.com/blog/2012/01/30/my-toolbox/"/>
+    <updated>2012-01-30T22:33:00+08:00</updated>
+    <id>http://bcswlmpke.github.com/blog/2012/01/30/my-toolbox</id>
+    <content type="html"><![CDATA[<p>最近看到<a href="http://blog.eddie.com.tw/2012/01/04/my-toolbox/" title="高見龍的工具箱">高見龍的工具箱</a>與<a href="http://blog.gasolin.idv.tw/2012/01/blog-post.html?m=1" title="Gasolin的工具箱">Gasolin的工具箱</a>，
+於是自己也興起了念頭，整理一下目前自己常用的工具。</p>
+
+<hr />
+
+<ul>
+<li><strong>實體工具</strong>
+
+<ul>
+<li>Mac Book Pro 13&#8221;</li>
+<li>Samsung i9000</li>
+</ul>
+</li>
+<li><strong>我的 MBP 不可缺少的軟體</strong>
+
+<ul>
+<li>TotalFinder</li>
+<li>Google Chrome
+
+<ul>
+<li>Plugins
+
+<ul>
+<li>Xmarks</li>
+<li>Google Dictionary</li>
+<li>VerticalTabs</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Adium</li>
+<li>Skype</li>
+<li>Dropbox</li>
+<li>iTerm2</li>
+<li>MPlayerX</li>
+<li>MacVim
+
+<ul>
+<li><a href="https://github.com/bcswlmpke/bcswlmpke-vim" title="Hank's vimrc">我常用的vim plugins</a></li>
+</ul>
+</li>
+<li>Eclipse</li>
+<li>XCode</li>
+<li>Alfred</li>
+<li>無蝦米</li>
+</ul>
+</li>
+<li><strong>我的 i9000 不可缺少的軟體</strong>
+
+<ul>
+<li>ES 檔案瀏覽器</li>
+<li>Fancy Widget</li>
+<li>Quick Settings</li>
+<li>Advanced Task Killer</li>
+<li>條碼掃描器</li>
+<li>RealCalc</li>
+<li>SwiFTP</li>
+<li>快圖瀏覽</li>
+<li>Fast Image View</li>
+<li>Adobe Reader</li>
+<li>Camera360</li>
+<li>Google+</li>
+<li>Facebook</li>
+<li>噗浪肉骨獸</li>
+<li>LINE</li>
+<li>海豚瀏覽器</li>
+<li>MoboPlayer</li>
+</ul>
+</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[管理Vim plugins]]></title>

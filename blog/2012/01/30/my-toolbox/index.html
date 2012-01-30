@@ -5,17 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>管理Vim plugins - Hank 學習筆記</title>
+  <title>我的工具箱 - Hank 學習筆記</title>
   <meta name="author" content="Hank">
 
   
-  <meta name="description" content="產生Vim工作目錄 - mkdir bcswlmpke-vim
-- cd bcswlmpke-vim
-- git init
-- touch README
-- git add README
-- git commit -m 'first commit'
-- git remote add origin &hellip;">
+  <meta name="description" content="最近看到高見龍的工具箱與Gasolin的工具箱，
+於是自己也興起了念頭，整理一下目前自己常用的工具。 實體工具 Mac Book Pro 13&#8221;
+Samsung i9000 我的 MBP 不可缺少的軟體 TotalFinder
+Google Chrome Plugins Xmarks &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -24,7 +21,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://bcswlmpke.github.com/blog/2012/01/17/vim-setup">
+  <link rel="canonical" href="http://bcswlmpke.github.com/blog/2012/01/30/my-toolbox">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -73,7 +70,7 @@
   
   <header>
     
-      <h1 class="entry-title">管理Vim Plugins</h1>
+      <h1 class="entry-title">我的工具箱</h1>
     
     
       <p class="meta">
@@ -89,7 +86,7 @@
   
 
 
-<time datetime="2012-01-17T00:19:00+08:00" pubdate data-updated="true">Jan 17<span>th</span>, 2012</time>
+<time datetime="2012-01-30T22:33:00+08:00" pubdate data-updated="true">Jan 30<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -98,97 +95,73 @@
   </header>
 
 
-<div class="entry-content"><ul>
-<li>產生Vim工作目錄
+<div class="entry-content"><p>最近看到<a href="http://blog.eddie.com.tw/2012/01/04/my-toolbox/" title="高見龍的工具箱">高見龍的工具箱</a>與<a href="http://blog.gasolin.idv.tw/2012/01/blog-post.html?m=1" title="Gasolin的工具箱">Gasolin的工具箱</a>，
+於是自己也興起了念頭，整理一下目前自己常用的工具。</p>
 
-<pre><code>- mkdir bcswlmpke-vim
-- cd bcswlmpke-vim
-- git init
-- touch README
-- git add README
-- git commit -m 'first commit'
-- git remote add origin git@github.com:bcswlmpke/bcswlmpke-vim.git
-- git push -u origin master
-</code></pre></li>
-<li>用 pathogen 來管理 Vim plugin
+<hr />
 
 <ul>
-<li>每個 plugin 都獨立安裝在 ~/.vim/bundle 下</li>
-<li>每個 plugin 都以 git submodule 的方式來管理，請參考<a href="http://vimcasts.org/episodes/synchronizing-plugins-with-git-submodules-and-pathogen" title="Git submodules and pathogen">Git Submodules and pathogen</a>
+<li><strong>實體工具</strong>
 
 <ul>
-<li>cd bcswlmpke-vim</li>
-<li>touch vimrc</li>
-<li>touch gvimrc</li>
-<li>ln -s ~/bcswlmpke-vim/vimrc ~/.vimrc</li>
-<li>ln -s ~/bcswlmpke-vim/gvimrc ~/.gvimrc</li>
-<li>ln -s ~/bcswlmpke-vim ~/.vim</li>
-<li>安裝 pathogen，下載 pathogen.vim 放到 .vim/autoload</li>
-<li>Activate pathogen, 需要在 .vimrc 加入下列兩行：
+<li>Mac Book Pro 13&#8221;</li>
+<li>Samsung i9000</li>
+</ul>
+</li>
+<li><strong>我的 MBP 不可缺少的軟體</strong>
 
 <ul>
-<li>call pathogen#runtime_append_all_bundles()</li>
-<li>call pathogen#helptags()</li>
+<li>TotalFinder</li>
+<li>Google Chrome
+
+<ul>
+<li>Plugins
+
+<ul>
+<li>Xmarks</li>
+<li>Google Dictionary</li>
+<li>VerticalTabs</li>
 </ul>
 </li>
 </ul>
 </li>
-</ul>
-</li>
-<li>以 Submodule 的方式安裝 plugins
-
-<pre><code>- cd bcswlmpke-vim
-- mkdir bundle
-- git submodule add https://github.com/fholgado/minibufexpl.vim.git bundle/minibufexpl.vim
-</code></pre></li>
-<li>安裝 Vim configuraton 到其它電腦
-
-<pre><code>- cd ~
-- git clone http://github.com/username/dotvim.git ~/.vim
-- ln -s ~/.vim/vimrc ~/.vimrc
-- ln -s ~/.vim/gvimrc ~/.gvimrc
-- cd ~/.vim
-- git submodule init
-- git submodule update
-</code></pre></li>
-<li>升級 plugin bundle
-
-<pre><code>- cd minibufexpl.vim
-- git pull origin master
-</code></pre></li>
-<li>升級所有的 bundled plugins
-
-<pre><code>- git submodule foreach git pull origin master
-</code></pre></li>
-<li>移除 Submodule
+<li>Adium</li>
+<li>Skype</li>
+<li>Dropbox</li>
+<li>iTerm2</li>
+<li>MPlayerX</li>
+<li>MacVim
 
 <ul>
-<li>砍掉目錄
-
-<ul>
-<li>git rm &#8211;cached [要移除的目錄]</li>
-<li>rm -rf [要移除的目錄]</li>
+<li><a href="https://github.com/bcswlmpke/bcswlmpke-vim" title="Hank's vimrc">我常用的vim plugins</a></li>
 </ul>
 </li>
-<li>修改 .gitmodules
-
-<ul>
-<li>將相關內容移除</li>
+<li>Eclipse</li>
+<li>XCode</li>
+<li>Alfred</li>
+<li>無蝦米</li>
 </ul>
 </li>
-<li>Commit
+<li><strong>我的 i9000 不可缺少的軟體</strong>
 
 <ul>
-<li>git add .gitmodules</li>
-<li>git commit -m &#8220;Remove submodule xxx&#8221;</li>
-</ul>
-</li>
-<li>Sync
-
-<ul>
-<li>git submodule sync</li>
-</ul>
-</li>
+<li>ES 檔案瀏覽器</li>
+<li>Fancy Widget</li>
+<li>Quick Settings</li>
+<li>Advanced Task Killer</li>
+<li>條碼掃描器</li>
+<li>RealCalc</li>
+<li>SwiFTP</li>
+<li>快圖瀏覽</li>
+<li>Fast Image View</li>
+<li>Adobe Reader</li>
+<li>Camera360</li>
+<li>Google+</li>
+<li>Facebook</li>
+<li>噗浪肉骨獸</li>
+<li>LINE</li>
+<li>海豚瀏覽器</li>
+<li>MoboPlayer</li>
 </ul>
 </li>
 </ul>
@@ -215,12 +188,12 @@
   
 
 
-<time datetime="2012-01-17T00:19:00+08:00" pubdate data-updated="true">Jan 17<span>th</span>, 2012</time>
+<time datetime="2012-01-30T22:33:00+08:00" pubdate data-updated="true">Jan 30<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/vim/'>Vim</a>
+    <a class='category' href='/blog/categories/tools/'>Tools</a>
   
 </span>
 
@@ -229,7 +202,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://bcswlmpke.github.com/blog/2012/01/17/vim-setup/" data-via="" data-counturl="http://bcswlmpke.github.com/blog/2012/01/17/vim-setup/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://bcswlmpke.github.com/blog/2012/01/30/my-toolbox/" data-via="" data-counturl="http://bcswlmpke.github.com/blog/2012/01/30/my-toolbox/" >Tweet</a>
   
   
   
@@ -238,10 +211,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/01/14/octopress-directory-structure/" title="Previous Post: Octopress的目錄結構">&laquo; Octopress的目錄結構</a>
+        <a class="basic-alignment left" href="/blog/2012/01/17/vim-setup/" title="Previous Post: 管理Vim plugins">&laquo; 管理Vim plugins</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/01/30/my-toolbox/" title="next Post: 我的工具箱">我的工具箱 &raquo;</a>
       
     </p>
   </footer>
@@ -306,8 +277,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://bcswlmpke.github.com/blog/2012/01/17/vim-setup/';
-        var disqus_url = 'http://bcswlmpke.github.com/blog/2012/01/17/vim-setup/';
+        var disqus_identifier = 'http://bcswlmpke.github.com/blog/2012/01/30/my-toolbox/';
+        var disqus_url = 'http://bcswlmpke.github.com/blog/2012/01/30/my-toolbox/';
         var disqus_script = 'embed.js';
       
     (function () {
