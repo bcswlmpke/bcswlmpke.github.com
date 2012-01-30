@@ -1,0 +1,61 @@
+---
+layout: post
+title: "管理Vim plugins"
+date: 2012-01-17 00:19
+comments: true
+categories: Vim
+---
+* 產生Vim工作目錄
+	  - mkdir bcswlmpke-vim
+      - cd bcswlmpke-vim
+      - git init
+      - touch README
+      - git add README
+      - git commit -m 'first commit'
+      - git remote add origin git@github.com:bcswlmpke/bcswlmpke-vim.git
+      - git push -u origin master
+* 用 pathogen 來管理 Vim plugin
+    - 每個 plugin 都獨立安裝在 ~/.vim/bundle 下
+    - 每個 plugin 都以 git submodule 的方式來管理，請參考[Git Submodules and pathogen][1]
+      - cd bcswlmpke-vim
+      - touch vimrc
+      - touch gvimrc
+      - ln -s ~/bcswlmpke-vim/vimrc ~/.vimrc
+      - ln -s ~/bcswlmpke-vim/gvimrc ~/.gvimrc
+      - ln -s ~/bcswlmpke-vim ~/.vim
+      - 安裝 pathogen，下載 pathogen.vim 放到 .vim/autoload 
+      - Activate pathogen, 需要在 .vimrc 加入下列兩行：
+      	  - call pathogen#runtime_append_all_bundles()
+          - call pathogen#helptags()
+* 以 Submodule 的方式安裝 plugins
+      - cd bcswlmpke-vim
+      - mkdir bundle
+      - git submodule add https://github.com/fholgado/minibufexpl.vim.git bundle/minibufexpl.vim
+* 安裝 Vim configuraton 到其它電腦
+      - cd ~
+      - git clone http://github.com/username/dotvim.git ~/.vim
+      - ln -s ~/.vim/vimrc ~/.vimrc
+      - ln -s ~/.vim/gvimrc ~/.gvimrc
+      - cd ~/.vim
+      - git submodule init
+      - git submodule update
+* 升級 plugin bundle
+      - cd minibufexpl.vim
+      - git pull origin master
+* 升級所有的 bundled plugins
+      - git submodule foreach git pull origin master
+* 移除 Submodule
+    - 砍掉目錄
+      - git rm --cached [要移除的目錄]
+      - rm -rf [要移除的目錄]
+    - 修改 .gitmodules
+      - 將相關內容移除
+    - Commit
+      - git add .gitmodules
+      - git commit -m "Remove submodule xxx"
+    - Sync
+      - git submodule sync
+
+
+
+[1]: http://vimcasts.org/episodes/synchronizing-plugins-with-git-submodules-and-pathogen "Git submodules and pathogen"

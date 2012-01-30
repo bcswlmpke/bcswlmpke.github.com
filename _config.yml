@@ -88,11 +88,30 @@ delicious_user:
 delicious_count: 3
 
 # Disqus Comments
-disqus_short_name:
-disqus_show_comment_count: false
+disqus_short_name: bcswlmpke
+disqus_show_comment_count: true
 
 # Google Analytics
 google_analytics_tracking_id:
 
 # Facebook Like
 facebook_like: false
+
+# 2012.01.13
+# ----------------------- #
+#    Categories           #
+# ----------------------- #
+# create categories page
+category_list: true
+# use counter after categories
+category_counter: true
+# category title
+category_title: 分類
+# create an include categories list in @source/_includes/asides/categories_sidebar.html
+# and don't forget to add 'asides/categories_sidebar.html' into @default_asides if you want to enable it.
+#category_sidebar: true
+# create an include categories tag cloud page in @source/_includes/asides/categories_tag.html
+# and don't forget to add 'asides/categories_tag.html' to @default_asides if you want to enable it.
+category_tag_cloud: true
+
+default_asides: [asides/recent_posts.html, asides/categories_tag.html, asides/twitter.html]
