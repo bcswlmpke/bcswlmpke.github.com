@@ -13,4 +13,10 @@ categories: Octopress
     - 放置你寫的文章
 * octopress/source/_includes/asides
     - 修改_config.yml -> rake generate 會在這邊產生html檔案
+* octopress/source/new_page
+    - rake new_page['new page'] 
+* octopress/source/_includes/custom/navigation.html
+    - 修改或加入link
+
+
 
