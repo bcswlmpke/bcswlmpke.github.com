@@ -60,7 +60,7 @@ categories: Objective-C
       @implementation MyClass
       @synthesize firstName, lastName, age=yearsOld;
       @end
-age 是用 yearsOld 這個 instance variable 所表示。
+age 是用 yearsOld 這個 instance variable 來表示。
 所以在 MyClass 內部使用時，可以用 yearsOld 來進行操作，
 而其它類別如果使用 MyClass，則可以用 age 這個 property 來進行操作。
 
