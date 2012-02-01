@@ -9,10 +9,11 @@
   <meta name="author" content="陳彥任">
 
   
-  <meta name="description" content="最近看到高見龍的工具箱與Gasolin的工具箱，
-於是自己也興起了念頭，整理一下目前自己常用的工具。 實體工具 Mac Book Pro 13&#8221;
-Samsung i9000 我的 MBP 不可缺少的軟體 TotalFinder
-Google Chrome Plugins Xmarks &hellip;">
+  <meta name="description" content="剛開始接觸 iOS 應用程式開發時，
+曾經對 @synthesize window = _window 所表達的意義有疑問，
+查過資料卻沒記下來，
+今天剛好同事問到，
+所以這次一定要做一下筆記。 Property Declaratoin @property (attributes) type &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +69,136 @@ Google Chrome Plugins Xmarks &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/01/objective-c-declared-properties-feature/">About Objective-C Declared Properties Feature</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-01T21:54:00+08:00" pubdate data-updated="true">Feb 1<span>st</span>, 2012</time>
+        
+         | <a href="/blog/2012/02/01/objective-c-declared-properties-feature/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>剛開始接觸 iOS 應用程式開發時，
+曾經對 @synthesize window = _window 所表達的意義有疑問，
+查過資料卻沒記下來，
+今天剛好同事問到，
+所以這次一定要做一下筆記。</p>
+
+<ul>
+<li><strong>Property Declaratoin</strong>
+
+<pre><code>@property (attributes) type name;
+
+@interface MyClass : NSObject
+@property float value;
+@end
+</code></pre>
+
+@property float value; 相等於
+
+<pre><code>- (float)value;
+- (void)setValue:(float)newValue;
+</code></pre>
+
+而 property 的宣告也可以放在 class extensions (也就是 anonymous categories)
+
+<pre><code>@interface MyClass : NSObject
+@property (retain, readonly) float value;
+@end
+
+@interface MyClass() // Private extension
+@property (retain, readwrite) float value;
+@end
+</code></pre></li>
+<li><strong>Property Declaratoin Attributes</strong>
+
+<pre><code>@property (attribute, [, attribute2, ...])
+</code></pre></li>
+<li><strong>Accessor Method Names</strong>
+
+<pre><code>getter=getterName
+setter=setterName
+</code></pre></li>
+<li><strong>Writability</strong>
+
+<ul>
+<li>readwrite</li>
+<li>readonly</li>
+</ul>
+</li>
+<li><strong>Setter Semantics</strong>
+
+<ul>
+<li>strong</li>
+<li>weak (OS X v10.6 and iOS 4 not support)</li>
+<li>copy</li>
+<li>assign (Default)</li>
+<li>retain</li>
+</ul>
+</li>
+<li><strong>Atomicity</strong>
+
+<ul>
+<li>nonatomic</li>
+<li>atomic (Default)</li>
+</ul>
+</li>
+<li><strong>Property Implementation Directives</strong></li>
+</ul>
+
+
+<p>用 property=ivar 可以指定特別的 instance variable 來讓 property 使用。
+不指定的情況如下，@synthesize value; 其實等同於 @synthesize value = value;</p>
+
+<pre><code>  @interface MyClass : NSObject
+  @property (copy, readwrite) NSString *value;
+  @end
+
+  @implementation MyClass
+  @synthesize value;
+  @end
+</code></pre>
+
+<p>有指定的情況如下：</p>
+
+<pre><code>  @implementation MyClass
+  @synthesize firstName, lastName, age=yearsOld;
+  @end
+</code></pre>
+
+<p>age 是用 yearsOld 這個 instance variable 所表示。
+所以在 MyClass 內部使用時，可以用 yearsOld 來進行操作，
+而其它類別如果使用 MyClass，則可以用 age 這個 property 來進行操作。</p>
+
+<blockquote><p>如果要看更詳細的說明，可以參考官方文件<a href="http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/ObjectiveC/Chapters/ocProperties.html" title="ocProperties">Declared Properties</a></p></blockquote>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -462,6 +593,10 @@ Google Chrome Plugins Xmarks &hellip;">
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/02/01/objective-c-declared-properties-feature/">About Objective-C Declared Properties Feature</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/01/30/my-toolbox/">我的工具箱</a>
       </li>
     
@@ -482,7 +617,7 @@ Google Chrome Plugins Xmarks &hellip;">
 
 <section>
 <h1>分類</h1>
-<span class='categories_tag'> <a href='/blog/categories/octopress' style='font-size: 160.0%'>Octopress(2)</a>  <a href='/blog/categories/tools' style='font-size: 130.0%'>Tools(1)</a>  <a href='/blog/categories/vim' style='font-size: 130.0%'>Vim(1)</a> </span>
+<span class='categories_tag'> <a href='/blog/categories/objective-c' style='font-size: 130.0%'>Objective-c(1)</a>  <a href='/blog/categories/octopress' style='font-size: 160.0%'>Octopress(2)</a>  <a href='/blog/categories/tools' style='font-size: 130.0%'>Tools(1)</a>  <a href='/blog/categories/vim' style='font-size: 130.0%'>Vim(1)</a> </span>
 </section>
 
 

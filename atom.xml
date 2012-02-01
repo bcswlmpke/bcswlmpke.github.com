@@ -4,7 +4,7 @@
   <title><![CDATA[Hank 學習筆記]]></title>
   <link href="http://bcswlmpke.github.com/atom.xml" rel="self"/>
   <link href="http://bcswlmpke.github.com/"/>
-  <updated>2012-01-31T23:50:56+08:00</updated>
+  <updated>2012-02-01T22:43:31+08:00</updated>
   <id>http://bcswlmpke.github.com/</id>
   <author>
     <name><![CDATA[陳彥任]]></name>
@@ -12,6 +12,107 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[About Objective-C Declared Properties Feature]]></title>
+    <link href="http://bcswlmpke.github.com/blog/2012/02/01/objective-c-declared-properties-feature/"/>
+    <updated>2012-02-01T21:54:00+08:00</updated>
+    <id>http://bcswlmpke.github.com/blog/2012/02/01/objective-c-declared-properties-feature</id>
+    <content type="html"><![CDATA[<p>剛開始接觸 iOS 應用程式開發時，
+曾經對 @synthesize window = _window 所表達的意義有疑問，
+查過資料卻沒記下來，
+今天剛好同事問到，
+所以這次一定要做一下筆記。</p>
+
+<ul>
+<li><strong>Property Declaratoin</strong>
+
+<pre><code>@property (attributes) type name;
+
+@interface MyClass : NSObject
+@property float value;
+@end
+</code></pre>
+
+@property float value; 相等於
+
+<pre><code>- (float)value;
+- (void)setValue:(float)newValue;
+</code></pre>
+
+而 property 的宣告也可以放在 class extensions (也就是 anonymous categories)
+
+<pre><code>@interface MyClass : NSObject
+@property (retain, readonly) float value;
+@end
+
+@interface MyClass() // Private extension
+@property (retain, readwrite) float value;
+@end
+</code></pre></li>
+<li><strong>Property Declaratoin Attributes</strong>
+
+<pre><code>@property (attribute, [, attribute2, ...])
+</code></pre></li>
+<li><strong>Accessor Method Names</strong>
+
+<pre><code>getter=getterName
+setter=setterName
+</code></pre></li>
+<li><strong>Writability</strong>
+
+<ul>
+<li>readwrite</li>
+<li>readonly</li>
+</ul>
+</li>
+<li><strong>Setter Semantics</strong>
+
+<ul>
+<li>strong</li>
+<li>weak (OS X v10.6 and iOS 4 not support)</li>
+<li>copy</li>
+<li>assign (Default)</li>
+<li>retain</li>
+</ul>
+</li>
+<li><strong>Atomicity</strong>
+
+<ul>
+<li>nonatomic</li>
+<li>atomic (Default)</li>
+</ul>
+</li>
+<li><strong>Property Implementation Directives</strong></li>
+</ul>
+
+
+<p>用 property=ivar 可以指定特別的 instance variable 來讓 property 使用。
+不指定的情況如下，@synthesize value; 其實等同於 @synthesize value = value;</p>
+
+<pre><code>  @interface MyClass : NSObject
+  @property (copy, readwrite) NSString *value;
+  @end
+
+  @implementation MyClass
+  @synthesize value;
+  @end
+</code></pre>
+
+<p>有指定的情況如下：</p>
+
+<pre><code>  @implementation MyClass
+  @synthesize firstName, lastName, age=yearsOld;
+  @end
+</code></pre>
+
+<p>age 是用 yearsOld 這個 instance variable 所表示。
+所以在 MyClass 內部使用時，可以用 yearsOld 來進行操作，
+而其它類別如果使用 MyClass，則可以用 age 這個 property 來進行操作。</p>
+
+<blockquote><p>如果要看更詳細的說明，可以參考官方文件<a href="http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/ObjectiveC/Chapters/ocProperties.html" title="ocProperties">Declared Properties</a></p></blockquote>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[我的工具箱]]></title>

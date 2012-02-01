@@ -5,17 +5,15 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>管理Vim plugins - Hank 學習筆記</title>
+  <title>About Objective-C Declared Properties Feature - Hank 學習筆記</title>
   <meta name="author" content="陳彥任">
 
   
-  <meta name="description" content="產生Vim工作目錄 - mkdir bcswlmpke-vim
-- cd bcswlmpke-vim
-- git init
-- touch README
-- git add README
-- git commit -m 'first commit'
-- git remote add origin &hellip;">
+  <meta name="description" content="剛開始接觸 iOS 應用程式開發時，
+曾經對 @synthesize window = _window 所表達的意義有疑問，
+查過資料卻沒記下來，
+今天剛好同事問到，
+所以這次一定要做一下筆記。 Property Declaratoin @property (attributes) type &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -24,7 +22,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://bcswlmpke.github.com/blog/2012/01/17/vim-setup">
+  <link rel="canonical" href="http://bcswlmpke.github.com/blog/2012/02/01/objective-c-declared-properties-feature">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -74,7 +72,7 @@
   
   <header>
     
-      <h1 class="entry-title">管理Vim Plugins</h1>
+      <h1 class="entry-title">About Objective-C Declared Properties Feature</h1>
     
     
       <p class="meta">
@@ -90,7 +88,7 @@
   
 
 
-<time datetime="2012-01-17T00:19:00+08:00" pubdate data-updated="true">Jan 17<span>th</span>, 2012</time>
+<time datetime="2012-02-01T21:54:00+08:00" pubdate data-updated="true">Feb 1<span>st</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -99,101 +97,99 @@
   </header>
 
 
-<div class="entry-content"><ul>
-<li>產生Vim工作目錄
+<div class="entry-content"><p>剛開始接觸 iOS 應用程式開發時，
+曾經對 @synthesize window = _window 所表達的意義有疑問，
+查過資料卻沒記下來，
+今天剛好同事問到，
+所以這次一定要做一下筆記。</p>
 
-<pre><code>- mkdir bcswlmpke-vim
-- cd bcswlmpke-vim
-- git init
-- touch README
-- git add README
-- git commit -m 'first commit'
-- git remote add origin git@github.com:bcswlmpke/bcswlmpke-vim.git
-- git push -u origin master
+<ul>
+<li><strong>Property Declaratoin</strong>
+
+<pre><code>@property (attributes) type name;
+
+@interface MyClass : NSObject
+@property float value;
+@end
+</code></pre>
+
+@property float value; 相等於
+
+<pre><code>- (float)value;
+- (void)setValue:(float)newValue;
+</code></pre>
+
+而 property 的宣告也可以放在 class extensions (也就是 anonymous categories)
+
+<pre><code>@interface MyClass : NSObject
+@property (retain, readonly) float value;
+@end
+
+@interface MyClass() // Private extension
+@property (retain, readwrite) float value;
+@end
 </code></pre></li>
-<li>用 pathogen 來管理 Vim plugin
+<li><strong>Property Declaratoin Attributes</strong>
 
-<ul>
-<li>每個 plugin 都獨立安裝在 ~/.vim/bundle 下</li>
-<li>每個 plugin 都以 git submodule 的方式來管理，請參考<a href="http://vimcasts.org/episodes/synchronizing-plugins-with-git-submodules-and-pathogen" title="Git submodules and pathogen">Git Submodules and pathogen</a>
-
-<ul>
-<li>cd bcswlmpke-vim</li>
-<li>touch vimrc</li>
-<li>touch gvimrc</li>
-<li>ln -s ~/bcswlmpke-vim/vimrc ~/.vimrc</li>
-<li>ln -s ~/bcswlmpke-vim/gvimrc ~/.gvimrc</li>
-<li>ln -s ~/bcswlmpke-vim ~/.vim</li>
-<li>安裝 pathogen，下載 pathogen.vim 放到 .vim/autoload</li>
-<li>Activate pathogen, 需要在 .vimrc 加入下列兩行：
-
-<ul>
-<li>call pathogen#runtime_append_all_bundles()</li>
-<li>call pathogen#helptags()</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>以 Submodule 的方式安裝 plugins
-
-<pre><code>- cd bcswlmpke-vim
-- mkdir bundle
-- git submodule add https://github.com/fholgado/minibufexpl.vim.git bundle/minibufexpl.vim
+<pre><code>@property (attribute, [, attribute2, ...])
 </code></pre></li>
-<li>安裝 Vim configuraton 到其它電腦
+<li><strong>Accessor Method Names</strong>
 
-<pre><code>- cd ~
-- git clone http://github.com/username/dotvim.git ~/.vim
-- ln -s ~/.vim/vimrc ~/.vimrc
-- ln -s ~/.vim/gvimrc ~/.gvimrc
-- cd ~/.vim
-- git submodule init
-- git submodule update
+<pre><code>getter=getterName
+setter=setterName
 </code></pre></li>
-<li>升級 plugin bundle
-
-<pre><code>- cd minibufexpl.vim
-- git pull origin master
-</code></pre></li>
-<li>升級所有的 bundled plugins
-
-<pre><code>- git submodule foreach git pull origin master
-</code></pre></li>
-<li>移除 Submodule
+<li><strong>Writability</strong>
 
 <ul>
-<li>砍掉目錄
+<li>readwrite</li>
+<li>readonly</li>
+</ul>
+</li>
+<li><strong>Setter Semantics</strong>
 
 <ul>
-<li>git rm &#8211;cached [要移除的目錄]</li>
-<li>rm -rf [要移除的目錄]</li>
+<li>strong</li>
+<li>weak (OS X v10.6 and iOS 4 not support)</li>
+<li>copy</li>
+<li>assign (Default)</li>
+<li>retain</li>
 </ul>
 </li>
-<li>修改 .gitmodules
+<li><strong>Atomicity</strong>
 
 <ul>
-<li>將相關內容移除</li>
+<li>nonatomic</li>
+<li>atomic (Default)</li>
 </ul>
 </li>
-<li>Commit
-
-<ul>
-<li>git add .gitmodules</li>
-<li>git commit -m &#8220;Remove submodule xxx&#8221;</li>
-</ul>
-</li>
-<li>Sync
-
-<ul>
-<li>git submodule sync</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>Property Implementation Directives</strong></li>
 </ul>
 
+
+<p>用 property=ivar 可以指定特別的 instance variable 來讓 property 使用。
+不指定的情況如下，@synthesize value; 其實等同於 @synthesize value = value;</p>
+
+<pre><code>  @interface MyClass : NSObject
+  @property (copy, readwrite) NSString *value;
+  @end
+
+  @implementation MyClass
+  @synthesize value;
+  @end
+</code></pre>
+
+<p>有指定的情況如下：</p>
+
+<pre><code>  @implementation MyClass
+  @synthesize firstName, lastName, age=yearsOld;
+  @end
+</code></pre>
+
+<p>age 是用 yearsOld 這個 instance variable 所表示。
+所以在 MyClass 內部使用時，可以用 yearsOld 來進行操作，
+而其它類別如果使用 MyClass，則可以用 age 這個 property 來進行操作。</p>
+
+<blockquote><p>如果要看更詳細的說明，可以參考官方文件<a href="http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/ObjectiveC/Chapters/ocProperties.html" title="ocProperties">Declared Properties</a></p></blockquote>
 </div>
 
 
@@ -216,12 +212,12 @@
   
 
 
-<time datetime="2012-01-17T00:19:00+08:00" pubdate data-updated="true">Jan 17<span>th</span>, 2012</time>
+<time datetime="2012-02-01T21:54:00+08:00" pubdate data-updated="true">Feb 1<span>st</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/vim/'>Vim</a>
+    <a class='category' href='/blog/categories/objective-c/'>Objective-C</a>
   
 </span>
 
@@ -230,7 +226,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://bcswlmpke.github.com/blog/2012/01/17/vim-setup/" data-via="" data-counturl="http://bcswlmpke.github.com/blog/2012/01/17/vim-setup/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://bcswlmpke.github.com/blog/2012/02/01/objective-c-declared-properties-feature/" data-via="" data-counturl="http://bcswlmpke.github.com/blog/2012/02/01/objective-c-declared-properties-feature/" >Tweet</a>
   
   
   
@@ -239,10 +235,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/01/14/octopress-directory-structure/" title="Previous Post: Octopress的目錄結構">&laquo; Octopress的目錄結構</a>
+        <a class="basic-alignment left" href="/blog/2012/01/30/my-toolbox/" title="Previous Post: 我的工具箱">&laquo; 我的工具箱</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/01/30/my-toolbox/" title="next Post: 我的工具箱">我的工具箱 &raquo;</a>
       
     </p>
   </footer>
@@ -311,8 +305,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://bcswlmpke.github.com/blog/2012/01/17/vim-setup/';
-        var disqus_url = 'http://bcswlmpke.github.com/blog/2012/01/17/vim-setup/';
+        var disqus_identifier = 'http://bcswlmpke.github.com/blog/2012/02/01/objective-c-declared-properties-feature/';
+        var disqus_url = 'http://bcswlmpke.github.com/blog/2012/02/01/objective-c-declared-properties-feature/';
         var disqus_script = 'embed.js';
       
     (function () {
