@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Objective-C | Hank 學習筆記]]></title>
   <link href="http://bcswlmpke.github.com/blog/categories/objective-c/atom.xml" rel="self"/>
   <link href="http://bcswlmpke.github.com/"/>
-  <updated>2012-02-01T22:43:31+08:00</updated>
+  <updated>2012-02-01T22:53:18+08:00</updated>
   <id>http://bcswlmpke.github.com/</id>
   <author>
     <name><![CDATA[陳彥任]]></name>
@@ -106,7 +106,7 @@ setter=setterName
   @end
 </code></pre>
 
-<p>age 是用 yearsOld 這個 instance variable 所表示。
+<p>age 是用 yearsOld 這個 instance variable 來表示。
 所以在 MyClass 內部使用時，可以用 yearsOld 來進行操作，
 而其它類別如果使用 MyClass，則可以用 age 這個 property 來進行操作。</p>
 
