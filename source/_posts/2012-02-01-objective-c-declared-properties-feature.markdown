@@ -12,15 +12,20 @@ categories: Objective-C
 所以這次一定要做一下筆記。
 
 * __Property Declaratoin__
+```objc
       @property (attributes) type name;
 
       @interface MyClass : NSObject
       @property float value;
       @end
+```
 @property float value; 相等於
+```objc
       - (float)value;
       - (void)setValue:(float)newValue;
+```
 而 property 的宣告也可以放在 class extensions (也就是 anonymous categories)
+```objc
       @interface MyClass : NSObject
       @property (retain, readonly) float value;
       @end
@@ -28,11 +33,16 @@ categories: Objective-C
       @interface MyClass() // Private extension
       @property (retain, readwrite) float value;
       @end
+```
 * __Property Declaratoin Attributes__
+```objc
       @property (attribute, [, attribute2, ...])
+```
 * __Accessor Method Names__
+```objc
       getter=getterName
       setter=setterName
+```
 * __Writability__
   * readwrite
   * readonly
@@ -49,6 +59,7 @@ categories: Objective-C
 
 用 property=ivar 可以指定特別的 instance variable 來讓 property 使用。
 不指定的情況如下，@synthesize value; 其實等同於 @synthesize value = value;
+```objc
       @interface MyClass : NSObject
       @property (copy, readwrite) NSString *value;
       @end
@@ -56,10 +67,13 @@ categories: Objective-C
       @implementation MyClass
       @synthesize value;
       @end
+```
 有指定的情況如下：
+```objc
       @implementation MyClass
       @synthesize firstName, lastName, age=yearsOld;
       @end
+```
 age 是用 yearsOld 這個 instance variable 來表示。
 所以在 MyClass 內部使用時，可以用 yearsOld 來進行操作，
 而其它類別如果使用 MyClass，則可以用 age 這個 property 來進行操作。

@@ -3,7 +3,7 @@ layout: post
 title: "不要相信retainCount，事實上你該怎麼做？"
 date: 2012-02-03 21:29
 comments: true
-categories: Objective-C, iOS
+categories: [Objective-C, iOS App]
 ---
 在還沒有擁抱 iOS 5 ARC (Automatic Reference Counting) 之前，
 我們必須自己管理程式所使用的記憶體，
