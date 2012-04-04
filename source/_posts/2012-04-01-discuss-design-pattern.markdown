@@ -1,0 +1,106 @@
+---
+layout: post
+title: "程式開發時，類別間存取的設計方式"
+date: 2012-04-01 18:32
+comments: true
+categories: [Design-Pattern]
+---
+在開發程式時，為了實現功能，我們需要實作一些類別彼此互相搭配，
+在設計模式的領域中，提出了23種模式與6大設計原則讓我們可以遵循，
+完成功能的設計方式絕對不只一種，端看設計者當時的思考方式與邏輯。
+
+最近看了設計模式6大原則中的迪米特法則(最少知識原則)，
+提到：在實際應用中，如果一個類別需要跳轉兩次以上才能存取到另一個
+類別，就需要想辦法進行重構了！
+
+我發現自己在未接觸設計模式前，自己常用下面的幾種方式對類別間的存取
+進行設計，程式碼的例子大致說明了設計的想法，
+想跟大家討論怎樣的設計方式或流程可以讓類別間的存取更有效率！
+
+* 方式1: B類別不認識A類別，但需要存取A類別中的資訊。
+
+```objc
+@protocol IData
+
+- (id)getData:(Enum)enumType;
+
+@end
+
+@interface A : NSObject <IData>
+
+@end
+
+@interface B : NSObject
+
+@property (nonatomic, assign) id<IData> pData;
+
+@end
+```
+- 說明
+    - A類別實作 IData 介面
+    - B類別不認識 A類別，只認識介面 IData
+    - 不讓B類別直接認識A類別，未來任何類別只要實作了介面IData，B類別的程式都不必修改
+    - 我覺得這種作法適用在撰寫的類別是提供給他人使用的情況，需要考慮未來程式的可維護性、重複使用以及擴充性。
+    - 但雖然B類別不認識A類別，只認識 IData 介面提供的程式介面 getData，但實際上 getData 的參數是一個 Enum，
+    表示如果要存取A類別身上不同的資訊，就要有一串 Enum 的型態，讓B類別能間接存取A類別的資訊
+    - 因此，如果A類別認識C類別，但B不認識A類別與C類別，只認識 IData 介面，但需要的資訊需要卻需要A類別存取C類別
+    身上的資訊才能提供，會變成 B -> IData -> A -> C 這樣跳轉兩次才能存取到另一個類別
+---
+* 方式2：B類別認識A類別，用「依賴」、「聚合」、「組合」、「關聯」的方式設計
+```objc
+@interface DataMgr : NSObject
+
+@end
+
+@interface B : NSObject
+{
+@private
+  DataMgr *_dataMgr;
+}
+
+- (id)initWithFrame:(CGRect)rect dataMgr:(DataMgr *)pDataMgr;
+
+@end
+```
+* 說明
+    * 在B類別初始化時，將需要的資訊傳入
+    * 如果B類別所需要的資訊只是暫時性的，可以用「依賴」的方式設計，當參數傳入後，
+    在函式內處理完畢就不再需要了
+    * 如果B類別需要的是後續還會再進行操作的資訊，則用「聚合」、「組合」、「關聯」的方式，
+    在其內部透過一個指標來操作，或是將傳入的資訊複製一份存在自己身上
+---
+* 方式3：B類別繼承A類別
+```objc
+@interface BaseDataMgr : NSObject
+
+- (BOOL)addUserData:(EnumUserData)type params:(NSArray *)params;
+- (id)getUserData:(EnumUserData)type params:(NSArray *)params;
+
+@end
+
+@interface MyDataMgr : BaseDataMgr
+
+- (void)functionA;
+- (NSInteger)functionB;
+
+@end
+@interface A : NSObject
+{
+@private
+  BaseDataMgr *_dataMgr;
+}
+
+@end
+```
+* 說明
+    * 盡量達成 Liskov Substitution Principle(LSP): 只要父類別能出現的地方，
+    子類別就可以出現，而且替換為子類別也不會產生任何錯誤或異常
+    * 當子類別不能完整作父類別的方法，或是父類別的某些方法在子類別中並不適用，
+    則建議採組合、聚合等方式代替繼承
+    * 我自己本身使用繼承時，大部份都沒有完全遵循上述的兩項原則，使用的情況大致為
+    A類別身上存著 BaseDataMgr 的指標，但使用時是產生 MyDataMgr 的實體，內部在使用時，
+    必須進行轉型 ex. [(MyDataMgr *)_dataMgr functionA] 才可操作 BaseDataMgr 不提供的方法。
+---
+以上舉了三個例子來說明，有時候覺得某些設計的的堅持或許是太鑽牛角尖，也或許是過度設計了，
+如果大家有什麼想法或建議，歡迎一起提出來討論！
+
