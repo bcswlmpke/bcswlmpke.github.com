@@ -1,0 +1,29 @@
+---
+layout: post
+title: Ruby 程式語言摘要
+date: 2012-04-24 21:33
+comments: true
+categories: Ruby
+---
+### 基本觀念 ###
+- load 與 require
+  - <code>load</code>: 是一個方法，所以可放在判斷式中，每載入 .rb 一次，就會重新執行 .rb 的內容，可指定相對或絕對路徑
+  - <code>require</code>: 使用時可不加上 .rb 副檔名。與 load 不同的是，載入過的檔案，再次 require 並不會重複執行。
+  - <code>$:</code> 表示預設路徑 (當不指定路徑或指定相對路徑時，從預設路徑尋找)；必要時，可在啟用 ruby 時加上 -I 指定路徑
+```ruby
+  load "../core.rb"
+  load "C:/workspace/core.rb"
+```
+---
+- 基本輸入輸出
+  - <code>ARGV</code>: 使用者輸入的命令列引數，會收集成字串陣列給 ARGV 
+  - <code>#{}</code>: 括號內指定變數名稱，直譯器會取得變數值
+
+
+
+
+
+---
+References: 1. [良葛格 Ruby Gossip][1]  
+[1]: http://caterpillar.onlyfun.net/Gossip/Ruby/index.html "Ruby Gossip"
+
