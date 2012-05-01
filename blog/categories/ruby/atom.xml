@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ruby | Hank 學習筆記]]></title>
+  <link href="http://bcswlmpke.github.com/blog/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://bcswlmpke.github.com/"/>
+  <updated>2012-05-01T21:36:31+08:00</updated>
+  <id>http://bcswlmpke.github.com/</id>
+  <author>
+    <name><![CDATA[陳彥任]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby 程式語言摘要]]></title>
+    <link href="http://bcswlmpke.github.com/blog/2012/04/24/ruby-language/"/>
+    <updated>2012-04-24T21:33:00+08:00</updated>
+    <id>http://bcswlmpke.github.com/blog/2012/04/24/ruby-language</id>
+    <content type="html"><![CDATA[<h3>基本觀念</h3>
+
+<ul>
+<li>load 與 require
+
+<ul>
+<li><code>load</code>: 是一個方法，所以可放在判斷式中，每載入 .rb 一次，就會重新執行 .rb 的內容，可指定相對或絕對路徑</li>
+<li><code>require</code>: 使用時可不加上 .rb 副檔名。與 load 不同的是，載入過的檔案，再次 require 並不會重複執行。</li>
+<li><code>$:</code> 表示預設路徑 (當不指定路徑或指定相對路徑時，從預設路徑尋找)；必要時，可在啟用 ruby 時加上 -I 指定路徑
+<code>ruby
+load "../core.rb"
+load "C:/workspace/core.rb"
+</code></li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+
+<ul>
+<li>基本輸入輸出
+
+<ul>
+<li><code>ARGV</code>: 使用者輸入的命令列引數，會收集成字串陣列給 ARGV</li>
+<li><code>#{}</code>: 括號內指定變數名稱，直譯器會取得變數值</li>
+<li>預設輸出是 STDOUT，標準錯誤輸出是 STDERR，透過 STDERR.class 可知道是屬於 IO Class</li>
+<li><code>gets</code>: 此方法取得使用者輸入，含換行字元；如果要拿掉字串前後的空白字元(像是換行字元)，可透過字串物件的chomp</li>
+<li>print, puts, printf(格式化輸出, 與C類似)</li>
+<li>sprintf 用來格式化字串</li>
+<li>格式化字串的另一種方式：透過%與陣列</li>
+<li>透過 to_i, to_f 可轉換字串為整數、浮點數; 也可以透過 Integer, Float</li>
+<li>gets 是從標準輸入 STDIN 取得字串，讀取檔案，要用 File.read</li>
+<li>File.read 會一次讀取檔案中的所有內容，逐行讀取要用 open
+<code>ruby
+filename = gets.chomp
+open(name, "w") do |file|
+file.print "test"
+end
+</code></li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+
+<h3>內建型態與操作</h3>
+
+<ul>
+<li>數值型態
+
+<ul>
+<li>Numeric 的子類別有 Integer, Float</li>
+<li>Integer 又包含 Fixnum, Bignum</li>
+<li>0b, 0, 0x</li>
+<li>如果整數超過 Fixnum 會自動轉為 Bignum</li>
+<li>字串、浮點數的 to_i 方法可建立整數；字串的to_i可指定2~36為基底</li>
+<li>字串、整數的 to_f 方法可建立浮點數</li>
+<li>rounding error 可透過 bigdecimal 程式庫來解決
+<code>ruby
+1.9.2p290 :037 &gt; "100".to_i
+=&gt; 100
+1.9.2p290 :038 &gt; "100".to_i(16)
+=&gt; 256
+1.9.2p290 :053 &gt;   0.1 + 0.2 == 0.3
+=&gt; false
+</code></li>
+</ul>
+</li>
+<li>字串型態
+
+<ul>
+<li>Ruby 中的字串，應該都是使用雙引號括住</li>
+<li>單引號括住的字串實際上是讓我們不必撰寫\、\"忽略字元就可以代表\、"</li>
+<li>在單引號中，除了\與\'之外，撰寫其它忽略字元都會被當作原始字串（Raw string）</li>
+<li>雙引號字串如果包含#{}，則<code>#{}</code> 中的內容會被當程式解釋</li>
+<li><code>%Q</code>: 建立雙引號字串</li>
+<li><code>%q</code>: 建立單引號字串</li>
+<li>在雙單引號中撰寫字串可直接換行，字串會自動加上\n</li>
+<li><code>+</code>: 串接字串</li>
+<li><code>*</code>: 重複字串</li>
+<li>字串為可變動的，可使用 <code>&lt;&lt;</code> 在原字串後面附加字串</li>
+<li><code>ord</code>:取得字元編碼</li>
+<li><code>chr</code>:將編碼轉為字元</li>
+<li><code>[]</code>: 可指定索引取得字元</li>
+<li>[n..m]: n 起始， m 結束，含 m</li>
+<li>[n...m]: n 起始，m 結束，不含 m</li>
+<li>[n, length]: n 起始，取長度 length</li>
+<li>字串沒!的方法表示以「新字串」傳回結果；有！的方法表示會「修改原字串」
+<code>ruby
+1.9.2p290 :057 &gt; print 'ha\nk'
+ha\nk =&gt; nil
+1.9.2p290 :058 &gt; 'ha\nk'
+=&gt; "ha\\nk"
+1.9.2p290 :059 &gt; print 'ha"nk'
+ha"nk =&gt; nil
+1.9.2p290 :060 &gt; 'ha"nk'
+=&gt; "ha\"nk" 1.9.2p290 :070 &gt;   %Q{this is a book.}
+=&gt; "this is a book."
+1.9.2p290 :071 &gt; %Q|this is a pen.|
+=&gt; "this is a pen."
+1.9.2p290 :072 &gt; "hank".length
+=&gt; 4
+1.9.2p290 :073 &gt; "hank".each_char do |c|
+1.9.2p290 :074 &gt;     print c, "-"
+1.9.2p290 :075?&gt;   end
+h-a-n-k- =&gt; "hank"
+1.9.2p290 :076 &gt; "hank" + "jane"
+=&gt; "hankjane"
+1.9.2p290 :077 &gt; "hank" * 5
+=&gt; "hankhankhankhankhank"
+1.9.2p290 :081 &gt;   "A".ord
+=&gt; 65
+1.9.2p290 :082 &gt; 65.chr
+=&gt; "A"
+</code></li>
+</ul>
+</li>
+<li>關於編碼</li>
+</ul>
+
+
+<hr />
+
+<p>References: 1. <a href="http://caterpillar.onlyfun.net/Gossip/Ruby/index.html" title="Ruby Gossip">良葛格 Ruby Gossip</a></p>
+]]></content>
+  </entry>
+  
+</feed>
