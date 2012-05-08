@@ -1,0 +1,373 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>ARC 與 非ARC 在大量資料的情況下的執行速度相差數倍 - Hank 學習筆記</title>
+  <meta name="author" content="陳彥任">
+
+  
+  <meta name="description" content="將手邊的 iOS 專案轉換為 ARC，
+讓 XCode 於 Compile 時期安插必要的記憶體管理程式碼，
+但是它所產生的程式碼是否與我們所想的一樣，
+這個就未必了。 我們應該盡可能讓 XCode 幫我們產生正確的記憶體管理程式碼，
+但必要時，我們也可以自己對程式碼進行改善！ 下面舉一個例子， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://bcswlmpke.github.com/blog/2012/05/08/arc-nonarc-performance">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Hank 學習筆記" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Hank 學習筆記</a></h1>
+  
+    <h2>Ruby > Objective-C > C#</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:bcswlmpke.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about-hank">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">ARC 與 非ARC 在大量資料的情況下的執行速度相差數倍</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-08T21:49:00+08:00" pubdate data-updated="true">May 8<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>將手邊的 iOS 專案轉換為 ARC，
+讓 XCode 於 Compile 時期安插必要的記憶體管理程式碼，
+但是它所產生的程式碼是否與我們所想的一樣，
+這個就未必了。</p>
+
+<p>我們應該盡可能讓 XCode 幫我們產生正確的記憶體管理程式碼，
+但必要時，我們也可以自己對程式碼進行改善！</p>
+
+<p>下面舉一個例子，同樣的程式碼，只是在「ARC」與「非ARC」的情況下編譯執行，
+但是兩者所需要的時間是相差數倍的！</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'>  <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">600000</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">10000000</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSMutableArray</span> <span class="n">new</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">arr</span> <span class="nl">addObject:</span><span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithInt:</span><span class="mi">1</span><span class="p">]];</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">CFAbsoluteTime</span> <span class="n">start</span> <span class="o">=</span> <span class="n">CFAbsoluteTimeGetCurrent</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kt">id</span> <span class="n">obj</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="n">obj</span> <span class="o">=</span> <span class="p">[</span><span class="n">arr</span> <span class="nl">objectAtIndex:</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">CFAbsoluteTime</span> <span class="n">end</span> <span class="o">=</span> <span class="n">CFAbsoluteTimeGetCurrent</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;end:%lf, start:%lf, diff:%lf&quot;</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="p">[</span><span class="n">arr</span> <span class="n">release</span><span class="p">];</span> <span class="c1">// -&gt; 這一行是「非ARC」需要加上的，但「ARC」沒有這行</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>執行結果：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="err">非</span><span class="nl">ARC:</span>  <span class="nl">end:</span><span class="mf">358178433.846184</span><span class="p">,</span> <span class="nl">start:</span><span class="mf">358178433.753032</span><span class="p">,</span> <span class="nl">diff:</span><span class="mf">0.093152</span>
+</span><span class='line'><span class="nl">ARC:</span>    <span class="nl">end:</span><span class="mf">358178929.480108</span><span class="p">,</span> <span class="nl">start:</span><span class="mf">358178928.841418</span><span class="p">,</span> <span class="nl">diff:</span><span class="mf">0.638690</span>
+</span><span class='line'><span class="err">可以看出「非</span><span class="n">ARC</span><span class="err">」的版本比「</span><span class="n">ARC</span><span class="err">」的版本快了近</span><span class="mi">7</span><span class="err">倍！</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>但實際上程式是慢在哪呢？
+-> 慢在 <code>obj = [arr objectAtIndex:n - 1];</code> 這邊，
+XCode 在 Compile 的時候，幫我們安插了類似下面的程式，</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'>  <span class="n">obj</span> <span class="o">=</span> <span class="p">[[</span><span class="n">arr</span> <span class="nl">objectAtIndex:</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="n">retain</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">obj</span> <span class="n">autorelease</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">如果把「非</span><span class="n">ARC</span><span class="err">」的版本修改為上述的程式碼，</span>
+</span><span class='line'><span class="err">則執行結果：</span>
+</span><span class='line'><span class="err">非</span><span class="nl">ARC:</span>  <span class="nl">end:</span><span class="mf">358179022.496308</span><span class="p">,</span> <span class="nl">start:</span><span class="mf">358179021.894909</span><span class="p">,</span> <span class="nl">diff:</span><span class="mf">0.601399</span>
+</span><span class='line'><span class="err">是不是就變慢了！</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>因此，XCode 在 Compile 的時候，我想它對於程式的記憶體管理是採取較保守的態度，
+如此看來，iOS 5 預設 property 為 strong 也就不意外了！</p>
+
+<p>那麼上面所舉的例子要怎麼解決呢？
+-> 我們可以透過 <code>Toll-Free Bridged Types</code> 來解決！
+來看一下，我們將 ARC 的版本的程式碼改成下面這個樣子：
+將<code>NSArray</code>改成使用<code>CFArrayRef</code>，
+這是 Foundation class -> Core Foundation type 的轉換，
+這樣的轉換是 Toll-Free 的！</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'>  <span class="n">__unsafe_unretained</span> <span class="kt">id</span> <span class="n">obj</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="n">obj</span> <span class="o">=</span> <span class="p">(</span><span class="n">__bridge</span> <span class="n">__unsafe_unretained</span> <span class="kt">id</span><span class="p">)</span><span class="n">CFArrayGetValueAtIndex</span><span class="p">((</span><span class="n">__bridge</span> <span class="n">CFArrayRef</span><span class="p">)</span><span class="n">arr</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="err">如果把「</span><span class="n">ARC</span><span class="err">」的版本修改為上述的程式碼，</span>
+</span><span class='line'><span class="err">則執行結果：</span>
+</span><span class='line'><span class="err">非</span><span class="nl">ARC:</span>  <span class="nl">end:</span><span class="mf">358179460.237259</span><span class="p">,</span> <span class="nl">start:</span><span class="mf">358179460.004701</span><span class="p">,</span> <span class="nl">diff:</span><span class="mf">0.232558</span>
+</span><span class='line'><span class="err">是不是就變快了！</span><span class="p">(</span><span class="err">但還沒有辦法跟原本的「非</span><span class="n">ARC</span><span class="err">」版本一樣快！</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>所以其實寫程式的時候要多想一下有沒有其它作法，
+因為不同的寫法雖然可能達成的結果相同，
+但所需要的時間是不同的，
+在使用 ARC 時，
+如果能清楚的知道自己所創建的物件是被 retain 的狀態，
+那麼在傳遞的過程中就可以視需求決定接收此物件是要 retain 或只是 assign，
+這樣可以讓 XCode 在 Compile 的時候，
+依照我們給它的指示去產生記憶體管理的程式碼，
+避免不必要或多餘的效能損失！</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">陳彥任</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-08T21:49:00+08:00" pubdate data-updated="true">May 8<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/objective-c/'>Objective-C</a>, <a class='category' href='/blog/categories/ios-app/'>iOS App</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://bcswlmpke.github.com/blog/2012/05/08/arc-nonarc-performance/" data-via="" data-counturl="http://bcswlmpke.github.com/blog/2012/05/08/arc-nonarc-performance/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/05/01/convert-to-arc/" title="Previous Post: 將專案轉換為ARC">&laquo; 將專案轉換為ARC</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/05/08/arc-nonarc-performance/">ARC 與 非ARC 在大量資料的情況下的執行速度相差數倍</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/05/01/convert-to-arc/">將專案轉換為ARC</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/24/ruby-language/">Ruby 程式語言摘要</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/01/discuss-design-pattern/">程式開發時，類別間存取的設計方式</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/02/03/objective-c-memory-management/">不要相信retainCount，事實上你該怎麼做？</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+<h1>分類</h1>
+<span class='categories_tag'> <a href='/blog/categories/design-pattern' style='font-size: 115.0%'>Design-pattern(1)</a>  <a href='/blog/categories/ios-app' style='font-size: 145.0%'>Ios app(3)</a>  <a href='/blog/categories/objective-c' style='font-size: 160.0%'>Objective-c(4)</a>  <a href='/blog/categories/octopress' style='font-size: 130.0%'>Octopress(2)</a>  <a href='/blog/categories/ruby' style='font-size: 115.0%'>Ruby(1)</a>  <a href='/blog/categories/tools' style='font-size: 115.0%'>Tools(1)</a>  <a href='/blog/categories/vim' style='font-size: 115.0%'>Vim(1)</a> </span>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - 陳彥任 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'bcswlmpke';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://bcswlmpke.github.com/blog/2012/05/08/arc-nonarc-performance/';
+        var disqus_url = 'http://bcswlmpke.github.com/blog/2012/05/08/arc-nonarc-performance/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
