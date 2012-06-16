@@ -96,6 +96,16 @@ h-a-n-k- => "hank"
  => "A" 
 ```
   - 關於編碼
+    - 字串有 encode 方法
+    - STDOUT 有 set_encoding 方法
+    - 內部編碼、字串編碼、外部編碼
+    - <code>ruby -EBig5:UTF-8 test.rb</code>
+    前面是外部編碼、後面是內部編碼
+    - 字串編碼1 <code># encoding: Big5</code>
+    - 字串編碼1 <code># coding: Big5</code>
+    - 字串編碼1 <code># -*- coding: Big5 -*-</code>
+  - 符號型態
+
 
 
 
