@@ -5,11 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Vim - Hank 學習筆記</title>
+  <title>Rails Develop Environment Setup - Hank 學習筆記</title>
   <meta name="author" content="陳彥任">
 
   
-  <meta name="description" content="Category: Vim">
+  <meta name="description" content="依照 Rails 101 的安裝步驟，但可能安裝的版本差太多，
+看起來會遇到不少問題，
+所以就一步一步筆記下來。 Homebrew ruby -e &#8220;$(curl -fsSL https://raw.github.com/gist/323731)&#8221;
+brew install &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +21,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://bcswlmpke.github.comblog/categories/vim">
+  <link rel="canonical" href="http://bcswlmpke.github.com/blog/2012/06/12/rails-develop-environment">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -64,36 +67,133 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Vim</h1>
+    
+      <h1 class="entry-title">Rails Develop Environment Setup</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-12T20:22:00+08:00" pubdate data-updated="true">Jun 12<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>依照 Rails 101 的安裝步驟，但可能安裝的版本差太多，
+看起來會遇到不少問題，
+所以就一步一步筆記下來。</p>
 
-  
-  <h2>2012</h2>
+<ul>
+<li>Homebrew
 
-<article>
-  
-<h1><a href="/blog/2012/01/17/vim-setup/">管理Vim plugins</a></h1>
-<time datetime="2012-01-17T00:19:00+08:00" pubdate><span class='month'>Jan</span> <span class='day'>17</span> <span class='year'>2012</span></time>
+<ul>
+<li>ruby -e &#8220;$(curl -fsSL https://raw.github.com/gist/323731)&#8221;</li>
+<li>brew install git (安裝 Git)</li>
+<li>brew update (更新套件清單)</li>
+<li>brew search (搜尋套件)</li>
+<li>留意 /usr/local/Library/Formula/</li>
+</ul>
+</li>
+<li>ImageMagick
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/vim/'>Vim</a></span>
-</footer>
+<ul>
+<li>brew install imagemagick (會自行處理相依套件問題)</li>
+</ul>
+</li>
+<li>MySQL Community Server
 
+<ul>
+<li>mysql-5.5.25-osx10.6-x86_64.dmg</li>
+</ul>
+</li>
+<li>RVM</li>
+<li>REE</li>
+<li>Ruby gems</li>
+<li>HTTP Server
 
-</article>
+<ul>
+<li>Pow</li>
+<li>Powder</li>
+</ul>
+</li>
+</ul>
 
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">陳彥任</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-12T20:22:00+08:00" pubdate data-updated="true">Jun 12<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/rails/'>Rails</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://bcswlmpke.github.com/blog/2012/06/12/rails-develop-environment/" data-via="" data-counturl="http://bcswlmpke.github.com/blog/2012/06/12/rails-develop-environment/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/05/08/arc-nonarc-performance/" title="Previous Post: ARC 與 非ARC 在大量資料的情況下的執行速度相差數倍">&laquo; ARC 與 非ARC 在大量資料的情況下的執行速度相差數倍</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/06/16/i9000-ics/" title="next Post: Galaxy S 不死，更新至 ICS 4.0.4">Galaxy S 不死，更新至 ICS 4.0.4 &raquo;</a>
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -151,7 +251,10 @@
       var disqus_shortname = 'bcswlmpke';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://bcswlmpke.github.com/blog/2012/06/12/rails-develop-environment/';
+        var disqus_url = 'http://bcswlmpke.github.com/blog/2012/06/12/rails-develop-environment/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

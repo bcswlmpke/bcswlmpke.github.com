@@ -9,11 +9,12 @@
   <meta name="author" content="陳彥任">
 
   
-  <meta name="description" content="將手邊的 iOS 專案轉換為 ARC，
-讓 XCode 於 Compile 時期安插必要的記憶體管理程式碼，
-但是它所產生的程式碼是否與我們所想的一樣，
-這個就未必了。 我們應該盡可能讓 XCode 幫我們產生正確的記憶體管理程式碼，
-但必要時，我們也可以自己對程式碼進行改善！ 下面舉一個例子， &hellip;">
+  <meta name="description" content="我的手機 I9000 8G 原本是刷 MIUI 2.3.7 for I9000，
+我安裝的軟體不會超過30個，
+程式區一直都有 1.8G 以上可用，
+資料區一直都有 3.5G 以上可用。
+但因為小米用久了真的愈來愈頓，
+整體的操作經驗讓我很失望。 目前看起來 Samsung 應該是不會幫 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +70,262 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/16/i9000-ics/">Galaxy S 不死，更新至 ICS 4.0.4</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-16T10:05:00+08:00" pubdate data-updated="true">Jun 16<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/06/16/i9000-ics/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://farm6.staticflickr.com/5038/7378210724_6c4fded6fd.jpg" title="ScreenCapture1" alt="ScreenCapture1" /> <img src="http://farm6.staticflickr.com/5336/7378210814_75c0c1522a.jpg" title="ScreenCapture2" alt="ScreenCapture1" /></p>
+
+<p>我的手機 I9000 8G 原本是刷 MIUI 2.3.7 for I9000，
+我安裝的軟體不會超過30個，
+程式區一直都有 1.8G 以上可用，
+資料區一直都有 3.5G 以上可用。
+但因為小米用久了真的愈來愈頓，
+整體的操作經驗讓我很失望。</p>
+
+<p>目前看起來 Samsung 應該是不會幫 I9000 升級到 ICS 了，
+不過 XDA 的大神們以及台灣的熱心網友們當然還是會想辦法讓 I9000 能吃到冰淇淋三明治，
+畢竟它的硬體條件不應該只留在薑餅時代！</p>
+
+<p>我覺得我的 I9000 升到 ICS 後，
+使用了一天感覺蠻省電的 (以我個人的使用方式，稍後會說明)，
+安裝的總軟體數約30個，
+然後整個操作經驗感覺都蠻順暢的，
+我想 I9000 應該也很欣慰，
+未來我應該不會再更新上去了，
+打算就這樣子再用個2年看看。</p>
+
+<p>廢話不多說，
+趕緊來介紹刷機的流程～</p>
+
+<hr />
+
+<ul>
+<li>備份
+
+<ul>
+<li>備份手機通訊錄 (這個我一直放 Google)</li>
+<li>照片</li>
+<li>音樂</li>
+<li>其它 (簡訊、遊戲等，我是不備份，這看個人)</li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+
+<ul>
+<li>手機還原到出廠設定
+
+<ul>
+<li>這會清掉所有安裝的程式</li>
+<li>但資料區的東西不會刪除</li>
+<li>資料區盡量空出 <code>500MB ~ 1GB</code> 的空間 (我的習慣)</li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+
+<ul>
+<li>安裝三星 Kies
+
+<ul>
+<li>但是在刷機前，請打開工作管理員，將 Kies 的程序都結束掉</li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+
+<ul>
+<li>把刷機所需的檔案放到手機 <code> /sdcard 根目錄</code>下
+
+<ul>
+<li>請比對電腦的檔案跟手機裡的檔案，大小要一樣</li>
+<li>如果檔案大小不對，刷壞了可能會哭; 這讓我想到以前寫 IP Camera 的
+韌體更新程式，Firmware 上傳至機器要做 CSC check 才能更新，不然更新失敗就慘了 (笑)</li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+
+<ul>
+<li>開始刷機
+
+<ul>
+<li>整個流程請參考 <a href="https://sites.google.com/site/itsamazinggalaxy/bing-qi-lin-san-ming-zhi-android-4/ak-lan-ren-zi-yong-ban/ak_v2" title="AK_V2">DingDingc&#8217;s Galaxy S Website! AK_V2</a></li>
+<li>我的刷機是依照 DingDingc 的教學一步一步做的，我覺得這個作者真的很用心，大家真的要感謝他！</li>
+<li>請自行選擇 ICS ROM (我個人是刷 <code>AK_V2</code>)，然後照作者的步驟做就對了，文字請多讀幾次，然後確實執行！</li>
+<li>我自己是從 MIUI 2.3.7 更新到 ICS AKOP 4.0.4，所以真的如作者說的一樣，什麼天王老子ROM，照步驟刷就對了！</li>
+<li>新手請記住：音量鍵上 + 首頁鍵 + 電源鍵 為 <code>Recovery Mode</code>; 音量鍵下 + 首頁鍵 + 電源鍵 為 <code>Download Mode</code></li>
+<li>黑化風格包我自己是沒有刷，所以我只到步驟7就完成了，而且我沒有超頻；想要黑化風格的人請完成步驟8</li>
+<li>我覺得手機穩定，省電，操作順暢最重要，所以未來除非有什麼大問題非修正不可，否則我個人是不會一直刷機</li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+
+<ul>
+<li>手機如何省電 (這是我個人的使用習慣)
+
+<ul>
+<li>螢幕是最耗電的，所以我是將螢幕亮度改成手動，然後亮度調低</li>
+<li>同步功能可以關閉</li>
+<li>需要登出帳號使用的程式，我使用後一定會登出 (個人習慣)，因為不登出的話，即使是同步功能關閉，有些程式還是會
+偷偷跑</li>
+<li>WIFI, 3G 不使用就關閉</li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+
+<ul>
+<li>軟體安裝(列出我常用的)
+
+<ul>
+<li>我刷 AK_V2，作者已經有提供軟體補包 for 任何一個版本的 ICS ROM (這個我有裝，看個人需要)</li>
+<li>Camera360</li>
+<li>SwiFTP</li>
+<li>ES 檔案總管</li>
+<li>RealCalc</li>
+<li>快圖瀏覽</li>
+<li>MoboPlayer</li>
+<li>Plurka</li>
+<li>Google+</li>
+<li>Adobe Reader</li>
+<li>Dropbox</li>
+<li>LINE</li>
+<li>Dolphin Browser</li>
+<li>Tunee Music</li>
+<li>Shazam</li>
+<li>超級管理器</li>
+</ul>
+</li>
+</ul>
+
+
+<p>最後，祝大家都能快樂的使用 I9000，都能有順暢的手機使用體驗！</p>
+
+<hr />
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/12/rails-develop-environment/">Rails Develop Environment Setup</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-12T20:22:00+08:00" pubdate data-updated="true">Jun 12<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/06/12/rails-develop-environment/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>依照 Rails 101 的安裝步驟，但可能安裝的版本差太多，
+看起來會遇到不少問題，
+所以就一步一步筆記下來。</p>
+
+<ul>
+<li>Homebrew
+
+<ul>
+<li>ruby -e &#8220;$(curl -fsSL https://raw.github.com/gist/323731)&#8221;</li>
+<li>brew install git (安裝 Git)</li>
+<li>brew update (更新套件清單)</li>
+<li>brew search (搜尋套件)</li>
+<li>留意 /usr/local/Library/Formula/</li>
+</ul>
+</li>
+<li>ImageMagick
+
+<ul>
+<li>brew install imagemagick (會自行處理相依套件問題)</li>
+</ul>
+</li>
+<li>MySQL Community Server
+
+<ul>
+<li>mysql-5.5.25-osx10.6-x86_64.dmg</li>
+</ul>
+</li>
+<li>RVM</li>
+<li>REE</li>
+<li>Ruby gems</li>
+<li>HTTP Server
+
+<ul>
+<li>Pow</li>
+<li>Powder</li>
+</ul>
+</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -658,7 +915,20 @@ XCode 在 Compile 的時候，幫我們安插了類似下面的程式，</p>
 
 
 <ul>
-<li>關於編碼</li>
+<li>關於編碼
+
+<ul>
+<li>字串有 encode 方法</li>
+<li>STDOUT 有 set_encoding 方法</li>
+<li>內部編碼、字串編碼、外部編碼</li>
+<li><code>ruby -EBig5:UTF-8 test.rb</code>
+前面是外部編碼、後面是內部編碼</li>
+<li>字串編碼1 <code># encoding: Big5</code></li>
+<li>字串編碼1 <code># coding: Big5</code></li>
+<li>字串編碼1 <code># -<em>- coding: Big5 -</em>-</code></li>
+</ul>
+</li>
+<li>符號型態</li>
 </ul>
 
 
@@ -1465,147 +1735,9 @@ A類別身上存著 BaseDataMgr 的指標，但使用時是產生 MyDataMgr 的�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/14/octopress-directory-structure/">Octopress的目錄結構</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-14T00:21:00+08:00" pubdate data-updated="true">Jan 14<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/01/14/octopress-directory-structure/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul>
-<li>octopress/
-
-<ul>
-<li>_config.yml 可以做基本設定修改</li>
-</ul>
-</li>
-<li>octopress/plugins
-
-<ul>
-<li>放置外掛程式</li>
-</ul>
-</li>
-<li>octopress/source/_posts
-
-<ul>
-<li>放置你寫的文章</li>
-</ul>
-</li>
-<li>octopress/source/_includes/asides
-
-<ul>
-<li>修改_config.yml -> rake generate 會在這邊產生html檔案</li>
-</ul>
-</li>
-<li>octopress/source/new_page
-
-<ul>
-<li>rake new_page[&#8216;new page&#8217;]</li>
-</ul>
-</li>
-<li>octopress/source/_includes/custom/navigation.html
-
-<ul>
-<li>修改或加入link</li>
-</ul>
-</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/12/octopress-note/">How to Use Octopress</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-12T21:53:00+08:00" pubdate data-updated="true">Jan 12<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/01/12/octopress-note/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul>
-<li>安裝
-
-<ul>
-<li>請參考<a href="http://octopress.org/docs/setup/" title="Octopress Setup">Octopress官網</a></li>
-<li>設定Octopress請參考<a href="http://octopress.org/docs/configuring/" title="Configuring Octopress">Configuring Octopress</a></li>
-</ul>
-</li>
-<li>用 Markdown 寫文章
-
-<ul>
-<li>rake new_post[文章名稱]</li>
-<li>請參考<a href="http://markdown.tw" title="Markdown Syntax">Markdown中文文件</a></li>
-<li>rake generate -> rake preview -> 然後<a href="http://127.0.0.1:4000/">這裡</a>可以看到預覽畫面</li>
-</ul>
-</li>
-<li>發佈
-
-<ul>
-<li>git checkout source</li>
-<li>git push origin source</li>
-<li>rake generate</li>
-<li>rake deploy</li>
-</ul>
-</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/2/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -1616,6 +1748,14 @@ A類別身上存著 BaseDataMgr 的指標，但使用時是產生 MyDataMgr 的�
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/06/16/i9000-ics/">Galaxy S 不死，更新至 ICS 4.0.4</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/06/12/rails-develop-environment/">Rails Develop Environment Setup</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2012/05/08/arc-nonarc-performance/">ARC 與 非ARC 在大量資料的情況下的執行速度相差數倍</a>
@@ -1629,20 +1769,12 @@ A類別身上存著 BaseDataMgr 的指標，但使用時是產生 MyDataMgr 的�
         <a href="/blog/2012/04/24/ruby-language/">Ruby 程式語言摘要</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/04/01/discuss-design-pattern/">程式開發時，類別間存取的設計方式</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/02/03/objective-c-memory-management/">不要相信retainCount，事實上你該怎麼做？</a>
-      </li>
-    
   </ul>
 </section>
 
 <section>
 <h1>分類</h1>
-<span class='categories_tag'> <a href='/blog/categories/design-pattern' style='font-size: 115.0%'>Design-pattern(1)</a>  <a href='/blog/categories/ios-app' style='font-size: 145.0%'>Ios app(3)</a>  <a href='/blog/categories/objective-c' style='font-size: 160.0%'>Objective-c(4)</a>  <a href='/blog/categories/octopress' style='font-size: 130.0%'>Octopress(2)</a>  <a href='/blog/categories/ruby' style='font-size: 115.0%'>Ruby(1)</a>  <a href='/blog/categories/tools' style='font-size: 115.0%'>Tools(1)</a>  <a href='/blog/categories/vim' style='font-size: 115.0%'>Vim(1)</a> </span>
+<span class='categories_tag'> <a href='/blog/categories/design-pattern' style='font-size: 115.0%'>Design-pattern(1)</a>  <a href='/blog/categories/ios-app' style='font-size: 145.0%'>Ios app(3)</a>  <a href='/blog/categories/objective-c' style='font-size: 160.0%'>Objective-c(4)</a>  <a href='/blog/categories/octopress' style='font-size: 130.0%'>Octopress(2)</a>  <a href='/blog/categories/phone' style='font-size: 115.0%'>Phone(1)</a>  <a href='/blog/categories/rails' style='font-size: 115.0%'>Rails(1)</a>  <a href='/blog/categories/ruby' style='font-size: 115.0%'>Ruby(1)</a>  <a href='/blog/categories/tools' style='font-size: 115.0%'>Tools(1)</a>  <a href='/blog/categories/vim' style='font-size: 115.0%'>Vim(1)</a> </span>
 </section>
 
 
