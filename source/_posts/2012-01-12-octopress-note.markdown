@@ -11,7 +11,7 @@ categories: Octopress
 * 用 Markdown 寫文章
     - rake new_post[文章名稱]
     - 請參考[Markdown中文文件][2]
-    - rake generate -> rake preview -> 然後[這裡](http://127.0.0.1:4000/)可以看到預覽畫面
+    - rake generate -> rake preview -> 然後[http://127.0.0.1:4000](http://127.0.0.1:4000/)可以看到預覽畫面
 * 發佈
     - git checkout source
     - git push origin source
