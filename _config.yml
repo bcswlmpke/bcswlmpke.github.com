@@ -114,4 +114,4 @@ category_title: 分類
 # and don't forget to add 'asides/categories_tag.html' to @default_asides if you want to enable it.
 category_tag_cloud: true
 
-default_asides: [asides/recent_posts.html, asides/categories_tag.html, asides/twitter.html]
+default_asides: [asides/recent_posts.html, asides/categories_tag.html, asides/twitter.html, custom/asides/my_friends.html]
