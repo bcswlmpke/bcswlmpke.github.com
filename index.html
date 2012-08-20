@@ -9,12 +9,10 @@
   <meta name="author" content="陳彥任">
 
   
-  <meta name="description" content="我的手機 I9000 8G 原本是刷 MIUI 2.3.7 for I9000，
-我安裝的軟體不會超過30個，
-程式區一直都有 1.8G 以上可用，
-資料區一直都有 3.5G 以上可用。
-但因為小米用久了真的愈來愈頓，
-整體的操作經驗讓我很失望。 目前看起來 Samsung 應該是不會幫 &hellip;">
+  <meta name="description" content="
+XVim 現在似乎比較穩定了 github: https://github.com/JugglerShu/XVim
+package: http://programming.jugglershu.net/xvim/ 下載最新的 package 然後重啟 XCode 就可以使用了！
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -70,6 +68,55 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/08/20/new-post/">XVim for XCode</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-20T22:42:00+08:00" pubdate data-updated="true">Aug 20<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/08/20/new-post/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul>
+<li>XVim 現在似乎比較穩定了
+
+<ul>
+<li>github: <a href="https://github.com/JugglerShu/XVim" title="github">https://github.com/JugglerShu/XVim</a></li>
+<li>package: <a href="http://programming.jugglershu.net/xvim/" title="package">http://programming.jugglershu.net/xvim/</a></li>
+</ul>
+</li>
+</ul>
+
+
+<p>下載最新的 package 然後重啟 XCode 就可以使用了！</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1603,138 +1650,6 @@ A類別身上存著 BaseDataMgr 的指標，但使用時是產生 MyDataMgr 的�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/17/vim-setup/">管理Vim Plugins</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-17T00:19:00+08:00" pubdate data-updated="true">Jan 17<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/01/17/vim-setup/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul>
-<li>產生Vim工作目錄
-
-<pre><code>- mkdir bcswlmpke-vim
-- cd bcswlmpke-vim
-- git init
-- touch README
-- git add README
-- git commit -m 'first commit'
-- git remote add origin git@github.com:bcswlmpke/bcswlmpke-vim.git
-- git push -u origin master
-</code></pre></li>
-<li>用 pathogen 來管理 Vim plugin
-
-<ul>
-<li>每個 plugin 都獨立安裝在 ~/.vim/bundle 下</li>
-<li>每個 plugin 都以 git submodule 的方式來管理，請參考<a href="http://vimcasts.org/episodes/synchronizing-plugins-with-git-submodules-and-pathogen" title="Git submodules and pathogen">Git Submodules and pathogen</a>
-
-<ul>
-<li>cd bcswlmpke-vim</li>
-<li>touch vimrc</li>
-<li>touch gvimrc</li>
-<li>ln -s ~/bcswlmpke-vim/vimrc ~/.vimrc</li>
-<li>ln -s ~/bcswlmpke-vim/gvimrc ~/.gvimrc</li>
-<li>ln -s ~/bcswlmpke-vim ~/.vim</li>
-<li>安裝 pathogen，下載 pathogen.vim 放到 .vim/autoload</li>
-<li>Activate pathogen, 需要在 .vimrc 加入下列兩行：
-
-<ul>
-<li>call pathogen#runtime_append_all_bundles()</li>
-<li>call pathogen#helptags()</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>以 Submodule 的方式安裝 plugins
-
-<pre><code>- cd bcswlmpke-vim
-- mkdir bundle
-- git submodule add https://github.com/fholgado/minibufexpl.vim.git bundle/minibufexpl.vim
-</code></pre></li>
-<li>安裝 Vim configuraton 到其它電腦
-
-<pre><code>- cd ~
-- git clone http://github.com/username/dotvim.git ~/.vim
-- ln -s ~/.vim/vimrc ~/.vimrc
-- ln -s ~/.vim/gvimrc ~/.gvimrc
-- cd ~/.vim
-- git submodule init
-- git submodule update
-</code></pre></li>
-<li>升級 plugin bundle
-
-<pre><code>- cd minibufexpl.vim
-- git pull origin master
-</code></pre></li>
-<li>升級所有的 bundled plugins
-
-<pre><code>- git submodule foreach git pull origin master
-</code></pre></li>
-<li>移除 Submodule
-
-<ul>
-<li>砍掉目錄
-
-<ul>
-<li>git rm &#8211;cached [要移除的目錄]</li>
-<li>rm -rf [要移除的目錄]</li>
-</ul>
-</li>
-<li>修改 .gitmodules
-
-<ul>
-<li>將相關內容移除</li>
-</ul>
-</li>
-<li>Commit
-
-<ul>
-<li>git add .gitmodules</li>
-<li>git commit -m &#8220;Remove submodule xxx&#8221;</li>
-</ul>
-</li>
-<li>Sync
-
-<ul>
-<li>git submodule sync</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1748,6 +1663,10 @@ A類別身上存著 BaseDataMgr 的指標，但使用時是產生 MyDataMgr 的�
     <section>
   <h1>最近的文章</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/08/20/new-post/">XVim for XCode</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2012/06/16/i9000-ics/">Galaxy S 不死，更新至 ICS 4.0.4</a>
@@ -1765,16 +1684,12 @@ A類別身上存著 BaseDataMgr 的指標，但使用時是產生 MyDataMgr 的�
         <a href="/blog/2012/05/01/convert-to-arc/">將專案轉換為ARC</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/04/24/ruby-language/">Ruby 程式語言摘要</a>
-      </li>
-    
   </ul>
 </section>
 
 <section>
 <h1>分類</h1>
-<span class='categories_tag'> <a href='/blog/categories/design-pattern' style='font-size: 115.0%'>Design-pattern(1)</a>  <a href='/blog/categories/ios-app' style='font-size: 145.0%'>Ios app(3)</a>  <a href='/blog/categories/objective-c' style='font-size: 160.0%'>Objective-c(4)</a>  <a href='/blog/categories/octopress' style='font-size: 130.0%'>Octopress(2)</a>  <a href='/blog/categories/phone' style='font-size: 115.0%'>Phone(1)</a>  <a href='/blog/categories/rails' style='font-size: 115.0%'>Rails(1)</a>  <a href='/blog/categories/ruby' style='font-size: 115.0%'>Ruby(1)</a>  <a href='/blog/categories/tools' style='font-size: 115.0%'>Tools(1)</a>  <a href='/blog/categories/vim' style='font-size: 115.0%'>Vim(1)</a> </span>
+<span class='categories_tag'> <a href='/blog/categories/design-pattern' style='font-size: 115.0%'>Design-pattern(1)</a>  <a href='/blog/categories/ios-app' style='font-size: 145.0%'>Ios app(3)</a>  <a href='/blog/categories/objective-c' style='font-size: 160.0%'>Objective-c(4)</a>  <a href='/blog/categories/octopress' style='font-size: 130.0%'>Octopress(2)</a>  <a href='/blog/categories/phone' style='font-size: 115.0%'>Phone(1)</a>  <a href='/blog/categories/rails' style='font-size: 115.0%'>Rails(1)</a>  <a href='/blog/categories/ruby' style='font-size: 115.0%'>Ruby(1)</a>  <a href='/blog/categories/tools' style='font-size: 130.0%'>Tools(2)</a>  <a href='/blog/categories/vim' style='font-size: 130.0%'>Vim(2)</a> </span>
 </section>
 
 
