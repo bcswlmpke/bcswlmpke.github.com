@@ -1,0 +1,16 @@
+---
+layout: post
+title: "XVim for XCode"
+date: 2012-08-20 22:42
+comments: true
+categories: [Tools, Vim]
+---
+
+* XVim 現在似乎比較穩定了
+  * github: [https://github.com/JugglerShu/XVim][1]
+  * package: [http://programming.jugglershu.net/xvim/][2]
+
+下載最新的 package 然後重啟 XCode 就可以使用了！
+
+[1]: https://github.com/JugglerShu/XVim "github"
+[2]: http://programming.jugglershu.net/xvim/ "package"
