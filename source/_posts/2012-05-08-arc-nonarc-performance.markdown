@@ -16,6 +16,8 @@ categories: [Objective-C, iOS App]
 下面舉一個例子，同樣的程式碼，只是在「ARC」與「非ARC」的情況下編譯執行，
 但是兩者所需要的時間是相差數倍的！
 
+<!-- more -->
+
 ```objc
   int n = 600000, m = 10000000;
     

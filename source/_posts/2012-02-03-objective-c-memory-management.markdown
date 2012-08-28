@@ -11,6 +11,7 @@ categories: [Objective-C, iOS App]
 整理出一些心得用來提醒自己，
 如果有錯誤也請大家幫忙指正或留言一起討論！
 
+<!-- more -->
 * __產生物件者，記得做對應的 release__
   * new (alloc + init)
   * retain 

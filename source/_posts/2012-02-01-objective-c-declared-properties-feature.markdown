@@ -10,6 +10,7 @@ categories: Objective-C
 查過資料卻沒記下來，
 今天剛好同事問到，
 所以這次一定要做一下筆記。
+<!-- more -->
 
 * __Property Declaratoin__
 ```objc

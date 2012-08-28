@@ -10,6 +10,8 @@ categories: Rails
 看起來會遇到不少問題，
 所以就一步一步筆記下來。
 
+<!-- more -->
+
 * Homebrew
   * ruby -e "$(curl -fsSL https://raw.github.com/gist/323731)"
   * brew install git (安裝 Git)

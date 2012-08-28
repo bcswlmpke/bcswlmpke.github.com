@@ -14,6 +14,7 @@ categories: Vim
       - git commit -m 'first commit'
       - git remote add origin git@github.com:bcswlmpke/bcswlmpke-vim.git
       - git push -u origin master
+<!-- more -->
 * 用 pathogen 來管理 Vim plugin
     - 每個 plugin 都獨立安裝在 ~/.vim/bundle 下
     - 每個 plugin 都以 git submodule 的方式來管理，請參考[Git Submodules and pathogen][1]

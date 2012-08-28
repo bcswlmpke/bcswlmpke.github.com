@@ -14,6 +14,7 @@ categories: Ruby
   load "../core.rb"
   load "C:/workspace/core.rb"
 ```
+<!-- more -->
 ---
 - 基本輸入輸出
   - <code>ARGV</code>: 使用者輸入的命令列引數，會收集成字串陣列給 ARGV 

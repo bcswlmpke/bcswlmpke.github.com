@@ -14,6 +14,7 @@ categories: [Objective-C, iOS App]
   - 如果轉換失敗，會提供錯誤訊息，等手動修正後，就可以重新啟動 Refactor ARC-conversion workflow
   ![Convert to ARC dialog][4]
   - 轉換成功後，你可以 review automatic changes，也可以做 snapshot 供之後回復(如果有需要)，然後選擇 Save 
+<!-- more -->
 ### 將手上的專案轉成 ARC 的一些心得整理 ###
   - 不想要轉換為 ARC 的 source file 可加上 <code>-fno-objc-arc</code>
   - 不需要自己加上 <code>retain</code>、<code>autorelease</code>、<code>release</code>、<code>[super dealloc]</code>

@@ -8,6 +8,8 @@ categories: Phone
 
 ![ScreenCapture1][2] ![ScreenCapture1][3]
 
+<!-- more -->
+
 我的手機 I9000 8G 原本是刷 MIUI 2.3.7 for I9000，
 我安裝的軟體不會超過30個，
 程式區一直都有 1.8G 以上可用，
@@ -29,6 +31,7 @@ categories: Phone
 
 廢話不多說，
 趕緊來介紹刷機的流程～
+
 
 ---
 * 備份
