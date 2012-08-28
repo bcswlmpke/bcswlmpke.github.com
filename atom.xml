@@ -4,7 +4,7 @@
   <title><![CDATA[Hank 學習筆記]]></title>
   <link href="http://bcswlmpke.github.com/atom.xml" rel="self"/>
   <link href="http://bcswlmpke.github.com/"/>
-  <updated>2012-08-20T23:06:29+08:00</updated>
+  <updated>2012-08-28T23:33:08+08:00</updated>
   <id>http://bcswlmpke.github.com/</id>
   <author>
     <name><![CDATA[陳彥任]]></name>
@@ -39,6 +39,9 @@
     <updated>2012-06-16T10:05:00+08:00</updated>
     <id>http://bcswlmpke.github.com/blog/2012/06/16/i9000-ics</id>
     <content type="html"><![CDATA[<p><img src="http://farm6.staticflickr.com/5038/7378210724_6c4fded6fd.jpg" title="ScreenCapture1" alt="ScreenCapture1" /> <img src="http://farm6.staticflickr.com/5336/7378210814_75c0c1522a.jpg" title="ScreenCapture2" alt="ScreenCapture1" /></p>
+
+<!-- more -->
+
 
 <p>我的手機 I9000 8G 原本是刷 MIUI 2.3.7 for I9000，
 我安裝的軟體不會超過30個，
@@ -193,6 +196,9 @@
 看起來會遇到不少問題，
 所以就一步一步筆記下來。</p>
 
+<!-- more -->
+
+
 <ul>
 <li>Homebrew
 
@@ -246,6 +252,11 @@
 
 <p>下面舉一個例子，同樣的程式碼，只是在「ARC」與「非ARC」的情況下編譯執行，
 但是兩者所需要的時間是相差數倍的！</p>
+
+<!-- more -->
+
+
+
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -382,14 +393,21 @@ XCode 在 Compile 的時候，幫我們安插了類似下面的程式，</p>
 <li>using the Apple LLVM compiler</li>
 <li>如果轉換失敗，會提供錯誤訊息，等手動修正後，就可以重新啟動 Refactor ARC-conversion workflow
 <img src="http://farm8.staticflickr.com/7238/7131702787_9e4cdfcfe1_z.jpg" title="Convert to ARC dialog" alt="Convert to ARC dialog" /></li>
-<li>轉換成功後，你可以 review automatic changes，也可以做 snapshot 供之後回復(如果有需要)，然後選擇 Save
+<li>轉換成功後，你可以 review automatic changes，也可以做 snapshot 供之後回復(如果有需要)，然後選擇 Save</li>
+</ul>
+</li>
+</ul>
 
-<h3>將手上的專案轉成 ARC 的一些心得整理</h3></li>
+
+<!-- more -->
+
+
+<h3>將手上的專案轉成 ARC 的一些心得整理</h3>
+
+<ul>
 <li>不想要轉換為 ARC 的 source file 可加上 <code>-fno-objc-arc</code></li>
 <li>不需要自己加上 <code>retain</code>、<code>autorelease</code>、<code>release</code>、<code>[super dealloc]</code></li>
 <li>Objects in the struct are unretained</li>
-</ul>
-</li>
 </ul>
 
 
@@ -587,6 +605,9 @@ XCode 在 Compile 的時候，幫我們安插了類似下面的程式，</p>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="nb">load</span> <span class="s2">&quot;../core.rb&quot;</span>
 </span><span class='line'>  <span class="nb">load</span> <span class="s2">&quot;C:/workspace/core.rb&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
+
+
+<!-- more -->
 
 
 <hr />
@@ -965,6 +986,9 @@ A類別身上存著 BaseDataMgr 的指標，但使用時是產生 MyDataMgr 的�
 整理出一些心得用來提醒自己，
 如果有錯誤也請大家幫忙指正或留言一起討論！</p>
 
+<!-- more -->
+
+
 <ul>
 <li><strong>產生物件者，記得做對應的 release</strong>
 
@@ -1088,6 +1112,9 @@ A類別身上存著 BaseDataMgr 的指標，但使用時是產生 MyDataMgr 的�
 查過資料卻沒記下來，
 今天剛好同事問到，
 所以這次一定要做一下筆記。</p>
+
+<!-- more -->
+
 
 <ul>
 <li><strong>Property Declaratoin</strong></li>
@@ -1233,6 +1260,9 @@ A類別身上存著 BaseDataMgr 的指標，但使用時是產生 MyDataMgr 的�
     <content type="html"><![CDATA[<p>最近看到<a href="http://blog.eddie.com.tw/2012/01/04/my-toolbox/" title="高見龍的工具箱">高見龍的工具箱</a>與<a href="http://blog.gasolin.idv.tw/2012/01/blog-post.html?m=1" title="Gasolin的工具箱">Gasolin的工具箱</a>，
 於是自己也興起了念頭，整理一下目前自己常用的工具。</p>
 
+<!-- more -->
+
+
 <hr />
 
 <ul>
@@ -1321,6 +1351,13 @@ A類別身上存著 BaseDataMgr 的指標，但使用時是產生 MyDataMgr 的�
 - git remote add origin git@github.com:bcswlmpke/bcswlmpke-vim.git
 - git push -u origin master
 </code></pre></li>
+</ul>
+
+
+<!-- more -->
+
+
+<ul>
 <li>用 pathogen 來管理 Vim plugin
 
 <ul>

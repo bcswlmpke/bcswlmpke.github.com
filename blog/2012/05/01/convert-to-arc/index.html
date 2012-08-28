@@ -107,14 +107,21 @@ Edit > Refactor > Convert to Objective- &hellip;">
 <li>using the Apple LLVM compiler</li>
 <li>如果轉換失敗，會提供錯誤訊息，等手動修正後，就可以重新啟動 Refactor ARC-conversion workflow
 <img src="http://farm8.staticflickr.com/7238/7131702787_9e4cdfcfe1_z.jpg" title="Convert to ARC dialog" alt="Convert to ARC dialog" /></li>
-<li>轉換成功後，你可以 review automatic changes，也可以做 snapshot 供之後回復(如果有需要)，然後選擇 Save
+<li>轉換成功後，你可以 review automatic changes，也可以做 snapshot 供之後回復(如果有需要)，然後選擇 Save</li>
+</ul>
+</li>
+</ul>
 
-<h3>將手上的專案轉成 ARC 的一些心得整理</h3></li>
+
+<!-- more -->
+
+
+<h3>將手上的專案轉成 ARC 的一些心得整理</h3>
+
+<ul>
 <li>不想要轉換為 ARC 的 source file 可加上 <code>-fno-objc-arc</code></li>
 <li>不需要自己加上 <code>retain</code>、<code>autorelease</code>、<code>release</code>、<code>[super dealloc]</code></li>
 <li>Objects in the struct are unretained</li>
-</ul>
-</li>
 </ul>
 
 

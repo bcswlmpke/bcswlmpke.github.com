@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Objective-C | Hank 學習筆記]]></title>
   <link href="http://bcswlmpke.github.com/blog/categories/objective-c/atom.xml" rel="self"/>
   <link href="http://bcswlmpke.github.com/"/>
-  <updated>2012-08-20T23:06:29+08:00</updated>
+  <updated>2012-08-28T23:33:08+08:00</updated>
   <id>http://bcswlmpke.github.com/</id>
   <author>
     <name><![CDATA[陳彥任]]></name>
@@ -28,6 +28,9 @@
 
 <p>下面舉一個例子，同樣的程式碼，只是在「ARC」與「非ARC」的情況下編譯執行，
 但是兩者所需要的時間是相差數倍的！</p>
+
+<!-- more -->
+
 
 <p>```objc
   int n = 600000, m = 10000000;</p>
@@ -127,9 +130,18 @@ XCode 在 Compile 的時候，幫我們安插了類似下面的程式，
 <li>using the Apple LLVM compiler</li>
 <li>如果轉換失敗，會提供錯誤訊息，等手動修正後，就可以重新啟動 Refactor ARC-conversion workflow
 <img src="http://farm8.staticflickr.com/7238/7131702787_9e4cdfcfe1_z.jpg" title="Convert to ARC dialog" alt="Convert to ARC dialog" /></li>
-<li>轉換成功後，你可以 review automatic changes，也可以做 snapshot 供之後回復(如果有需要)，然後選擇 Save
+<li>轉換成功後，你可以 review automatic changes，也可以做 snapshot 供之後回復(如果有需要)，然後選擇 Save</li>
+</ul>
+</li>
+</ul>
 
-<h3>將手上的專案轉成 ARC 的一些心得整理</h3></li>
+
+<!-- more -->
+
+
+<h3>將手上的專案轉成 ARC 的一些心得整理</h3>
+
+<ul>
 <li>不想要轉換為 ARC 的 source file 可加上 <code>-fno-objc-arc</code></li>
 <li>不需要自己加上 <code>retain</code>、<code>autorelease</code>、<code>release</code>、<code>[super dealloc]</code></li>
 <li>Objects in the struct are unretained
@@ -161,36 +173,39 @@ void</em> myObjectPointer = (</strong>bridge void*)myObject;</li>
 </ul>
 
 
-<p>void<em> myObjectPointer2 = NULL;
-NSObject</em> myObject2 = (__bridge NSObject*)myObjectPointer2;
+<p>  void<em> myObjectPointer2 = NULL;
+  NSObject</em> myObject2 = (<strong>bridge NSObject*)myObjectPointer2;
+<code>
+  - assign retained object to unsafe_unretained variable, object will be released after assignment
+</code>objc
+  請在 @property 加上 strong
+  或是在變數名稱前加上 </strong>strong
+<code>
+  - 發生 leaking 怎麼辦？
+</code>objc
+  如果發生類似 *** __NSAutoreleaseNoPool(): Object 0x648ad80 of class NSCFString autoreleased with no pool in place - just leaking 的訊息，
+  可以透過 Profile -> Leak Tool 找出有問題的地方
+<code>
+  - 如果是 static method 回傳一個物件，要怎麼釋放？(以 C 所產生的物件為例)
+</code>objc
+  CFUUIDRef theUUID = CFUUIDCreate(NULL);</p>
+
+<pre><code>CFStringRef strUUID = CFUUIDCreateString(NULL, theUUID);
+CFRelease(theUUID);
+
+return (__bridge_transfer NSString *)strUUID; // 釋放原先所有權，將所有權交給 ARC 
+</code></pre>
+
+<p><code>
+  - id array member instance under ARC
+</code>objc
+id<ITest> <strong>strong *iArray = nil;
+iArray = (id<ITest> </strong>strong *)calloc(sizeof(id<ITest>), Size);
 ```</p>
 
+<h3>一些不錯的參考連結</h3>
+
 <ul>
-<li>assign retained object to unsafe_unretained variable, object will be released after assignment
-<code>objc
-請在 @property 加上 strong
-或是在變數名稱前加上 __strong
-</code></li>
-<li>發生 leaking 怎麼辦？
-<code>objc
-如果發生類似 *** __NSAutoreleaseNoPool(): Object 0x648ad80 of class NSCFString autoreleased with no pool in place - just leaking 的訊息，
-可以透過 Profile -&gt; Leak Tool 找出有問題的地方
-</code></li>
-<li><p>如果是 static method 回傳一個物件，要怎麼釋放？(以 C 所產生的物件為例)
-```objc
-CFUUIDRef theUUID = CFUUIDCreate(NULL);
-CFStringRef strUUID = CFUUIDCreateString(NULL, theUUID);
-CFRelease(theUUID);</p>
-
-<p>return (__bridge_transfer NSString *)strUUID; // 釋放原先所有權，將所有權交給 ARC
-```</p></li>
-<li>id array member instance under ARC
-<code>objc
-id&lt;ITest&gt; __strong *iArray = nil;
-iArray = (id&lt;ITest&gt; __strong *)calloc(sizeof(id&lt;ITest&gt;), Size);
-</code>
-
-<h3>一些不錯的參考連結</h3></li>
 <li>Property declarations
 <code>objc
 「assign」 implies 「__unsafe_unretained」ownership.
@@ -203,8 +218,6 @@ weak implies __weak ownership.
 <li>Bridged casts
 ```objc
 A bridged cast is a C-style cast annotated with one of three keywords:</li>
-</ul>
-</li>
 </ul>
 
 
@@ -230,6 +243,9 @@ A bridged cast is a C-style cast annotated with one of three keywords:</li>
 在開發 iOS 的過程中踩過不少地雷，
 整理出一些心得用來提醒自己，
 如果有錯誤也請大家幫忙指正或留言一起討論！</p>
+
+<!-- more -->
+
 
 <ul>
 <li><strong>產生物件者，記得做對應的 release</strong>
@@ -319,6 +335,9 @@ self.name = nil; // 等同於 [name release]; name = nil;</p>
 查過資料卻沒記下來，
 今天剛好同事問到，
 所以這次一定要做一下筆記。</p>
+
+<!-- more -->
+
 
 <ul>
 <li><strong>Property Declaratoin</strong>

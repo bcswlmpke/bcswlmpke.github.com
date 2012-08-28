@@ -114,91 +114,15 @@
 - git remote add origin git@github.com:bcswlmpke/bcswlmpke-vim.git
 - git push -u origin master
 </code></pre></li>
-<li>用 pathogen 來管理 Vim plugin
-
-<ul>
-<li>每個 plugin 都獨立安裝在 ~/.vim/bundle 下</li>
-<li>每個 plugin 都以 git submodule 的方式來管理，請參考<a href="http://vimcasts.org/episodes/synchronizing-plugins-with-git-submodules-and-pathogen" title="Git submodules and pathogen">Git Submodules and pathogen</a>
-
-<ul>
-<li>cd bcswlmpke-vim</li>
-<li>touch vimrc</li>
-<li>touch gvimrc</li>
-<li>ln -s ~/bcswlmpke-vim/vimrc ~/.vimrc</li>
-<li>ln -s ~/bcswlmpke-vim/gvimrc ~/.gvimrc</li>
-<li>ln -s ~/bcswlmpke-vim ~/.vim</li>
-<li>安裝 pathogen，下載 pathogen.vim 放到 .vim/autoload</li>
-<li>Activate pathogen, 需要在 .vimrc 加入下列兩行：
-
-<ul>
-<li>call pathogen#runtime_append_all_bundles()</li>
-<li>call pathogen#helptags()</li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>以 Submodule 的方式安裝 plugins
 
-<pre><code>- cd bcswlmpke-vim
-- mkdir bundle
-- git submodule add https://github.com/fholgado/minibufexpl.vim.git bundle/minibufexpl.vim
-</code></pre></li>
-<li>安裝 Vim configuraton 到其它電腦
-
-<pre><code>- cd ~
-- git clone http://github.com/username/dotvim.git ~/.vim
-- ln -s ~/.vim/vimrc ~/.vimrc
-- ln -s ~/.vim/gvimrc ~/.gvimrc
-- cd ~/.vim
-- git submodule init
-- git submodule update
-</code></pre></li>
-<li>升級 plugin bundle
-
-<pre><code>- cd minibufexpl.vim
-- git pull origin master
-</code></pre></li>
-<li>升級所有的 bundled plugins
-
-<pre><code>- git submodule foreach git pull origin master
-</code></pre></li>
-<li>移除 Submodule
-
-<ul>
-<li>砍掉目錄
-
-<ul>
-<li>git rm &#8211;cached [要移除的目錄]</li>
-<li>rm -rf [要移除的目錄]</li>
-</ul>
-</li>
-<li>修改 .gitmodules
-
-<ul>
-<li>將相關內容移除</li>
-</ul>
-</li>
-<li>Commit
-
-<ul>
-<li>git add .gitmodules</li>
-<li>git commit -m &#8220;Remove submodule xxx&#8221;</li>
-</ul>
-</li>
-<li>Sync
-
-<ul>
-<li>git submodule sync</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
 
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/01/17/vim-setup/">Read on &rarr;</a>
+    </footer>
   
 
 
