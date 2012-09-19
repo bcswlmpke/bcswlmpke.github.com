@@ -5,14 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Rails Develop Environment Setup - Hank 學習筆記</title>
+  <title>Tap手勢的處理 - Hank 學習筆記</title>
   <meta name="author" content="陳彥任">
 
   
-  <meta name="description" content="依照 Rails 101 的安裝步驟，但可能安裝的版本差太多，
-看起來會遇到不少問題，
-所以就一步一步筆記下來。 Homebrew ruby -e &#8220;$(curl -fsSL https://raw.github.com/gist/323731)&#8221;
-brew install &hellip;">
+  <meta name="description" content="要處理 Single Tap 與 Double Tap 的時候,
+除了下面這行要設定以外 1 [_singleTap requireGestureRecognizerToFail:_doubleTap]; 還必須設定 1
+2 [_singleTap setDelaysTouchesBegan: &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +20,7 @@ brew install &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://bcswlmpke.github.com/blog/2012/06/12/rails-develop-environment">
+  <link rel="canonical" href="http://bcswlmpke.github.com/blog/2012/09/19/tap-gesture">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -71,7 +70,7 @@ brew install &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Rails Develop Environment Setup</h1>
+      <h1 class="entry-title">Tap手勢的處理</h1>
     
     
       <p class="meta">
@@ -87,7 +86,7 @@ brew install &hellip;">
   
 
 
-<time datetime="2012-06-12T20:22:00+08:00" pubdate data-updated="true">Jun 12<span>th</span>, 2012</time>
+<time datetime="2012-09-19T23:11:00+08:00" pubdate data-updated="true">Sep 19<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -96,48 +95,24 @@ brew install &hellip;">
   </header>
 
 
-<div class="entry-content"><p>依照 Rails 101 的安裝步驟，但可能安裝的版本差太多，
-看起來會遇到不少問題，
-所以就一步一步筆記下來。</p>
+<div class="entry-content"><p>要處理 Single Tap 與 Double Tap 的時候,
+除了下面這行要設定以外</p>
 
-<!-- more -->
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'>  <span class="p">[</span><span class="n">_singleTap</span> <span class="nl">requireGestureRecognizerToFail:</span><span class="n">_doubleTap</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<ul>
-<li>Homebrew
+<p>還必須設定</p>
 
-<ul>
-<li>ruby -e &#8220;$(curl -fsSL https://raw.github.com/gist/323731)&#8221;</li>
-<li>brew install git (安裝 Git)</li>
-<li>brew update (更新套件清單)</li>
-<li>brew search (搜尋套件)</li>
-<li>留意 /usr/local/Library/Formula/</li>
-</ul>
-</li>
-<li>ImageMagick
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'>  <span class="p">[</span><span class="n">_singleTap</span> <span class="nl">setDelaysTouchesBegan:</span><span class="n">YES</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">_doubleTap</span> <span class="nl">setDelaysTouchesBegan:</span><span class="n">YES</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<ul>
-<li>brew install imagemagick (會自行處理相依套件問題)</li>
-</ul>
-</li>
-<li>MySQL Community Server
 
-<ul>
-<li>mysql-5.5.25-osx10.6-x86_64.dmg</li>
-</ul>
-</li>
-<li>RVM</li>
-<li>REE</li>
-<li>Ruby gems</li>
-<li>HTTP Server
-
-<ul>
-<li>Pow</li>
-<li>Powder</li>
-</ul>
-</li>
-</ul>
-
+<p>否則當 Double Tap trigger 時，也會觸發 Single Tap.</p>
 </div>
 
 
@@ -160,12 +135,12 @@ brew install &hellip;">
   
 
 
-<time datetime="2012-06-12T20:22:00+08:00" pubdate data-updated="true">Jun 12<span>th</span>, 2012</time>
+<time datetime="2012-09-19T23:11:00+08:00" pubdate data-updated="true">Sep 19<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/rails/'>Rails</a>
+    <a class='category' href='/blog/categories/objective-c/'>Objective-C</a>, <a class='category' href='/blog/categories/ios-app/'>iOS App</a>
   
 </span>
 
@@ -174,7 +149,7 @@ brew install &hellip;">
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://bcswlmpke.github.com/blog/2012/06/12/rails-develop-environment/" data-via="" data-counturl="http://bcswlmpke.github.com/blog/2012/06/12/rails-develop-environment/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://bcswlmpke.github.com/blog/2012/09/19/tap-gesture/" data-via="" data-counturl="http://bcswlmpke.github.com/blog/2012/09/19/tap-gesture/" >Tweet</a>
   
   
   
@@ -183,10 +158,8 @@ brew install &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/05/08/arc-nonarc-performance/" title="Previous Post: ARC 與 非ARC 在大量資料的情況下的執行速度相差數倍">&laquo; ARC 與 非ARC 在大量資料的情況下的執行速度相差數倍</a>
+        <a class="basic-alignment left" href="/blog/2012/08/20/new-post/" title="Previous Post: XVim for XCode">&laquo; XVim for XCode</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/06/16/i9000-ics/" title="next Post: Galaxy S 不死，更新至 ICS 4.0.4">Galaxy S 不死，更新至 ICS 4.0.4 &raquo;</a>
       
     </p>
   </footer>
@@ -259,8 +232,8 @@ brew install &hellip;">
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://bcswlmpke.github.com/blog/2012/06/12/rails-develop-environment/';
-        var disqus_url = 'http://bcswlmpke.github.com/blog/2012/06/12/rails-develop-environment/';
+        var disqus_identifier = 'http://bcswlmpke.github.com/blog/2012/09/19/tap-gesture/';
+        var disqus_url = 'http://bcswlmpke.github.com/blog/2012/09/19/tap-gesture/';
         var disqus_script = 'embed.js';
       
     (function () {
