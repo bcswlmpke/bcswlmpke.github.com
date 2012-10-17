@@ -4,7 +4,7 @@
   <title><![CDATA[Hank 學習筆記]]></title>
   <link href="http://bcswlmpke.github.com/atom.xml" rel="self"/>
   <link href="http://bcswlmpke.github.com/"/>
-  <updated>2012-10-02T22:43:13+08:00</updated>
+  <updated>2012-10-17T21:59:52+08:00</updated>
   <id>http://bcswlmpke.github.com/</id>
   <author>
     <name><![CDATA[陳彥任]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[UITableView 如何調整 Scroll Indicator 的位置？]]></title>
+    <link href="http://bcswlmpke.github.com/blog/2012/10/17/change-uitable-scrollindicator-position/"/>
+    <updated>2012-10-17T21:48:00+08:00</updated>
+    <id>http://bcswlmpke.github.com/blog/2012/10/17/change-uitable-scrollindicator-position</id>
+    <content type="html"><![CDATA[<p>嚴格說起來，應該是繼承自 UIScrollView 的都可以調整。
+舉例來說，假設要顯示的是垂直方向的 Indicator (預設是開啟的)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">_tableView</span><span class="o">.</span><span class="n">showsVerticalScrollIndicator</span> <span class="o">=</span> <span class="no">YES</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>預設位置是在 TableView 的最右邊，假設想放到左邊，或是中間，要怎麼做？
+答案是：<code>UIEdgeInsets</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">top</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">bottom</span><span class="p">,</span> <span class="n">right</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>接下來要怎麼調整，就看個人需求囉！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[UITableView 顯示上萬筆資料時，reloadData 很慢的問題]]></title>

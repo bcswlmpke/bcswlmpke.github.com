@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS App | Hank 學習筆記]]></title>
   <link href="http://bcswlmpke.github.com/blog/categories/ios-app/atom.xml" rel="self"/>
   <link href="http://bcswlmpke.github.com/"/>
-  <updated>2012-10-02T22:43:13+08:00</updated>
+  <updated>2012-10-17T21:59:52+08:00</updated>
   <id>http://bcswlmpke.github.com/</id>
   <author>
     <name><![CDATA[陳彥任]]></name>
@@ -12,6 +12,25 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[UITableView 如何調整 Scroll Indicator 的位置？]]></title>
+    <link href="http://bcswlmpke.github.com/blog/2012/10/17/change-uitable-scrollindicator-position/"/>
+    <updated>2012-10-17T21:48:00+08:00</updated>
+    <id>http://bcswlmpke.github.com/blog/2012/10/17/change-uitable-scrollindicator-position</id>
+    <content type="html"><![CDATA[<p>嚴格說起來，應該是繼承自 UIScrollView 的都可以調整。
+舉例來說，假設要顯示的是垂直方向的 Indicator (預設是開啟的)
+<code>ruby
+_tableView.showsVerticalScrollIndicator = YES;
+</code>
+預設位置是在 TableView 的最右邊，假設想放到左邊，或是中間，要怎麼做？
+答案是：<code>UIEdgeInsets</code>
+<code>ruby
+top, left, bottom, right
+</code>
+接下來要怎麼調整，就看個人需求囉！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[UITableView 顯示上萬筆資料時，reloadData 很慢的問題]]></title>
@@ -271,98 +290,6 @@ A bridged cast is a C-style cast annotated with one of three keywords:</li>
   - <a href="http://clang.llvm.org/docs/AutomaticReferenceCounting.html" title="Automatic Reference Counting">Automatic Reference Counting</a>
   - <a href="http://developer.apple.com/library/ios/#releasenotes/ObjectiveC/RN-TransitioningToARC/Introduction/Introduction.html#//apple_ref/doc/uid/TP40011226" title="Transitioning to ARC Release Notes">Transitioning to ARC Release Notes</a>
   - <a href="http://www.mikeash.com/pyblog/friday-qa-2011-09-30-automatic-reference-counting.html" title="Q&amp;A 2011-09-30: Automatic Reference Counting">Q&amp;A 2011-09-30: Automatic Reference Counting</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[不要相信retainCount，事實上你該怎麼做？]]></title>
-    <link href="http://bcswlmpke.github.com/blog/2012/02/03/objective-c-memory-management/"/>
-    <updated>2012-02-03T21:29:00+08:00</updated>
-    <id>http://bcswlmpke.github.com/blog/2012/02/03/objective-c-memory-management</id>
-    <content type="html"><![CDATA[<p>在還沒有擁抱 iOS 5 ARC (Automatic Reference Counting) 之前，
-我們必須自己管理程式所使用的記憶體，
-在開發 iOS 的過程中踩過不少地雷，
-整理出一些心得用來提醒自己，
-如果有錯誤也請大家幫忙指正或留言一起討論！</p>
-
-<!-- more -->
-
-
-<ul>
-<li><strong>產生物件者，記得做對應的 release</strong>
-
-<ul>
-<li>new (alloc + init)</li>
-<li>retain</li>
-<li>copy</li>
-</ul>
-</li>
-<li><strong>addSubView 會將 retainCount +1，有兩種處理的時機</strong>
-<code>objc
-  UILabel *label = [UILabel alloc] initWithFrame:self.bounds];
-  [self addSubView:label];
-  [label release];
-</code>
-```objc
-  @implementation MyClass
-
-<pre><code>  - (void)dealloc 
-  {
-      if (label != nil)
-      {
-          if (label.superview != nil)
-              [label removeFromSuperview];
-          [label release];
-          label = nil;
-      }
-      [super dealloc];
-  }
-</code></pre>
-
-<p>  @end
-```</p></li>
-<li><strong>Layer 的 Animation 或 setFrame 會暫時的增加 retainCount，直到動作完成</strong></li>
-<li><strong>如果你要使用 Thread，請記得用 Autorelease Pool 幫 Thread 做記憶體管理</strong></li>
-<li><strong>如果實作的類別要用 Delegate 時，Property 請記得用 assgin，如果用 retain 會造成 Circular Reference</strong>
-```objc
-  @interface MyClass
-  {
-
-<pre><code>id target;
-</code></pre>
-
-<p>  }
-  @property (nonatomic, assgin) id target;
-  @end
-```</p></li>
-<li><strong>如果 Property 的屬性使用 retain，要記得 release 並設成 nil</strong>
-```objc
-  @interface MyClass
-  {
-
-<pre><code>NSString *name;
-</code></pre>
-
-  }
-  @property (nonatomic, retain) NSString *name;
-  @end
-  @implementation MyClass
-
-<ul>
-<li><p>(void)dealloc
-{
-self.name = nil; // 等同於 [name release]; name = nil;</p>
-
-<p>[super dealloc];
-}
-@end
-```</p>
-
-<blockquote><p>更詳細的說明可以參考官方文件：<a href="https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/MemoryMgmt/Articles/MemoryMgmt.html" title="About Memory Management">About Memory Management</a></p></blockquote></li>
-</ul>
-</li>
-</ul>
-
 ]]></content>
   </entry>
   
