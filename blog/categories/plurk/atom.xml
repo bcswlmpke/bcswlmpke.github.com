@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Plurk | Hank 學習筆記]]></title>
+  <link href="http://bcswlmpke.github.com/blog/categories/plurk/atom.xml" rel="self"/>
+  <link href="http://bcswlmpke.github.com/"/>
+  <updated>2012-10-17T22:19:40+08:00</updated>
+  <id>http://bcswlmpke.github.com/</id>
+  <author>
+    <name><![CDATA[陳彥任]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[如何寫一個噗浪機器人]]></title>
+    <link href="http://bcswlmpke.github.com/blog/2012/10/17/how-to-build-plurk-bot/"/>
+    <updated>2012-10-17T22:02:00+08:00</updated>
+    <id>http://bcswlmpke.github.com/blog/2012/10/17/how-to-build-plurk-bot</id>
+    <content type="html"><![CDATA[<ul>
+<li>步驟1：註冊新的噗浪帳號，並取得四項參數，可以參考<a href="http://blog.urdada.net/2011/10/28/426/" title="噗浪機器人範例程式 - 使用 Plurk API 2.0">噗浪機器人範例程式 - 使用 Plurk API 2.0</a>
+
+<ul>
+<li>App Key (Consumer Key)</li>
+<li>App Secret (Consumer Secret)</li>
+<li>Access Token (Token Key)</li>
+<li>Access Token Secret (Token Secret)</li>
+</ul>
+</li>
+<li>步驟2：範例測試
+
+<ul>
+<li>參考上面提到的網址，用 Python 來實驗，置換四個參數</li>
+<li>下載 Library
+
+<ul>
+<li>(1) <a href="https://github.com/clsung/plurk-oauth" title="plurk-oauth">plurk-oauth</a></li>
+<li>(2) <a href="https://github.com/simplegeo/python-oauth2" title="python-oauth2">python-oauth2 library</a></li>
+<li>(3) <a href="http://code.google.com/p/httplib2/" title="httplib2">httplib2 client library in Python</a> <code>sudo python setup.py install</code></li>
+</ul>
+</li>
+<li>將 python-oauth2 的 oauth2 目錄放到與 plurk-oauth 同一層即可。</li>
+<li>執行範例，發一則含 <code>hello</code>字樣的噗，機器人會回 <code>world</code></li>
+</ul>
+</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

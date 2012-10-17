@@ -9,11 +9,10 @@
   <meta name="author" content="陳彥任">
 
   
-  <meta name="description" content="在還沒有擁抱 iOS 5 ARC (Automatic Reference Counting) 之前，
-我們必須自己管理程式所使用的記憶體，
-在開發 iOS 的過程中踩過不少地雷，
-整理出一些心得用來提醒自己，
-如果有錯誤也請大家幫忙指正或留言一起討論！ ">
+  <meta name="description" content="在開發程式時，為了實現功能，我們需要實作一些類別彼此互相搭配，
+在設計模式的領域中，提出了23種模式與6大設計原則讓我們可以遵循，
+完成功能的設計方式絕對不只一種，端看設計者當時的思考方式與邏輯。 最近看了設計模式6大原則中的迪米特法則(最少知識原則)，
+提到：在實際應用中， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +68,230 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/01/discuss-design-pattern/">程式開發時，類別間存取的設計方式</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-01T18:32:00+08:00" pubdate data-updated="true">Apr 1<span>st</span>, 2012</time>
+        
+         | <a href="/blog/2012/04/01/discuss-design-pattern/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>在開發程式時，為了實現功能，我們需要實作一些類別彼此互相搭配，
+在設計模式的領域中，提出了23種模式與6大設計原則讓我們可以遵循，
+完成功能的設計方式絕對不只一種，端看設計者當時的思考方式與邏輯。</p>
+
+<p>最近看了設計模式6大原則中的迪米特法則(最少知識原則)，
+提到：在實際應用中，如果一個類別需要跳轉兩次以上才能存取到另一個
+類別，就需要想辦法進行重構了！</p>
+
+<p>我發現自己在未接觸設計模式前，自己常用下面的幾種方式對類別間的存取
+進行設計，程式碼的例子大致說明了設計的想法，
+想跟大家討論怎樣的設計方式或流程可以讓類別間的存取更有效率！</p>
+
+<ul>
+<li>方式1: B類別不認識A類別，但需要存取A類別中的資訊。</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@protocol</span> <span class="nc">IData</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nl">getData:</span><span class="p">(</span><span class="n">Enum</span><span class="p">)</span><span class="n">enumType</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@interface</span> <span class="nc">A</span> : <span class="nc">NSObject</span> <span class="o">&lt;</span><span class="n">IData</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@end</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">@</span><span class="n">interface</span> <span class="n">B</span> <span class="o">:</span> <span class="n">NSObject</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">assign</span><span class="p">)</span> <span class="kt">id</span><span class="o">&lt;</span><span class="n">IData</span><span class="o">&gt;</span> <span class="n">pData</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>說明
+
+<ul>
+<li>A類別實作 IData 介面</li>
+<li>B類別不認識 A類別，只認識介面 IData</li>
+<li>不讓B類別直接認識A類別，未來任何類別只要實作了介面IData，B類別的程式都不必修改</li>
+<li>我覺得這種作法適用在撰寫的類別是提供給他人使用的情況，需要考慮未來程式的可維護性、重複使用以及擴充性。</li>
+<li>但雖然B類別不認識A類別，只認識 IData 介面提供的程式介面 getData，但實際上 getData 的參數是一個 Enum，
+表示如果要存取A類別身上不同的資訊，就要有一串 Enum 的型態，讓B類別能間接存取A類別的資訊</li>
+<li>因此，如果A類別認識C類別，但B不認識A類別與C類別，只認識 IData 介面，但需要的資訊需要卻需要A類別存取C類別
+身上的資訊才能提供，會變成 B -> IData -> A -> C 這樣跳轉兩次才能存取到另一個類別</li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+
+<ul>
+<li>方式2：B類別認識A類別，用「依賴」、「聚合」、「組合」、「關聯」的方式設計</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@interface</span> <span class="nc">DataMgr</span> : <span class="nc">NSObject</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@interface</span> <span class="nc">B</span> : <span class="nc">NSObject</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="k">@private</span>
+</span><span class='line'>  <span class="n">DataMgr</span> <span class="o">*</span><span class="n">_dataMgr</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nl">initWithFrame:</span><span class="p">(</span><span class="n">CGRect</span><span class="p">)</span><span class="n">rect</span> <span class="nl">dataMgr:</span><span class="p">(</span><span class="n">DataMgr</span> <span class="o">*</span><span class="p">)</span><span class="n">pDataMgr</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>說明
+
+<ul>
+<li>在B類別初始化時，將需要的資訊傳入</li>
+<li>如果B類別所需要的資訊只是暫時性的，可以用「依賴」的方式設計，當參數傳入後，
+在函式內處理完畢就不再需要了</li>
+<li>如果B類別需要的是後續還會再進行操作的資訊，則用「聚合」、「組合」、「關聯」的方式，
+在其內部透過一個指標來操作，或是將傳入的資訊複製一份存在自己身上</li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+
+<ul>
+<li>方式3：B類別繼承A類別</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@interface</span> <span class="nc">BaseDataMgr</span> : <span class="nc">NSObject</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nl">addUserData:</span><span class="p">(</span><span class="n">EnumUserData</span><span class="p">)</span><span class="n">type</span> <span class="nl">params:</span><span class="p">(</span><span class="n">NSArray</span> <span class="o">*</span><span class="p">)</span><span class="n">params</span><span class="p">;</span>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nl">getUserData:</span><span class="p">(</span><span class="n">EnumUserData</span><span class="p">)</span><span class="n">type</span> <span class="nl">params:</span><span class="p">(</span><span class="n">NSArray</span> <span class="o">*</span><span class="p">)</span><span class="n">params</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@interface</span> <span class="nc">MyDataMgr</span> : <span class="nc">BaseDataMgr</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">functionA</span><span class="p">;</span>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span><span class="n">functionB</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@end</span>
+</span><span class='line'><span class="k">@interface</span> <span class="nc">A</span> : <span class="nc">NSObject</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="k">@private</span>
+</span><span class='line'>  <span class="n">BaseDataMgr</span> <span class="o">*</span><span class="n">_dataMgr</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>說明
+
+<ul>
+<li>盡量達成 Liskov Substitution Principle(LSP): 只要父類別能出現的地方，
+子類別就可以出現，而且替換為子類別也不會產生任何錯誤或異常</li>
+<li>當子類別不能完整作父類別的方法，或是父類別的某些方法在子類別中並不適用，
+則建議採組合、聚合等方式代替繼承</li>
+<li>我自己本身使用繼承時，大部份都沒有完全遵循上述的兩項原則，使用的情況大致為
+A類別身上存著 BaseDataMgr 的指標，但使用時是產生 MyDataMgr 的實體，內部在使用時，
+必須進行轉型 ex. [(MyDataMgr *)_dataMgr functionA] 才可操作 BaseDataMgr 不提供的方法。</li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+
+<p>以上舉了三個例子來說明，有時候覺得某些設計的的堅持或許是太鑽牛角尖，也或許是過度設計了，
+如果大家有什麼想法或建議，歡迎一起提出來討論！</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -419,6 +642,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/10/17/how-to-build-plurk-bot/">如何寫一個噗浪機器人</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/10/17/change-uitable-scrollindicator-position/">UITableView 如何調整 Scroll Indicator 的位置？</a>
       </li>
     
@@ -434,16 +661,12 @@
         <a href="/blog/2012/08/20/new-post/">XVim for XCode</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/06/16/i9000-ics/">Galaxy S 不死，更新至 ICS 4.0.4</a>
-      </li>
-    
   </ul>
 </section>
 
 <section>
 <h1>分類</h1>
-<span class='categories_tag'> <a href='/blog/categories/design-pattern' style='font-size: 108.57142857142857%'>Design-pattern(1)</a>  <a href='/blog/categories/ios-app' style='font-size: 151.42857142857144%'>Ios app(6)</a>  <a href='/blog/categories/objective-c' style='font-size: 160.0%'>Objective-c(7)</a>  <a href='/blog/categories/octopress' style='font-size: 117.14285714285714%'>Octopress(2)</a>  <a href='/blog/categories/phone' style='font-size: 108.57142857142857%'>Phone(1)</a>  <a href='/blog/categories/rails' style='font-size: 108.57142857142857%'>Rails(1)</a>  <a href='/blog/categories/ruby' style='font-size: 108.57142857142857%'>Ruby(1)</a>  <a href='/blog/categories/tools' style='font-size: 117.14285714285714%'>Tools(2)</a>  <a href='/blog/categories/vim' style='font-size: 117.14285714285714%'>Vim(2)</a> </span>
+<span class='categories_tag'> <a href='/blog/categories/design-pattern' style='font-size: 108.57142857142857%'>Design-pattern(1)</a>  <a href='/blog/categories/ios-app' style='font-size: 151.42857142857144%'>Ios app(6)</a>  <a href='/blog/categories/objective-c' style='font-size: 160.0%'>Objective-c(7)</a>  <a href='/blog/categories/octopress' style='font-size: 117.14285714285714%'>Octopress(2)</a>  <a href='/blog/categories/phone' style='font-size: 108.57142857142857%'>Phone(1)</a>  <a href='/blog/categories/plurk' style='font-size: 108.57142857142857%'>Plurk(1)</a>  <a href='/blog/categories/rails' style='font-size: 108.57142857142857%'>Rails(1)</a>  <a href='/blog/categories/ruby' style='font-size: 108.57142857142857%'>Ruby(1)</a>  <a href='/blog/categories/tools' style='font-size: 117.14285714285714%'>Tools(2)</a>  <a href='/blog/categories/vim' style='font-size: 117.14285714285714%'>Vim(2)</a> </span>
 </section>
 
 
