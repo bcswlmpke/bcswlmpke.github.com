@@ -3,7 +3,7 @@ layout: post
 title: "如何寫一個噗浪機器人"
 date: 2012-10-17 22:02
 comments: true
-categories: Plurk 
+categories: Plurk
 ---
 
 - 步驟1：註冊新的噗浪帳號，並取得四項參數，可以參考[噗浪機器人範例程式 - 使用 Plurk API 2.0][1]
@@ -13,8 +13,8 @@ categories: Plurk
   - Access Token Secret (Token Secret)
 - 步驟2：範例測試
   - 參考上面提到的網址，用 Python 來實驗，置換四個參數
-  - 下載 Library 
-    - (1) [plurk-oauth][2] 
+  - 下載 Library
+    - (1) [plurk-oauth][2]
     - (2) [python-oauth2 library][3]
     - (3) [httplib2 client library in Python][4] <code>sudo python setup.py install</code>
   - 將 python-oauth2 的 oauth2 目錄放到與 plurk-oauth 同一層即可。
