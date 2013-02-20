@@ -9,10 +9,14 @@
   <meta name="author" content="Hank Chen">
 
   
-  <meta name="description" content="步驟1：註冊新的噗浪帳號，並取得四項參數，可以參考噗浪機器人範例程式 - 使用 Plurk API 2.0 App Key (Consumer Key)
-App Secret (Consumer Secret)
-Access Token (Token Key)
-Access Token &hellip;">
+  <meta name="description" content="假設 Application 必須支援 iOS 4.3 的版本，
+且是在使用 ARC 的情況下，
+由於 iOS 5 才開始支援 weak reference，
+那麼在 iOS 5 以下的版本，
+可能會遇到下面這段程式有可能 crash 的問題： 1
+2
+3
+dispatch_async( &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +70,80 @@ Access Token &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/02/20/arc-weak-reference/">iOS 5 以下不支援 Weak Reference 遇到的問題</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-20T20:26:00+08:00" pubdate data-updated="true">Feb 20<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/02/20/arc-weak-reference/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>假設 Application 必須支援 iOS 4.3 的版本，
+且是在使用 ARC 的情況下，
+由於 iOS 5 才開始支援 weak reference，
+那麼在 iOS 5 以下的版本，
+可能會遇到下面這段程式有可能 crash 的問題：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">dispatch_async</span><span class="p">(</span><span class="n">dispatch_get_main_queue</span><span class="p">(),</span> <span class="o">^</span><span class="p">{</span>
+</span><span class='line'>  <span class="no">NSUInteger</span> <span class="n">count</span> <span class="o">=</span> <span class="o">[</span><span class="nb">self</span><span class="o">.</span><span class="n">dataSource</span> <span class="n">numberOfItems</span><span class="ss">:self</span><span class="o">]</span><span class="p">;</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>首先，
+因為 weak 屬性在 iOS 4.3 不支援，
+所以 dataSource 是一個屬性設為 assign 的 property，
+numberOfItems 是一個 delegate 由其它物件進行實作，
+如果在開始執行 dispatch_async 這個 block 內的動作之前，
+dataSource 已經被釋放了，
+這時候輪到執行 block 內的動作時，
+會去 retain dataSource，
+但因為 dataSource 已經被釋放，所以這個 retain 的動作會造成 crash。</p>
+
+<p>如果 dataSource 這個 property 的屬性為 weak，
+那個在 dataSource 被釋放時，
+這個 property 就會被設成 nil。
+此時應該不會造成 crash 才對。(不曉得這樣的理解有沒有錯)</p>
+
+<p>但因為 main thread 可能處於忙碌狀態，
+所以 <code>dispatch_async(dispatch_get_main_queue()</code>的動作
+未必會馬上被執行，就有機會遇到上述的問題。</p>
+
+<p>在 iOS 4.3 除了 <a href="https://github.com/mikeash/MAZeroingWeakRef" title="MAZeroingWeakRef">MAZeroingWeakRef</a> 這個方式外，
+不曉得在實作上，
+大家是用什麼方式來避免上述的情況發生？</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -551,68 +629,6 @@ Access Token &hellip;">
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/24/ruby-language/">Ruby 程式語言摘要</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-24T21:33:00+08:00" pubdate data-updated="true">Apr 24<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/04/24/ruby-language/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>基本觀念</h3>
-
-<ul>
-<li>load 與 require
-
-<ul>
-<li><code>load</code>: 是一個方法，所以可放在判斷式中，每載入 .rb 一次，就會重新執行 .rb 的內容，可指定相對或絕對路徑</li>
-<li><code>require</code>: 使用時可不加上 .rb 副檔名。與 load 不同的是，載入過的檔案，再次 require 並不會重複執行。</li>
-<li><code>$:</code> 表示預設路徑 (當不指定路徑或指定相對路徑時，從預設路徑尋找)；必要時，可在啟用 ruby 時加上 -I 指定路徑</li>
-</ul>
-</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="nb">load</span> <span class="s2">&quot;../core.rb&quot;</span>
-</span><span class='line'>  <span class="nb">load</span> <span class="s2">&quot;C:/workspace/core.rb&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/04/24/ruby-language/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -626,6 +642,10 @@ Access Token &hellip;">
     <section>
   <h1>最近的文章</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/02/20/arc-weak-reference/">iOS 5 以下不支援 weak reference 遇到的問題</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2012/10/17/how-to-build-plurk-bot/">如何寫一個噗浪機器人</a>
@@ -643,16 +663,12 @@ Access Token &hellip;">
         <a href="/blog/2012/09/19/tap-gesture/">Tap手勢的處理</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/08/20/new-post/">XVim for XCode</a>
-      </li>
-    
   </ul>
 </section>
 
 <section>
 <h1>分類</h1>
-<span class='categories_tag'> <a href='/blog/categories/design-pattern' style='font-size: 108.57142857142857%'>Design-pattern(1)</a>  <a href='/blog/categories/ios-app' style='font-size: 151.42857142857144%'>Ios app(6)</a>  <a href='/blog/categories/objective-c' style='font-size: 160.0%'>Objective-c(7)</a>  <a href='/blog/categories/octopress' style='font-size: 117.14285714285714%'>Octopress(2)</a>  <a href='/blog/categories/phone' style='font-size: 108.57142857142857%'>Phone(1)</a>  <a href='/blog/categories/plurk' style='font-size: 108.57142857142857%'>Plurk(1)</a>  <a href='/blog/categories/rails' style='font-size: 108.57142857142857%'>Rails(1)</a>  <a href='/blog/categories/ruby' style='font-size: 108.57142857142857%'>Ruby(1)</a>  <a href='/blog/categories/tools' style='font-size: 117.14285714285714%'>Tools(2)</a>  <a href='/blog/categories/vim' style='font-size: 117.14285714285714%'>Vim(2)</a> </span>
+<span class='categories_tag'> <a href='/blog/categories/design-pattern' style='font-size: 107.5%'>Design-pattern(1)</a>  <a href='/blog/categories/ios-app' style='font-size: 152.5%'>Ios app(7)</a>  <a href='/blog/categories/objective-c' style='font-size: 160.0%'>Objective-c(8)</a>  <a href='/blog/categories/octopress' style='font-size: 115.0%'>Octopress(2)</a>  <a href='/blog/categories/phone' style='font-size: 107.5%'>Phone(1)</a>  <a href='/blog/categories/plurk' style='font-size: 107.5%'>Plurk(1)</a>  <a href='/blog/categories/rails' style='font-size: 107.5%'>Rails(1)</a>  <a href='/blog/categories/ruby' style='font-size: 107.5%'>Ruby(1)</a>  <a href='/blog/categories/tools' style='font-size: 115.0%'>Tools(2)</a>  <a href='/blog/categories/vim' style='font-size: 115.0%'>Vim(2)</a> </span>
 </section>
 
 
@@ -667,7 +683,7 @@ Access Token &hellip;">
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2012 - Hank Chen -
+  Copyright &copy; 2013 - Hank Chen -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

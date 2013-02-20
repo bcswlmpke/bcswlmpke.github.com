@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS App | Hank]]></title>
   <link href="http://bcswlmpke.github.com/blog/categories/ios-app/atom.xml" rel="self"/>
   <link href="http://bcswlmpke.github.com/"/>
-  <updated>2012-11-25T13:58:06+08:00</updated>
+  <updated>2013-02-20T20:48:13+08:00</updated>
   <id>http://bcswlmpke.github.com/</id>
   <author>
     <name><![CDATA[Hank Chen]]></name>
@@ -12,6 +12,49 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[iOS 5 以下不支援 weak reference 遇到的問題]]></title>
+    <link href="http://bcswlmpke.github.com/blog/2013/02/20/arc-weak-reference/"/>
+    <updated>2013-02-20T20:26:00+08:00</updated>
+    <id>http://bcswlmpke.github.com/blog/2013/02/20/arc-weak-reference</id>
+    <content type="html"><![CDATA[<p>假設 Application 必須支援 iOS 4.3 的版本，
+且是在使用 ARC 的情況下，
+由於 iOS 5 才開始支援 weak reference，
+那麼在 iOS 5 以下的版本，
+可能會遇到下面這段程式有可能 crash 的問題：
+```ruby
+dispatch_async(dispatch_get_main_queue(), ^{</p>
+
+<pre><code>NSUInteger count = [self.dataSource numberOfItems:self];
+</code></pre>
+
+<p>});
+```
+首先，
+因為 weak 屬性在 iOS 4.3 不支援，
+所以 dataSource 是一個屬性設為 assign 的 property，
+numberOfItems 是一個 delegate 由其它物件進行實作，
+如果在開始執行 dispatch_async 這個 block 內的動作之前，
+dataSource 已經被釋放了，
+這時候輪到執行 block 內的動作時，
+會去 retain dataSource，
+但因為 dataSource 已經被釋放，所以這個 retain 的動作會造成 crash。</p>
+
+<p>如果 dataSource 這個 property 的屬性為 weak，
+那個在 dataSource 被釋放時，
+這個 property 就會被設成 nil。
+此時應該不會造成 crash 才對。(不曉得這樣的理解有沒有錯)</p>
+
+<p>但因為 main thread 可能處於忙碌狀態，
+所以 <code>dispatch_async(dispatch_get_main_queue()</code>的動作
+未必會馬上被執行，就有機會遇到上述的問題。</p>
+
+<p>在 iOS 4.3 除了 <a href="https://github.com/mikeash/MAZeroingWeakRef" title="MAZeroingWeakRef">MAZeroingWeakRef</a> 這個方式外，
+不曉得在實作上，
+大家是用什麼方式來避免上述的情況發生？</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[UITableView 如何調整 Scroll Indicator 的位置？]]></title>
@@ -170,126 +213,6 @@ XCode 在 Compile 的時候，幫我們安插了類似下面的程式，
 這樣可以讓 XCode 在 Compile 的時候，
 依照我們給它的指示去產生記憶體管理的程式碼，
 避免不必要或多餘的效能損失！</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[將專案轉換為ARC]]></title>
-    <link href="http://bcswlmpke.github.com/blog/2012/05/01/convert-to-arc/"/>
-    <updated>2012-05-01T20:28:00+08:00</updated>
-    <id>http://bcswlmpke.github.com/blog/2012/05/01/convert-to-arc</id>
-    <content type="html"><![CDATA[<h3>Automatic Reference Counting</h3>
-
-<ul>
-<li>ARC
-
-<ul>
-<li>XCode 4.2 開始支援</li>
-<li>Preferences > General > enable Continue building after errors</li>
-<li>Edit > Refactor > Convert to Objective-C ARC</li>
-<li>using the Apple LLVM compiler</li>
-<li>如果轉換失敗，會提供錯誤訊息，等手動修正後，就可以重新啟動 Refactor ARC-conversion workflow
-<img src="http://farm8.staticflickr.com/7238/7131702787_9e4cdfcfe1_z.jpg" title="Convert to ARC dialog" alt="Convert to ARC dialog" /></li>
-<li>轉換成功後，你可以 review automatic changes，也可以做 snapshot 供之後回復(如果有需要)，然後選擇 Save</li>
-</ul>
-</li>
-</ul>
-
-
-<!-- more -->
-
-
-<h3>將手上的專案轉成 ARC 的一些心得整理</h3>
-
-<ul>
-<li>不想要轉換為 ARC 的 source file 可加上 <code>-fno-objc-arc</code></li>
-<li>不需要自己加上 <code>retain</code>、<code>autorelease</code>、<code>release</code>、<code>[super dealloc]</code></li>
-<li>Objects in the struct are unretained
-<code>objc
-typedef struct {
-__unsafe_unretained NSString *name;
-} MyStruct;
-</code></li>
-<li>關於 weak
-<code>objc
-Becase of 「__weak」 references only work on iOS 5 and above.
-If you have the deployment target set to anything earlier, then you'll get the error.
-Basically, if you want to deploy to earlier devices you can't use automated 「__weak」 references.
-The substitute would be 「__unsafe_unretained」.
-</code></li>
-<li>NSAutoreleasePool 要修改如下
-<code>objc
-[Before]
-NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-[pool drain];
-[After]
-@autoreleasepool {
-}
-</code></li>
-<li>cast of C pointer type 'void <em>' to Objective-C pointer type 'NSObject </em>' requires a bridged cast <code><strong>bridge</code>
-```objc
-NSObject<em> myObject = [[NSObject alloc] init];
-void</em> myObjectPointer = (</strong>bridge void*)myObject;</li>
-</ul>
-
-
-<p>  void<em> myObjectPointer2 = NULL;
-  NSObject</em> myObject2 = (<strong>bridge NSObject*)myObjectPointer2;
-<code>
-  - assign retained object to unsafe_unretained variable, object will be released after assignment
-</code>objc
-  請在 @property 加上 strong
-  或是在變數名稱前加上 </strong>strong
-<code>
-  - 發生 leaking 怎麼辦？
-</code>objc
-  如果發生類似 *** __NSAutoreleaseNoPool(): Object 0x648ad80 of class NSCFString autoreleased with no pool in place - just leaking 的訊息，
-  可以透過 Profile -> Leak Tool 找出有問題的地方
-<code>
-  - 如果是 static method 回傳一個物件，要怎麼釋放？(以 C 所產生的物件為例)
-</code>objc
-  CFUUIDRef theUUID = CFUUIDCreate(NULL);</p>
-
-<pre><code>CFStringRef strUUID = CFUUIDCreateString(NULL, theUUID);
-CFRelease(theUUID);
-
-return (__bridge_transfer NSString *)strUUID; // 釋放原先所有權，將所有權交給 ARC 
-</code></pre>
-
-<p><code>
-  - id array member instance under ARC
-</code>objc
-id<ITest> <strong>strong *iArray = nil;
-iArray = (id<ITest> </strong>strong *)calloc(sizeof(id<ITest>), Size);
-```</p>
-
-<h3>一些不錯的參考連結</h3>
-
-<ul>
-<li>Property declarations
-<code>objc
-「assign」 implies 「__unsafe_unretained」ownership.
-「copy」 implies 「__strong」 ownership, as well as the usual behavior of copy semantics on the setter.
-「retain」 implies 「__strong」 ownership.
-「strong」 implies 「__strong」 ownership.
-「unsafe_unretained」 implies 「__unsafe_unretained」 ownership.
-weak implies __weak ownership.
-</code></li>
-<li>Bridged casts
-```objc
-A bridged cast is a C-style cast annotated with one of three keywords:</li>
-</ul>
-
-
-<p>(<strong>bridge T) op casts the operand to the destination type T. If T is a retainable object pointer type, then op must have a non-retainable pointer type. If T is a non-retainable pointer type, then op must have a retainable object pointer type. Otherwise the cast is ill-formed. There is no transfer of ownership, and ARC inserts no retain operations.
-(</strong>bridge_retained T) op casts the operand, which must have retainable object pointer type, to the destination type, which must be a non-retainable pointer type. ARC retains the value, subject to the usual optimizations on local values, and the recipient is responsible for balancing that +1.
-(__bridge_transfer T) op casts the operand, which must have non-retainable pointer type, to the destination type, which must be a retainable object pointer type. ARC will release the value at the end of the enclosing full-expression, subject to the usual optimizations on local values.</p>
-
-<p>Using a <strong>bridge_retained or </strong>bridge_transfer cast purely to convince ARC to emit an unbalanced retain or release, respectively, is poor form.
-```
-  - <a href="http://clang.llvm.org/docs/AutomaticReferenceCounting.html" title="Automatic Reference Counting">Automatic Reference Counting</a>
-  - <a href="http://developer.apple.com/library/ios/#releasenotes/ObjectiveC/RN-TransitioningToARC/Introduction/Introduction.html#//apple_ref/doc/uid/TP40011226" title="Transitioning to ARC Release Notes">Transitioning to ARC Release Notes</a>
-  - <a href="http://www.mikeash.com/pyblog/friday-qa-2011-09-30-automatic-reference-counting.html" title="Q&amp;A 2011-09-30: Automatic Reference Counting">Q&amp;A 2011-09-30: Automatic Reference Counting</a></p>
 ]]></content>
   </entry>
   

@@ -5,14 +5,18 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>如何寫一個噗浪機器人 - Hank</title>
+  <title>iOS 5 以下不支援 weak reference 遇到的問題 - Hank</title>
   <meta name="author" content="Hank Chen">
 
   
-  <meta name="description" content="步驟1：註冊新的噗浪帳號，並取得四項參數，可以參考噗浪機器人範例程式 - 使用 Plurk API 2.0 App Key (Consumer Key)
-App Secret (Consumer Secret)
-Access Token (Token Key)
-Access Token &hellip;">
+  <meta name="description" content="假設 Application 必須支援 iOS 4.3 的版本，
+且是在使用 ARC 的情況下，
+由於 iOS 5 才開始支援 weak reference，
+那麼在 iOS 5 以下的版本，
+可能會遇到下面這段程式有可能 crash 的問題： 1
+2
+3
+dispatch_async( &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +25,7 @@ Access Token &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://bcswlmpke.github.com/blog/2012/10/17/how-to-build-plurk-bot">
+  <link rel="canonical" href="http://bcswlmpke.github.com/blog/2013/02/20/arc-weak-reference">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -69,7 +73,7 @@ Access Token &hellip;">
   
   <header>
     
-      <h1 class="entry-title">如何寫一個噗浪機器人</h1>
+      <h1 class="entry-title">iOS 5 以下不支援 Weak Reference 遇到的問題</h1>
     
     
       <p class="meta">
@@ -85,7 +89,7 @@ Access Token &hellip;">
   
 
 
-<time datetime="2012-10-17T22:02:00+08:00" pubdate data-updated="true">Oct 17<span>th</span>, 2012</time>
+<time datetime="2013-02-20T20:26:00+08:00" pubdate data-updated="true">Feb 20<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -94,34 +98,43 @@ Access Token &hellip;">
   </header>
 
 
-<div class="entry-content"><ul>
-<li>步驟1：註冊新的噗浪帳號，並取得四項參數，可以參考<a href="http://blog.urdada.net/2011/10/28/426/" title="噗浪機器人範例程式 - 使用 Plurk API 2.0">噗浪機器人範例程式 - 使用 Plurk API 2.0</a>
+<div class="entry-content"><p>假設 Application 必須支援 iOS 4.3 的版本，
+且是在使用 ARC 的情況下，
+由於 iOS 5 才開始支援 weak reference，
+那麼在 iOS 5 以下的版本，
+可能會遇到下面這段程式有可能 crash 的問題：</p>
 
-<ul>
-<li>App Key (Consumer Key)</li>
-<li>App Secret (Consumer Secret)</li>
-<li>Access Token (Token Key)</li>
-<li>Access Token Secret (Token Secret)</li>
-</ul>
-</li>
-<li>步驟2：範例測試
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">dispatch_async</span><span class="p">(</span><span class="n">dispatch_get_main_queue</span><span class="p">(),</span> <span class="o">^</span><span class="p">{</span>
+</span><span class='line'>  <span class="no">NSUInteger</span> <span class="n">count</span> <span class="o">=</span> <span class="o">[</span><span class="nb">self</span><span class="o">.</span><span class="n">dataSource</span> <span class="n">numberOfItems</span><span class="ss">:self</span><span class="o">]</span><span class="p">;</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<ul>
-<li>參考上面提到的網址，用 Python 來實驗，置換四個參數</li>
-<li>下載 Library
 
-<ul>
-<li>(1) <a href="https://github.com/clsung/plurk-oauth" title="plurk-oauth">plurk-oauth</a></li>
-<li>(2) <a href="https://github.com/simplegeo/python-oauth2" title="python-oauth2">python-oauth2 library</a></li>
-<li>(3) <a href="http://code.google.com/p/httplib2/" title="httplib2">httplib2 client library in Python</a> <code>sudo python setup.py install</code></li>
-</ul>
-</li>
-<li>將 python-oauth2 的 oauth2 目錄放到與 plurk-oauth 同一層即可。</li>
-<li>執行範例，發一則含 <code>hello</code>字樣的噗，機器人會回 <code>world</code></li>
-</ul>
-</li>
-</ul>
+<p>首先，
+因為 weak 屬性在 iOS 4.3 不支援，
+所以 dataSource 是一個屬性設為 assign 的 property，
+numberOfItems 是一個 delegate 由其它物件進行實作，
+如果在開始執行 dispatch_async 這個 block 內的動作之前，
+dataSource 已經被釋放了，
+這時候輪到執行 block 內的動作時，
+會去 retain dataSource，
+但因為 dataSource 已經被釋放，所以這個 retain 的動作會造成 crash。</p>
 
+<p>如果 dataSource 這個 property 的屬性為 weak，
+那個在 dataSource 被釋放時，
+這個 property 就會被設成 nil。
+此時應該不會造成 crash 才對。(不曉得這樣的理解有沒有錯)</p>
+
+<p>但因為 main thread 可能處於忙碌狀態，
+所以 <code>dispatch_async(dispatch_get_main_queue()</code>的動作
+未必會馬上被執行，就有機會遇到上述的問題。</p>
+
+<p>在 iOS 4.3 除了 <a href="https://github.com/mikeash/MAZeroingWeakRef" title="MAZeroingWeakRef">MAZeroingWeakRef</a> 這個方式外，
+不曉得在實作上，
+大家是用什麼方式來避免上述的情況發生？</p>
 </div>
 
 
@@ -144,12 +157,12 @@ Access Token &hellip;">
   
 
 
-<time datetime="2012-10-17T22:02:00+08:00" pubdate data-updated="true">Oct 17<span>th</span>, 2012</time>
+<time datetime="2013-02-20T20:26:00+08:00" pubdate data-updated="true">Feb 20<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/plurk/'>Plurk</a>
+    <a class='category' href='/blog/categories/objective-c/'>Objective-C</a>, <a class='category' href='/blog/categories/ios-app/'>iOS App</a>
   
 </span>
 
@@ -158,7 +171,7 @@ Access Token &hellip;">
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://bcswlmpke.github.com/blog/2012/10/17/how-to-build-plurk-bot/" data-via="" data-counturl="http://bcswlmpke.github.com/blog/2012/10/17/how-to-build-plurk-bot/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://bcswlmpke.github.com/blog/2013/02/20/arc-weak-reference/" data-via="" data-counturl="http://bcswlmpke.github.com/blog/2013/02/20/arc-weak-reference/" >Tweet</a>
   
   
   
@@ -167,10 +180,8 @@ Access Token &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/10/17/change-uitable-scrollindicator-position/" title="Previous Post: UITableView 如何調整 Scroll Indicator 的位置？">&laquo; UITableView 如何調整 Scroll Indicator 的位置？</a>
+        <a class="basic-alignment left" href="/blog/2012/10/17/how-to-build-plurk-bot/" title="Previous Post: 如何寫一個噗浪機器人">&laquo; 如何寫一個噗浪機器人</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/02/20/arc-weak-reference/" title="next Post: iOS 5 以下不支援 weak reference 遇到的問題">iOS 5 以下不支援 weak reference 遇到的問題 &raquo;</a>
       
     </p>
   </footer>
@@ -243,8 +254,8 @@ Access Token &hellip;">
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://bcswlmpke.github.com/blog/2012/10/17/how-to-build-plurk-bot/';
-        var disqus_url = 'http://bcswlmpke.github.com/blog/2012/10/17/how-to-build-plurk-bot/';
+        var disqus_identifier = 'http://bcswlmpke.github.com/blog/2013/02/20/arc-weak-reference/';
+        var disqus_url = 'http://bcswlmpke.github.com/blog/2013/02/20/arc-weak-reference/';
         var disqus_script = 'embed.js';
       
     (function () {
