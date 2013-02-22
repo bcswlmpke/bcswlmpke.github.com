@@ -135,6 +135,16 @@ dataSource 已經被釋放了，
 <p>在 iOS 4.3 除了 <a href="https://github.com/mikeash/MAZeroingWeakRef" title="MAZeroingWeakRef">MAZeroingWeakRef</a> 這個方式外，
 不曉得在實作上，
 大家是用什麼方式來避免上述的情況發生？</p>
+
+<ul>
+<li>2013.2.22 更新
+
+<ul>
+<li>附註：實作上述 <code>dispatch_async(dispatch_get_main_queue()</code> 的 class 只要在 dealloc 的時候把 self.dataSource 設為 nil, 就可避免 Crash 發生。</li>
+</ul>
+</li>
+</ul>
+
 </div>
 
 
