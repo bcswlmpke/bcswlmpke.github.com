@@ -38,6 +38,9 @@ dataSource 已經被釋放了，
 不曉得在實作上，
 大家是用什麼方式來避免上述的情況發生？
 
+- 2013.2.22 更新
+	- 附註：實作上述 <code>dispatch_async(dispatch_get_main_queue()</code> 的 class 只要在 dealloc 的時候把 self.dataSource 設為 nil, 就可避免 Crash 發生。
+
 [1]: https://github.com/mikeash/MAZeroingWeakRef "MAZeroingWeakRef"
 
 
