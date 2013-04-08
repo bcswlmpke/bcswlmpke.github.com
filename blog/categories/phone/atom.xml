@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Phone | Hank學習筆記]]></title>
-  <link href="http://bcswlmpke.github.com/blog/categories/phone/atom.xml" rel="self"/>
-  <link href="http://bcswlmpke.github.com/"/>
-  <updated>2013-03-05T22:01:58+08:00</updated>
-  <id>http://bcswlmpke.github.com/</id>
+  <link href="http://bcswlmpke.github.io/blog/categories/phone/atom.xml" rel="self"/>
+  <link href="http://bcswlmpke.github.io/"/>
+  <updated>2013-04-08T16:54:40+08:00</updated>
+  <id>http://bcswlmpke.github.io/</id>
   <author>
     <name><![CDATA[Hank Chen]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Galaxy S 不死，更新至 ICS 4.0.4]]></title>
-    <link href="http://bcswlmpke.github.com/blog/2012/06/16/i9000-ics/"/>
+    <link href="http://bcswlmpke.github.io/blog/2012/06/16/i9000-ics/"/>
     <updated>2012-06-16T10:05:00+08:00</updated>
-    <id>http://bcswlmpke.github.com/blog/2012/06/16/i9000-ics</id>
+    <id>http://bcswlmpke.github.io/blog/2012/06/16/i9000-ics</id>
     <content type="html"><![CDATA[<p><img src="http://farm6.staticflickr.com/5038/7378210724_6c4fded6fd.jpg" title="ScreenCapture1" alt="ScreenCapture1" /> <img src="http://farm6.staticflickr.com/5336/7378210814_75c0c1522a.jpg" title="ScreenCapture2" alt="ScreenCapture1" /></p>
 
 <!-- more -->

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Hank學習筆記]]></title>
-  <link href="http://bcswlmpke.github.com/atom.xml" rel="self"/>
-  <link href="http://bcswlmpke.github.com/"/>
-  <updated>2013-03-05T22:01:58+08:00</updated>
-  <id>http://bcswlmpke.github.com/</id>
+  <link href="http://bcswlmpke.github.io/atom.xml" rel="self"/>
+  <link href="http://bcswlmpke.github.io/"/>
+  <updated>2013-04-08T16:54:40+08:00</updated>
+  <id>http://bcswlmpke.github.io/</id>
   <author>
     <name><![CDATA[Hank Chen]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[iOS 5 以下不支援 weak reference 遇到的問題]]></title>
-    <link href="http://bcswlmpke.github.com/blog/2013/02/20/arc-weak-reference/"/>
+    <link href="http://bcswlmpke.github.io/blog/2013/02/20/arc-weak-reference/"/>
     <updated>2013-02-20T20:26:00+08:00</updated>
-    <id>http://bcswlmpke.github.com/blog/2013/02/20/arc-weak-reference</id>
+    <id>http://bcswlmpke.github.io/blog/2013/02/20/arc-weak-reference</id>
     <content type="html"><![CDATA[<p>假設 Application 必須支援 iOS 4.3 的版本，
 且是在使用 ARC 的情況下，
 由於 iOS 5 才開始支援 weak reference，
@@ -70,9 +70,9 @@ dataSource 已經被釋放了，
   
   <entry>
     <title type="html"><![CDATA[如何寫一個噗浪機器人]]></title>
-    <link href="http://bcswlmpke.github.com/blog/2012/10/17/how-to-build-plurk-bot/"/>
+    <link href="http://bcswlmpke.github.io/blog/2012/10/17/how-to-build-plurk-bot/"/>
     <updated>2012-10-17T22:02:00+08:00</updated>
-    <id>http://bcswlmpke.github.com/blog/2012/10/17/how-to-build-plurk-bot</id>
+    <id>http://bcswlmpke.github.io/blog/2012/10/17/how-to-build-plurk-bot</id>
     <content type="html"><![CDATA[<ul>
 <li>步驟1：註冊新的噗浪帳號，並取得四項參數，可以參考<a href="http://blog.urdada.net/2011/10/28/426/" title="噗浪機器人範例程式 - 使用 Plurk API 2.0">噗浪機器人範例程式 - 使用 Plurk API 2.0</a>
 
@@ -106,9 +106,9 @@ dataSource 已經被釋放了，
   
   <entry>
     <title type="html"><![CDATA[UITableView 如何調整 Scroll Indicator 的位置？]]></title>
-    <link href="http://bcswlmpke.github.com/blog/2012/10/17/change-uitable-scrollindicator-position/"/>
+    <link href="http://bcswlmpke.github.io/blog/2012/10/17/change-uitable-scrollindicator-position/"/>
     <updated>2012-10-17T21:48:00+08:00</updated>
-    <id>http://bcswlmpke.github.com/blog/2012/10/17/change-uitable-scrollindicator-position</id>
+    <id>http://bcswlmpke.github.io/blog/2012/10/17/change-uitable-scrollindicator-position</id>
     <content type="html"><![CDATA[<p>嚴格說起來，應該是繼承自 UIScrollView 的都可以調整。
 舉例來說，假設要顯示的是垂直方向的 Indicator (預設是開啟的)</p>
 
@@ -131,9 +131,9 @@ dataSource 已經被釋放了，
   
   <entry>
     <title type="html"><![CDATA[UITableView 顯示上萬筆資料時，reloadData 很慢的問題]]></title>
-    <link href="http://bcswlmpke.github.com/blog/2012/10/02/uitableview-reloaddata-slow/"/>
+    <link href="http://bcswlmpke.github.io/blog/2012/10/02/uitableview-reloaddata-slow/"/>
     <updated>2012-10-02T22:09:00+08:00</updated>
-    <id>http://bcswlmpke.github.com/blog/2012/10/02/uitableview-reloaddata-slow</id>
+    <id>http://bcswlmpke.github.io/blog/2012/10/02/uitableview-reloaddata-slow</id>
     <content type="html"><![CDATA[<p>執行 UITableView reloadData，實作 numberOfRowsInSection 回傳 10000：</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -164,9 +164,9 @@ dataSource 已經被釋放了，
   
   <entry>
     <title type="html"><![CDATA[Tap手勢的處理]]></title>
-    <link href="http://bcswlmpke.github.com/blog/2012/09/19/tap-gesture/"/>
+    <link href="http://bcswlmpke.github.io/blog/2012/09/19/tap-gesture/"/>
     <updated>2012-09-19T23:11:00+08:00</updated>
-    <id>http://bcswlmpke.github.com/blog/2012/09/19/tap-gesture</id>
+    <id>http://bcswlmpke.github.io/blog/2012/09/19/tap-gesture</id>
     <content type="html"><![CDATA[<p>要處理 Single Tap 與 Double Tap 的時候,
 除了下面這行要設定以外</p>
 
@@ -190,9 +190,9 @@ dataSource 已經被釋放了，
   
   <entry>
     <title type="html"><![CDATA[XVim for XCode]]></title>
-    <link href="http://bcswlmpke.github.com/blog/2012/08/20/new-post/"/>
+    <link href="http://bcswlmpke.github.io/blog/2012/08/20/new-post/"/>
     <updated>2012-08-20T22:42:00+08:00</updated>
-    <id>http://bcswlmpke.github.com/blog/2012/08/20/new-post</id>
+    <id>http://bcswlmpke.github.io/blog/2012/08/20/new-post</id>
     <content type="html"><![CDATA[<ul>
 <li>XVim 現在似乎比較穩定了
 
@@ -210,9 +210,9 @@ dataSource 已經被釋放了，
   
   <entry>
     <title type="html"><![CDATA[Galaxy S 不死，更新至 ICS 4.0.4]]></title>
-    <link href="http://bcswlmpke.github.com/blog/2012/06/16/i9000-ics/"/>
+    <link href="http://bcswlmpke.github.io/blog/2012/06/16/i9000-ics/"/>
     <updated>2012-06-16T10:05:00+08:00</updated>
-    <id>http://bcswlmpke.github.com/blog/2012/06/16/i9000-ics</id>
+    <id>http://bcswlmpke.github.io/blog/2012/06/16/i9000-ics</id>
     <content type="html"><![CDATA[<p><img src="http://farm6.staticflickr.com/5038/7378210724_6c4fded6fd.jpg" title="ScreenCapture1" alt="ScreenCapture1" /> <img src="http://farm6.staticflickr.com/5336/7378210814_75c0c1522a.jpg" title="ScreenCapture2" alt="ScreenCapture1" /></p>
 
 <!-- more -->
@@ -364,9 +364,9 @@ dataSource 已經被釋放了，
   
   <entry>
     <title type="html"><![CDATA[Rails Develop Environment Setup]]></title>
-    <link href="http://bcswlmpke.github.com/blog/2012/06/12/rails-develop-environment/"/>
+    <link href="http://bcswlmpke.github.io/blog/2012/06/12/rails-develop-environment/"/>
     <updated>2012-06-12T20:22:00+08:00</updated>
-    <id>http://bcswlmpke.github.com/blog/2012/06/12/rails-develop-environment</id>
+    <id>http://bcswlmpke.github.io/blog/2012/06/12/rails-develop-environment</id>
     <content type="html"><![CDATA[<p>依照 Rails 101 的安裝步驟，但可能安裝的版本差太多，
 看起來會遇到不少問題，
 所以就一步一步筆記下來。</p>
@@ -414,9 +414,9 @@ dataSource 已經被釋放了，
   
   <entry>
     <title type="html"><![CDATA[ARC 與 非ARC 在大量資料的情況下的執行速度相差數倍]]></title>
-    <link href="http://bcswlmpke.github.com/blog/2012/05/08/arc-nonarc-performance/"/>
+    <link href="http://bcswlmpke.github.io/blog/2012/05/08/arc-nonarc-performance/"/>
     <updated>2012-05-08T21:49:00+08:00</updated>
-    <id>http://bcswlmpke.github.com/blog/2012/05/08/arc-nonarc-performance</id>
+    <id>http://bcswlmpke.github.io/blog/2012/05/08/arc-nonarc-performance</id>
     <content type="html"><![CDATA[<p>將手邊的 iOS 專案轉換為 ARC，
 讓 XCode 於 Compile 時期安插必要的記憶體管理程式碼，
 但是它所產生的程式碼是否與我們所想的一樣，
@@ -553,9 +553,9 @@ XCode 在 Compile 的時候，幫我們安插了類似下面的程式，</p>
   
   <entry>
     <title type="html"><![CDATA[將專案轉換為ARC]]></title>
-    <link href="http://bcswlmpke.github.com/blog/2012/05/01/convert-to-arc/"/>
+    <link href="http://bcswlmpke.github.io/blog/2012/05/01/convert-to-arc/"/>
     <updated>2012-05-01T20:28:00+08:00</updated>
-    <id>http://bcswlmpke.github.com/blog/2012/05/01/convert-to-arc</id>
+    <id>http://bcswlmpke.github.io/blog/2012/05/01/convert-to-arc</id>
     <content type="html"><![CDATA[<h3>Automatic Reference Counting</h3>
 
 <ul>
@@ -758,9 +758,9 @@ XCode 在 Compile 的時候，幫我們安插了類似下面的程式，</p>
   
   <entry>
     <title type="html"><![CDATA[Ruby 程式語言摘要]]></title>
-    <link href="http://bcswlmpke.github.com/blog/2012/04/24/ruby-language/"/>
+    <link href="http://bcswlmpke.github.io/blog/2012/04/24/ruby-language/"/>
     <updated>2012-04-24T21:33:00+08:00</updated>
-    <id>http://bcswlmpke.github.com/blog/2012/04/24/ruby-language</id>
+    <id>http://bcswlmpke.github.io/blog/2012/04/24/ruby-language</id>
     <content type="html"><![CDATA[<h3>基本觀念</h3>
 
 <ul>
@@ -957,9 +957,9 @@ XCode 在 Compile 的時候，幫我們安插了類似下面的程式，</p>
   
   <entry>
     <title type="html"><![CDATA[程式開發時，類別間存取的設計方式]]></title>
-    <link href="http://bcswlmpke.github.com/blog/2012/04/01/discuss-design-pattern/"/>
+    <link href="http://bcswlmpke.github.io/blog/2012/04/01/discuss-design-pattern/"/>
     <updated>2012-04-01T18:32:00+08:00</updated>
-    <id>http://bcswlmpke.github.com/blog/2012/04/01/discuss-design-pattern</id>
+    <id>http://bcswlmpke.github.io/blog/2012/04/01/discuss-design-pattern</id>
     <content type="html"><![CDATA[<p>在開發程式時，為了實現功能，我們需要實作一些類別彼此互相搭配，
 在設計模式的領域中，提出了23種模式與6大設計原則讓我們可以遵循，
 完成功能的設計方式絕對不只一種，端看設計者當時的思考方式與邏輯。</p>
@@ -1152,9 +1152,9 @@ A類別身上存著 BaseDataMgr 的指標，但使用時是產生 MyDataMgr 的�
   
   <entry>
     <title type="html"><![CDATA[不要相信retainCount，事實上你該怎麼做？]]></title>
-    <link href="http://bcswlmpke.github.com/blog/2012/02/03/objective-c-memory-management/"/>
+    <link href="http://bcswlmpke.github.io/blog/2012/02/03/objective-c-memory-management/"/>
     <updated>2012-02-03T21:29:00+08:00</updated>
-    <id>http://bcswlmpke.github.com/blog/2012/02/03/objective-c-memory-management</id>
+    <id>http://bcswlmpke.github.io/blog/2012/02/03/objective-c-memory-management</id>
     <content type="html"><![CDATA[<p>在還沒有擁抱 iOS 5 ARC (Automatic Reference Counting) 之前，
 我們必須自己管理程式所使用的記憶體，
 在開發 iOS 的過程中踩過不少地雷，
@@ -1279,9 +1279,9 @@ A類別身上存著 BaseDataMgr 的指標，但使用時是產生 MyDataMgr 的�
   
   <entry>
     <title type="html"><![CDATA[About Objective-C Declared Properties Feature]]></title>
-    <link href="http://bcswlmpke.github.com/blog/2012/02/01/objective-c-declared-properties-feature/"/>
+    <link href="http://bcswlmpke.github.io/blog/2012/02/01/objective-c-declared-properties-feature/"/>
     <updated>2012-02-01T21:54:00+08:00</updated>
-    <id>http://bcswlmpke.github.com/blog/2012/02/01/objective-c-declared-properties-feature</id>
+    <id>http://bcswlmpke.github.io/blog/2012/02/01/objective-c-declared-properties-feature</id>
     <content type="html"><![CDATA[<p>剛開始接觸 iOS 應用程式開發時，
 曾經對 @synthesize window = _window 所表達的意義有疑問，
 查過資料卻沒記下來，
@@ -1429,9 +1429,9 @@ A類別身上存著 BaseDataMgr 的指標，但使用時是產生 MyDataMgr 的�
   
   <entry>
     <title type="html"><![CDATA[我的工具箱]]></title>
-    <link href="http://bcswlmpke.github.com/blog/2012/01/30/my-toolbox/"/>
+    <link href="http://bcswlmpke.github.io/blog/2012/01/30/my-toolbox/"/>
     <updated>2012-01-30T22:33:00+08:00</updated>
-    <id>http://bcswlmpke.github.com/blog/2012/01/30/my-toolbox</id>
+    <id>http://bcswlmpke.github.io/blog/2012/01/30/my-toolbox</id>
     <content type="html"><![CDATA[<p>最近看到<a href="http://blog.eddie.com.tw/2012/01/04/my-toolbox/" title="高見龍的工具箱">高見龍的工具箱</a>與<a href="http://blog.gasolin.idv.tw/2012/01/blog-post.html?m=1" title="Gasolin的工具箱">Gasolin的工具箱</a>，
 於是自己也興起了念頭，整理一下目前自己常用的工具。</p>
 
@@ -1511,9 +1511,9 @@ A類別身上存著 BaseDataMgr 的指標，但使用時是產生 MyDataMgr 的�
   
   <entry>
     <title type="html"><![CDATA[管理Vim plugins]]></title>
-    <link href="http://bcswlmpke.github.com/blog/2012/01/17/vim-setup/"/>
+    <link href="http://bcswlmpke.github.io/blog/2012/01/17/vim-setup/"/>
     <updated>2012-01-17T00:19:00+08:00</updated>
-    <id>http://bcswlmpke.github.com/blog/2012/01/17/vim-setup</id>
+    <id>http://bcswlmpke.github.io/blog/2012/01/17/vim-setup</id>
     <content type="html"><![CDATA[<ul>
 <li>產生Vim工作目錄
 
@@ -1621,9 +1621,9 @@ A類別身上存著 BaseDataMgr 的指標，但使用時是產生 MyDataMgr 的�
   
   <entry>
     <title type="html"><![CDATA[Octopress的目錄結構]]></title>
-    <link href="http://bcswlmpke.github.com/blog/2012/01/14/octopress-directory-structure/"/>
+    <link href="http://bcswlmpke.github.io/blog/2012/01/14/octopress-directory-structure/"/>
     <updated>2012-01-14T00:21:00+08:00</updated>
-    <id>http://bcswlmpke.github.com/blog/2012/01/14/octopress-directory-structure</id>
+    <id>http://bcswlmpke.github.io/blog/2012/01/14/octopress-directory-structure</id>
     <content type="html"><![CDATA[<ul>
 <li>octopress/
 
@@ -1668,9 +1668,9 @@ A類別身上存著 BaseDataMgr 的指標，但使用時是產生 MyDataMgr 的�
   
   <entry>
     <title type="html"><![CDATA[How to use Octopress]]></title>
-    <link href="http://bcswlmpke.github.com/blog/2012/01/12/octopress-note/"/>
+    <link href="http://bcswlmpke.github.io/blog/2012/01/12/octopress-note/"/>
     <updated>2012-01-12T21:53:00+08:00</updated>
-    <id>http://bcswlmpke.github.com/blog/2012/01/12/octopress-note</id>
+    <id>http://bcswlmpke.github.io/blog/2012/01/12/octopress-note</id>
     <content type="html"><![CDATA[<ul>
 <li>安裝
 

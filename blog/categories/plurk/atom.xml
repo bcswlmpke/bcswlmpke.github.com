@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Plurk | Hank學習筆記]]></title>
-  <link href="http://bcswlmpke.github.com/blog/categories/plurk/atom.xml" rel="self"/>
-  <link href="http://bcswlmpke.github.com/"/>
-  <updated>2013-03-05T22:01:58+08:00</updated>
-  <id>http://bcswlmpke.github.com/</id>
+  <link href="http://bcswlmpke.github.io/blog/categories/plurk/atom.xml" rel="self"/>
+  <link href="http://bcswlmpke.github.io/"/>
+  <updated>2013-04-08T16:54:40+08:00</updated>
+  <id>http://bcswlmpke.github.io/</id>
   <author>
     <name><![CDATA[Hank Chen]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[如何寫一個噗浪機器人]]></title>
-    <link href="http://bcswlmpke.github.com/blog/2012/10/17/how-to-build-plurk-bot/"/>
+    <link href="http://bcswlmpke.github.io/blog/2012/10/17/how-to-build-plurk-bot/"/>
     <updated>2012-10-17T22:02:00+08:00</updated>
-    <id>http://bcswlmpke.github.com/blog/2012/10/17/how-to-build-plurk-bot</id>
+    <id>http://bcswlmpke.github.io/blog/2012/10/17/how-to-build-plurk-bot</id>
     <content type="html"><![CDATA[<ul>
 <li>步驟1：註冊新的噗浪帳號，並取得四項參數，可以參考<a href="http://blog.urdada.net/2011/10/28/426/" title="噗浪機器人範例程式 - 使用 Plurk API 2.0">噗浪機器人範例程式 - 使用 Plurk API 2.0</a>
 
