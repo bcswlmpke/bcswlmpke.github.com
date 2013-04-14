@@ -5,14 +5,16 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>How to use Octopress - Hank學習筆記</title>
+  <title>Mac Terminal 開啟 MacVim, Sublime Text 2 - Hank學習筆記</title>
   <meta name="author" content="Hank Chen">
 
   
-  <meta name="description" content="安裝 請參考Octopress官網
-設定Octopress請參考Configuring Octopress 用 Markdown 寫文章 rake new_post[文章名稱]
-請參考Markdown中文文件
-rake generate -> rake preview -> 然後http:// &hellip;">
+  <meta name="description" content="1
+sudo ln -s /Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl /usr/bin/subl Sublime Text 2 編輯文件:subl file
+打開目錄:subl .. 1
+2
+3
+#!/bin &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +23,7 @@ rake generate -> rake preview -> 然後http:// &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://bcswlmpke.github.io/blog/2012/01/12/octopress-note">
+  <link rel="canonical" href="http://bcswlmpke.github.io/blog/2013/04/14/mac-terminal-open-macvim-subl2">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -71,7 +73,7 @@ rake generate -> rake preview -> 然後http:// &hellip;">
   
   <header>
     
-      <h1 class="entry-title">How to Use Octopress</h1>
+      <h1 class="entry-title">Mac Terminal 開啟 MacVim, Sublime Text 2</h1>
     
     
       <p class="meta">
@@ -87,7 +89,7 @@ rake generate -> rake preview -> 然後http:// &hellip;">
   
 
 
-<time datetime="2012-01-12T21:53:00+08:00" pubdate data-updated="true">Jan 12<span>th</span>, 2012</time>
+<time datetime="2013-04-14T21:02:00+08:00" pubdate data-updated="true">Apr 14<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -96,29 +98,37 @@ rake generate -> rake preview -> 然後http:// &hellip;">
   </header>
 
 
-<div class="entry-content"><ul>
-<li>安裝
+<div class="entry-content"><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">sudo</span> <span class="n">ln</span> <span class="o">-</span><span class="n">s</span><span class="sr"> /Applications/</span><span class="no">Sublime</span><span class="p">\</span> <span class="no">Text</span><span class="p">\</span> <span class="mi">2</span><span class="o">.</span><span class="n">app</span><span class="o">/</span><span class="no">Contents</span><span class="o">/</span><span class="no">SharedSupport</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">subl</span><span class="sr"> /usr/</span><span class="n">bin</span><span class="o">/</span><span class="n">subl</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <ul>
-<li>請參考<a href="http://octopress.org/docs/setup/" title="Octopress Setup">Octopress官網</a></li>
-<li>設定Octopress請參考<a href="http://octopress.org/docs/configuring/" title="Configuring Octopress">Configuring Octopress</a></li>
+<li>Sublime Text 2
+
+<ul>
+<li>編輯文件:<code>subl file</code></li>
+<li>打開目錄:<code>subl ..</code></li>
 </ul>
 </li>
-<li>用 Markdown 寫文章
-
-<ul>
-<li>rake new_post[文章名稱]</li>
-<li>請參考<a href="http://markdown.tw" title="Markdown Syntax">Markdown中文文件</a></li>
-<li>rake generate -> rake preview -> 然後<a href="http://127.0.0.1:4000/">http://127.0.0.1:4000</a>可以看到預覽畫面</li>
 </ul>
-</li>
-<li>發佈
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#!/bin/sh</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">open</span> <span class="o">-</span><span class="n">a</span><span class="sr"> /Applications/</span><span class="no">MacVim</span><span class="o">.</span><span class="n">app</span><span class="o">/</span><span class="no">Contents</span><span class="o">/</span><span class="no">MacOS</span><span class="o">/</span><span class="no">MacVim</span> <span class="vg">$@</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <ul>
-<li>git checkout source</li>
-<li>git push origin source</li>
-<li>rake generate</li>
-<li>rake deploy</li>
+<li>MacVim
+
+<ul>
+<li>將 mvim script 放到 /usr/local/bin/</li>
+<li>編輯文件:<code>mvim file</code></li>
 </ul>
 </li>
 </ul>
@@ -145,12 +155,12 @@ rake generate -> rake preview -> 然後http:// &hellip;">
   
 
 
-<time datetime="2012-01-12T21:53:00+08:00" pubdate data-updated="true">Jan 12<span>th</span>, 2012</time>
+<time datetime="2013-04-14T21:02:00+08:00" pubdate data-updated="true">Apr 14<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/octopress/'>Octopress</a>
+    <a class='category' href='/blog/categories/subl2/'>Subl2</a>, <a class='category' href='/blog/categories/vim/'>Vim</a>
   
 </span>
 
@@ -159,7 +169,7 @@ rake generate -> rake preview -> 然後http:// &hellip;">
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://bcswlmpke.github.io/blog/2012/01/12/octopress-note/" data-via="" data-counturl="http://bcswlmpke.github.io/blog/2012/01/12/octopress-note/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://bcswlmpke.github.io/blog/2013/04/14/mac-terminal-open-macvim-subl2/" data-via="" data-counturl="http://bcswlmpke.github.io/blog/2013/04/14/mac-terminal-open-macvim-subl2/" >Tweet</a>
   
   
   
@@ -168,8 +178,8 @@ rake generate -> rake preview -> 然後http:// &hellip;">
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/2013/02/20/arc-weak-reference/" title="Previous Post: iOS 5 以下不支援 weak reference 遇到的問題">&laquo; iOS 5 以下不支援 weak reference 遇到的問題</a>
       
-        <a class="basic-alignment right" href="/blog/2012/01/14/octopress-directory-structure/" title="next Post: Octopress的目錄結構">Octopress的目錄結構 &raquo;</a>
       
     </p>
   </footer>
@@ -242,8 +252,8 @@ rake generate -> rake preview -> 然後http:// &hellip;">
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://bcswlmpke.github.io/blog/2012/01/12/octopress-note/';
-        var disqus_url = 'http://bcswlmpke.github.io/blog/2012/01/12/octopress-note/';
+        var disqus_identifier = 'http://bcswlmpke.github.io/blog/2013/04/14/mac-terminal-open-macvim-subl2/';
+        var disqus_url = 'http://bcswlmpke.github.io/blog/2013/04/14/mac-terminal-open-macvim-subl2/';
         var disqus_script = 'embed.js';
       
     (function () {

@@ -9,14 +9,12 @@
   <meta name="author" content="Hank Chen">
 
   
-  <meta name="description" content="假設 Application 必須支援 iOS 4.3 的版本，
-且是在使用 ARC 的情況下，
-由於 iOS 5 才開始支援 weak reference，
-那麼在 iOS 5 以下的版本，
-可能會遇到下面這段程式有可能 crash 的問題： 1
+  <meta name="description" content="1
+sudo ln -s /Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl /usr/bin/subl Sublime Text 2 編輯文件:subl file
+打開目錄:subl .. 1
 2
 3
-dispatch_async( &hellip;">
+#!/bin &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -72,6 +70,78 @@ dispatch_async( &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/14/mac-terminal-open-macvim-subl2/">Mac Terminal 開啟 MacVim, Sublime Text 2</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-14T21:02:00+08:00" pubdate data-updated="true">Apr 14<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/14/mac-terminal-open-macvim-subl2/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">sudo</span> <span class="n">ln</span> <span class="o">-</span><span class="n">s</span><span class="sr"> /Applications/</span><span class="no">Sublime</span><span class="p">\</span> <span class="no">Text</span><span class="p">\</span> <span class="mi">2</span><span class="o">.</span><span class="n">app</span><span class="o">/</span><span class="no">Contents</span><span class="o">/</span><span class="no">SharedSupport</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">subl</span><span class="sr"> /usr/</span><span class="n">bin</span><span class="o">/</span><span class="n">subl</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Sublime Text 2
+
+<ul>
+<li>編輯文件:<code>subl file</code></li>
+<li>打開目錄:<code>subl ..</code></li>
+</ul>
+</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#!/bin/sh</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">open</span> <span class="o">-</span><span class="n">a</span><span class="sr"> /Applications/</span><span class="no">MacVim</span><span class="o">.</span><span class="n">app</span><span class="o">/</span><span class="no">Contents</span><span class="o">/</span><span class="no">MacOS</span><span class="o">/</span><span class="no">MacVim</span> <span class="vg">$@</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>MacVim
+
+<ul>
+<li>將 mvim script 放到 /usr/local/bin/</li>
+<li>編輯文件:<code>mvim file</code></li>
+</ul>
+</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -582,65 +652,6 @@ dataSource 已經被釋放了，
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/01/convert-to-arc/">將專案轉換為ARC</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-01T20:28:00+08:00" pubdate data-updated="true">May 1<span>st</span>, 2012</time>
-        
-         | <a href="/blog/2012/05/01/convert-to-arc/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>Automatic Reference Counting</h3>
-
-<ul>
-<li>ARC
-
-<ul>
-<li>XCode 4.2 開始支援</li>
-<li>Preferences > General > enable Continue building after errors</li>
-<li>Edit > Refactor > Convert to Objective-C ARC</li>
-<li>using the Apple LLVM compiler</li>
-<li>如果轉換失敗，會提供錯誤訊息，等手動修正後，就可以重新啟動 Refactor ARC-conversion workflow
-<img src="http://farm8.staticflickr.com/7238/7131702787_9e4cdfcfe1_z.jpg" title="Convert to ARC dialog" alt="Convert to ARC dialog" /></li>
-<li>轉換成功後，你可以 review automatic changes，也可以做 snapshot 供之後回復(如果有需要)，然後選擇 Save</li>
-</ul>
-</li>
-</ul>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/05/01/convert-to-arc/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -654,6 +665,10 @@ dataSource 已經被釋放了，
     <section>
   <h1>最近的文章</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/04/14/mac-terminal-open-macvim-subl2/">Mac Terminal 開啟 MacVim, Sublime Text 2</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/02/20/arc-weak-reference/">iOS 5 以下不支援 weak reference 遇到的問題</a>
@@ -671,16 +686,12 @@ dataSource 已經被釋放了，
         <a href="/blog/2012/10/02/uitableview-reloaddata-slow/">UITableView 顯示上萬筆資料時，reloadData 很慢的問題</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/09/19/tap-gesture/">Tap手勢的處理</a>
-      </li>
-    
   </ul>
 </section>
 
 <section>
 <h1>分類</h1>
-<span class='categories_tag'> <a href='/blog/categories/design-pattern' style='font-size: 107.5%'>Design-pattern(1)</a>  <a href='/blog/categories/ios-app' style='font-size: 152.5%'>Ios app(7)</a>  <a href='/blog/categories/objective-c' style='font-size: 160.0%'>Objective-c(8)</a>  <a href='/blog/categories/octopress' style='font-size: 115.0%'>Octopress(2)</a>  <a href='/blog/categories/phone' style='font-size: 107.5%'>Phone(1)</a>  <a href='/blog/categories/plurk' style='font-size: 107.5%'>Plurk(1)</a>  <a href='/blog/categories/rails' style='font-size: 107.5%'>Rails(1)</a>  <a href='/blog/categories/ruby' style='font-size: 107.5%'>Ruby(1)</a>  <a href='/blog/categories/tools' style='font-size: 115.0%'>Tools(2)</a>  <a href='/blog/categories/vim' style='font-size: 115.0%'>Vim(2)</a> </span>
+<span class='categories_tag'> <a href='/blog/categories/design-pattern' style='font-size: 107.5%'>Design-pattern(1)</a>  <a href='/blog/categories/ios-app' style='font-size: 152.5%'>Ios app(7)</a>  <a href='/blog/categories/objective-c' style='font-size: 160.0%'>Objective-c(8)</a>  <a href='/blog/categories/octopress' style='font-size: 115.0%'>Octopress(2)</a>  <a href='/blog/categories/phone' style='font-size: 107.5%'>Phone(1)</a>  <a href='/blog/categories/plurk' style='font-size: 107.5%'>Plurk(1)</a>  <a href='/blog/categories/rails' style='font-size: 107.5%'>Rails(1)</a>  <a href='/blog/categories/ruby' style='font-size: 107.5%'>Ruby(1)</a>  <a href='/blog/categories/subl2' style='font-size: 107.5%'>Subl2(1)</a>  <a href='/blog/categories/tools' style='font-size: 115.0%'>Tools(2)</a>  <a href='/blog/categories/vim' style='font-size: 122.5%'>Vim(3)</a> </span>
 </section>
 
 

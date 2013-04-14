@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Subl2 | Hank學習筆記]]></title>
+  <link href="http://bcswlmpke.github.io/blog/categories/subl2/atom.xml" rel="self"/>
+  <link href="http://bcswlmpke.github.io/"/>
+  <updated>2013-04-14T21:26:54+08:00</updated>
+  <id>http://bcswlmpke.github.io/</id>
+  <author>
+    <name><![CDATA[Hank Chen]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Mac Terminal 開啟 MacVim, Sublime Text 2]]></title>
+    <link href="http://bcswlmpke.github.io/blog/2013/04/14/mac-terminal-open-macvim-subl2/"/>
+    <updated>2013-04-14T21:02:00+08:00</updated>
+    <id>http://bcswlmpke.github.io/blog/2013/04/14/mac-terminal-open-macvim-subl2</id>
+    <content type="html"><![CDATA[<p><code>ruby
+sudo ln -s /Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl /usr/bin/subl
+</code></p>
+
+<ul>
+<li>Sublime Text 2
+
+<ul>
+<li>編輯文件:<code>subl file</code></li>
+<li>打開目錄:<code>subl ..</code></li>
+</ul>
+</li>
+</ul>
+
+
+<p>```ruby</p>
+
+<h1>!/bin/sh</h1>
+
+<p>open -a /Applications/MacVim.app/Contents/MacOS/MacVim $@
+```</p>
+
+<ul>
+<li>MacVim
+
+<ul>
+<li>將 mvim script 放到 /usr/local/bin/</li>
+<li>編輯文件:<code>mvim file</code></li>
+</ul>
+</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>
