@@ -1,0 +1,28 @@
+---
+layout: post
+title: "Git Notes"
+date: 2013-05-13 22:14
+comments: true
+categories: Git
+---
+最近公司打算開始使用 Git, 
+所以除了平常在家玩 Open Source 外，
+工作也可以使用 Git 了，
+發現自己有些觀念沒記下來也會忘記，
+所以要記錄下來。
+
+* Setup Git 
+  * <code>git config --global user.name "Your Name Here"</code>
+  * <code>git config --global user.email "your_email@example.com"</code>
+  * 如果有多個帳號, 可以拿掉 <code>--global</code>，各自 repo 分別設定
+* .gitignore
+  * 如果 .gitignore not working，有可能是原本已經被 tracked，所以必須做下列的動作先 untracked
+    * git rm -r --cached .
+    * git add .
+    * git commit -m ".gitignore is now working"
+* keep empty folder
+  * 因為 Git 不能 track empty directory, 所以必須放置 placekholder 
+    * touch directory/.gitkeep
+    * git add -f directory/.gitkeep
+
+
