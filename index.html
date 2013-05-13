@@ -9,12 +9,12 @@
   <meta name="author" content="Hank Chen">
 
   
-  <meta name="description" content="1
-sudo ln -s /Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl /usr/bin/subl Sublime Text 2 編輯文件:subl file
-打開目錄:subl .. 1
-2
-3
-#!/bin &hellip;">
+  <meta name="description" content="最近公司打算開始使用 Git,
+所以除了平常在家玩 Open Source 外，
+工作也可以使用 Git 了，
+發現自己有些觀念沒記下來也會忘記，
+所以要記錄下來。 Setup Git git config --global user.name "Your Name Here"
+git &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -70,6 +70,85 @@ sudo ln -s /Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl /u
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/13/git-notes/">Git Notes</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-13T22:14:00+08:00" pubdate data-updated="true">May 13<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/13/git-notes/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近公司打算開始使用 Git,
+所以除了平常在家玩 Open Source 外，
+工作也可以使用 Git 了，
+發現自己有些觀念沒記下來也會忘記，
+所以要記錄下來。</p>
+
+<ul>
+<li>Setup Git
+
+<ul>
+<li><code>git config --global user.name "Your Name Here"</code></li>
+<li><code>git config --global user.email "your_email@example.com"</code></li>
+<li>如果有多個帳號, 可以拿掉 <code>--global</code>，各自 repo 分別設定</li>
+</ul>
+</li>
+<li>.gitignore
+
+<ul>
+<li>如果 .gitignore not working，有可能是原本已經被 tracked，所以必須做下列的動作先 untracked
+
+<ul>
+<li>git rm -r &#8211;cached .</li>
+<li>git add .</li>
+<li>git commit -m &#8220;.gitignore is now working&#8221;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>keep empty folder
+
+<ul>
+<li>因為 Git 不能 track empty directory, 所以必須放置 placekholder
+
+<ul>
+<li>touch directory/.gitkeep</li>
+<li>git add -f directory/.gitkeep</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -600,58 +679,6 @@ dataSource 已經被釋放了，
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/08/arc-nonarc-performance/">ARC 與 非ARC 在大量資料的情況下的執行速度相差數倍</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-08T21:49:00+08:00" pubdate data-updated="true">May 8<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/05/08/arc-nonarc-performance/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>將手邊的 iOS 專案轉換為 ARC，
-讓 XCode 於 Compile 時期安插必要的記憶體管理程式碼，
-但是它所產生的程式碼是否與我們所想的一樣，
-這個就未必了。</p>
-
-<p>我們應該盡可能讓 XCode 幫我們產生正確的記憶體管理程式碼，
-但必要時，我們也可以自己對程式碼進行改善！</p>
-
-<p>下面舉一個例子，同樣的程式碼，只是在「ARC」與「非ARC」的情況下編譯執行，
-但是兩者所需要的時間是相差數倍的！</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/05/08/arc-nonarc-performance/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -665,6 +692,10 @@ dataSource 已經被釋放了，
     <section>
   <h1>最近的文章</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/05/13/git-notes/">Git Notes</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/04/14/mac-terminal-open-macvim-subl2/">Mac Terminal 開啟 MacVim, Sublime Text 2</a>
@@ -682,16 +713,12 @@ dataSource 已經被釋放了，
         <a href="/blog/2012/10/17/change-uitable-scrollindicator-position/">UITableView 如何調整 Scroll Indicator 的位置？</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/10/02/uitableview-reloaddata-slow/">UITableView 顯示上萬筆資料時，reloadData 很慢的問題</a>
-      </li>
-    
   </ul>
 </section>
 
 <section>
 <h1>分類</h1>
-<span class='categories_tag'> <a href='/blog/categories/design-pattern' style='font-size: 107.5%'>Design-pattern(1)</a>  <a href='/blog/categories/ios-app' style='font-size: 152.5%'>Ios app(7)</a>  <a href='/blog/categories/objective-c' style='font-size: 160.0%'>Objective-c(8)</a>  <a href='/blog/categories/octopress' style='font-size: 115.0%'>Octopress(2)</a>  <a href='/blog/categories/phone' style='font-size: 107.5%'>Phone(1)</a>  <a href='/blog/categories/plurk' style='font-size: 107.5%'>Plurk(1)</a>  <a href='/blog/categories/rails' style='font-size: 107.5%'>Rails(1)</a>  <a href='/blog/categories/ruby' style='font-size: 107.5%'>Ruby(1)</a>  <a href='/blog/categories/subl2' style='font-size: 107.5%'>Subl2(1)</a>  <a href='/blog/categories/tools' style='font-size: 115.0%'>Tools(2)</a>  <a href='/blog/categories/vim' style='font-size: 122.5%'>Vim(3)</a> </span>
+<span class='categories_tag'> <a href='/blog/categories/design-pattern' style='font-size: 107.5%'>Design-pattern(1)</a>  <a href='/blog/categories/git' style='font-size: 107.5%'>Git(1)</a>  <a href='/blog/categories/ios-app' style='font-size: 152.5%'>Ios app(7)</a>  <a href='/blog/categories/objective-c' style='font-size: 160.0%'>Objective-c(8)</a>  <a href='/blog/categories/octopress' style='font-size: 115.0%'>Octopress(2)</a>  <a href='/blog/categories/phone' style='font-size: 107.5%'>Phone(1)</a>  <a href='/blog/categories/plurk' style='font-size: 107.5%'>Plurk(1)</a>  <a href='/blog/categories/rails' style='font-size: 107.5%'>Rails(1)</a>  <a href='/blog/categories/ruby' style='font-size: 107.5%'>Ruby(1)</a>  <a href='/blog/categories/subl2' style='font-size: 107.5%'>Subl2(1)</a>  <a href='/blog/categories/tools' style='font-size: 115.0%'>Tools(2)</a>  <a href='/blog/categories/vim' style='font-size: 122.5%'>Vim(3)</a> </span>
 </section>
 
 

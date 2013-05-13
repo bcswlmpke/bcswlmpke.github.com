@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Git | Hank學習筆記]]></title>
+  <link href="http://bcswlmpke.github.io/blog/categories/git/atom.xml" rel="self"/>
+  <link href="http://bcswlmpke.github.io/"/>
+  <updated>2013-05-13T22:29:31+08:00</updated>
+  <id>http://bcswlmpke.github.io/</id>
+  <author>
+    <name><![CDATA[Hank Chen]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Git Notes]]></title>
+    <link href="http://bcswlmpke.github.io/blog/2013/05/13/git-notes/"/>
+    <updated>2013-05-13T22:14:00+08:00</updated>
+    <id>http://bcswlmpke.github.io/blog/2013/05/13/git-notes</id>
+    <content type="html"><![CDATA[<p>最近公司打算開始使用 Git,
+所以除了平常在家玩 Open Source 外，
+工作也可以使用 Git 了，
+發現自己有些觀念沒記下來也會忘記，
+所以要記錄下來。</p>
+
+<ul>
+<li>Setup Git
+
+<ul>
+<li><code>git config --global user.name "Your Name Here"</code></li>
+<li><code>git config --global user.email "your_email@example.com"</code></li>
+<li>如果有多個帳號, 可以拿掉 <code>--global</code>，各自 repo 分別設定</li>
+</ul>
+</li>
+<li>.gitignore
+
+<ul>
+<li>如果 .gitignore not working，有可能是原本已經被 tracked，所以必須做下列的動作先 untracked
+
+<ul>
+<li>git rm -r --cached .</li>
+<li>git add .</li>
+<li>git commit -m ".gitignore is now working"</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>keep empty folder
+
+<ul>
+<li>因為 Git 不能 track empty directory, 所以必須放置 placekholder
+
+<ul>
+<li>touch directory/.gitkeep</li>
+<li>git add -f directory/.gitkeep</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

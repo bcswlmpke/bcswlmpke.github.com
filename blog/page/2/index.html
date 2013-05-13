@@ -9,9 +9,11 @@
   <meta name="author" content="Hank Chen">
 
   
-  <meta name="description" content="Automatic Reference Counting ARC XCode 4.2 開始支援
-Preferences > General > enable Continue building after errors
-Edit > Refactor > Convert to Objective- &hellip;">
+  <meta name="description" content="將手邊的 iOS 專案轉換為 ARC，
+讓 XCode 於 Compile 時期安插必要的記憶體管理程式碼，
+但是它所產生的程式碼是否與我們所想的一樣，
+這個就未必了。 我們應該盡可能讓 XCode 幫我們產生正確的記憶體管理程式碼，
+但必要時，我們也可以自己對程式碼進行改善！ 下面舉一個例子， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +69,58 @@ Edit > Refactor > Convert to Objective- &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/08/arc-nonarc-performance/">ARC 與 非ARC 在大量資料的情況下的執行速度相差數倍</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-08T21:49:00+08:00" pubdate data-updated="true">May 8<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/08/arc-nonarc-performance/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>將手邊的 iOS 專案轉換為 ARC，
+讓 XCode 於 Compile 時期安插必要的記憶體管理程式碼，
+但是它所產生的程式碼是否與我們所想的一樣，
+這個就未必了。</p>
+
+<p>我們應該盡可能讓 XCode 幫我們產生正確的記憶體管理程式碼，
+但必要時，我們也可以自己對程式碼進行改善！</p>
+
+<p>下面舉一個例子，同樣的程式碼，只是在「ARC」與「非ARC」的情況下編譯執行，
+但是兩者所需要的時間是相差數倍的！</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/05/08/arc-nonarc-performance/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -762,6 +816,10 @@ A類別身上存著 BaseDataMgr 的指標，但使用時是產生 MyDataMgr 的�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/05/13/git-notes/">Git Notes</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/04/14/mac-terminal-open-macvim-subl2/">Mac Terminal 開啟 MacVim, Sublime Text 2</a>
       </li>
     
@@ -777,16 +835,12 @@ A類別身上存著 BaseDataMgr 的指標，但使用時是產生 MyDataMgr 的�
         <a href="/blog/2012/10/17/change-uitable-scrollindicator-position/">UITableView 如何調整 Scroll Indicator 的位置？</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/10/02/uitableview-reloaddata-slow/">UITableView 顯示上萬筆資料時，reloadData 很慢的問題</a>
-      </li>
-    
   </ul>
 </section>
 
 <section>
 <h1>分類</h1>
-<span class='categories_tag'> <a href='/blog/categories/design-pattern' style='font-size: 107.5%'>Design-pattern(1)</a>  <a href='/blog/categories/ios-app' style='font-size: 152.5%'>Ios app(7)</a>  <a href='/blog/categories/objective-c' style='font-size: 160.0%'>Objective-c(8)</a>  <a href='/blog/categories/octopress' style='font-size: 115.0%'>Octopress(2)</a>  <a href='/blog/categories/phone' style='font-size: 107.5%'>Phone(1)</a>  <a href='/blog/categories/plurk' style='font-size: 107.5%'>Plurk(1)</a>  <a href='/blog/categories/rails' style='font-size: 107.5%'>Rails(1)</a>  <a href='/blog/categories/ruby' style='font-size: 107.5%'>Ruby(1)</a>  <a href='/blog/categories/subl2' style='font-size: 107.5%'>Subl2(1)</a>  <a href='/blog/categories/tools' style='font-size: 115.0%'>Tools(2)</a>  <a href='/blog/categories/vim' style='font-size: 122.5%'>Vim(3)</a> </span>
+<span class='categories_tag'> <a href='/blog/categories/design-pattern' style='font-size: 107.5%'>Design-pattern(1)</a>  <a href='/blog/categories/git' style='font-size: 107.5%'>Git(1)</a>  <a href='/blog/categories/ios-app' style='font-size: 152.5%'>Ios app(7)</a>  <a href='/blog/categories/objective-c' style='font-size: 160.0%'>Objective-c(8)</a>  <a href='/blog/categories/octopress' style='font-size: 115.0%'>Octopress(2)</a>  <a href='/blog/categories/phone' style='font-size: 107.5%'>Phone(1)</a>  <a href='/blog/categories/plurk' style='font-size: 107.5%'>Plurk(1)</a>  <a href='/blog/categories/rails' style='font-size: 107.5%'>Rails(1)</a>  <a href='/blog/categories/ruby' style='font-size: 107.5%'>Ruby(1)</a>  <a href='/blog/categories/subl2' style='font-size: 107.5%'>Subl2(1)</a>  <a href='/blog/categories/tools' style='font-size: 115.0%'>Tools(2)</a>  <a href='/blog/categories/vim' style='font-size: 122.5%'>Vim(3)</a> </span>
 </section>
 
 

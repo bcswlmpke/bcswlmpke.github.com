@@ -5,11 +5,16 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Vim - Hank學習筆記</title>
+  <title>Git Notes - Hank學習筆記</title>
   <meta name="author" content="Hank Chen">
 
   
-  <meta name="description" content="Category: Vim">
+  <meta name="description" content="最近公司打算開始使用 Git,
+所以除了平常在家玩 Open Source 外，
+工作也可以使用 Git 了，
+發現自己有些觀念沒記下來也會忘記，
+所以要記錄下來。 Setup Git git config --global user.name "Your Name Here"
+git &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +23,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://bcswlmpke.github.ioblog/categories/vim">
+  <link rel="canonical" href="http://bcswlmpke.github.io/blog/2013/05/13/git-notes">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -64,67 +69,134 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Vim</h1>
+    
+      <h1 class="entry-title">Git Notes</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-13T22:14:00+08:00" pubdate data-updated="true">May 13<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>最近公司打算開始使用 Git,
+所以除了平常在家玩 Open Source 外，
+工作也可以使用 Git 了，
+發現自己有些觀念沒記下來也會忘記，
+所以要記錄下來。</p>
 
-  
-  <h2>2013</h2>
+<ul>
+<li>Setup Git
 
-<article>
-  
-<h1><a href="/blog/2013/04/14/mac-terminal-open-macvim-subl2/">Mac Terminal 開啟 MacVim, Sublime Text 2</a></h1>
-<time datetime="2013-04-14T21:02:00+08:00" pubdate><span class='month'>Apr</span> <span class='day'>14</span> <span class='year'>2013</span></time>
+<ul>
+<li><code>git config --global user.name "Your Name Here"</code></li>
+<li><code>git config --global user.email "your_email@example.com"</code></li>
+<li>如果有多個帳號, 可以拿掉 <code>--global</code>，各自 repo 分別設定</li>
+</ul>
+</li>
+<li>.gitignore
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/subl2/'>Subl2</a>, <a class='category' href='/blog/categories/vim/'>Vim</a></span>
-</footer>
+<ul>
+<li>如果 .gitignore not working，有可能是原本已經被 tracked，所以必須做下列的動作先 untracked
 
+<ul>
+<li>git rm -r &#8211;cached .</li>
+<li>git add .</li>
+<li>git commit -m &#8220;.gitignore is now working&#8221;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>keep empty folder
 
-</article>
+<ul>
+<li>因為 Git 不能 track empty directory, 所以必須放置 placekholder
 
-
-
-  
-  <h2>2012</h2>
-
-<article>
-  
-<h1><a href="/blog/2012/08/20/new-post/">XVim for XCode</a></h1>
-<time datetime="2012-08-20T22:42:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>20</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/tools/'>Tools</a>, <a class='category' href='/blog/categories/vim/'>Vim</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2012/01/17/vim-setup/">管理Vim plugins</a></h1>
-<time datetime="2012-01-17T00:19:00+08:00" pubdate><span class='month'>Jan</span> <span class='day'>17</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/vim/'>Vim</a></span>
-</footer>
-
-
-</article>
+<ul>
+<li>touch directory/.gitkeep</li>
+<li>git add -f directory/.gitkeep</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Hank Chen</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-13T22:14:00+08:00" pubdate data-updated="true">May 13<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/git/'>Git</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://bcswlmpke.github.io/blog/2013/05/13/git-notes/" data-via="" data-counturl="http://bcswlmpke.github.io/blog/2013/05/13/git-notes/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/04/14/mac-terminal-open-macvim-subl2/" title="Previous Post: Mac Terminal 開啟 MacVim, Sublime Text 2">&laquo; Mac Terminal 開啟 MacVim, Sublime Text 2</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -186,7 +258,10 @@
       var disqus_shortname = 'bcswlmpke';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://bcswlmpke.github.io/blog/2013/05/13/git-notes/';
+        var disqus_url = 'http://bcswlmpke.github.io/blog/2013/05/13/git-notes/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
