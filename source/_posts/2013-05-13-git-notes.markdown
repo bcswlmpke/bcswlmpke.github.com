@@ -17,6 +17,9 @@ categories: Git
   * 如果有多個帳號, 可以拿掉 <code>--global</code>，各自 repo 分別設定
   * <code>git config --global color.ui true</code>
   * <code>git config --global core.editor "vi"</code>
+  
+<!-- more -->
+
 * .gitignore
   * 如果 .gitignore not working，有可能是原本已經被 tracked，所以必須做下列的動作先 untracked
     * <code>git rm -r --cached .</code>
