@@ -11,18 +11,49 @@ categories: Git
 發現自己有些觀念沒記下來也會忘記，
 所以要記錄下來。
 
-* Setup Git 
+* Setup Git (編輯 .gitconfig 或輸入指令)
   * <code>git config --global user.name "Your Name Here"</code>
   * <code>git config --global user.email "your_email@example.com"</code>
   * 如果有多個帳號, 可以拿掉 <code>--global</code>，各自 repo 分別設定
+  * <code>git config --global color.ui true</code>
+  * <code>git config --global core.editor "vi"</code>
 * .gitignore
   * 如果 .gitignore not working，有可能是原本已經被 tracked，所以必須做下列的動作先 untracked
-    * git rm -r --cached .
-    * git add .
-    * git commit -m ".gitignore is now working"
+    * <code>git rm -r --cached .</code>
+    * <code>git add .</code>
+    * <code>git commit -m ".gitignore is now working"</code>
 * keep empty folder
   * 因為 Git 不能 track empty directory, 所以必須放置 placekholder 
     * touch directory/.gitkeep
     * git add -f directory/.gitkeep
+* HEAD 指向 current branch
+* 砍掉 untracked 檔案
+  * 列出打算要清除的檔案 <code>git clean -n</code>
+  * 清除檔案 <code>git clean -f</code>
+  * 清除目錄 <code>git clean -f -d</code>
+* 檢查多餘的空白
+  * <code>git diff --check</code>
+* 何時使用 branch
+  * 實驗
+  * 實作新功能時
+  * Bug fix 
+  * Refactor
+* Branch
+  * git branch new_feature
+  * git check new_feature
+  * git checkout -b new_feature
+  * 更名
+    * git branch -m old_name new_name
+  * 刪除branch 
+    * git branch new_feature -d
+  * 合併branch
+    * git checkout master 
+    * git merge new_feature
+    * 放棄合併:git reset --hard HEAD
+* Stash 
+  * git stash  
+  * git stash apply 
+  * git stash clear 
+
 
 
