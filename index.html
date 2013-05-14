@@ -13,8 +13,7 @@
 所以除了平常在家玩 Open Source 外，
 工作也可以使用 Git 了，
 發現自己有些觀念沒記下來也會忘記，
-所以要記錄下來。 Setup Git git config --global user.name "Your Name Here"
-git &hellip;">
+所以要記錄下來。 Setup Git (編輯 .gitconfig 或輸入指令) git config --global user.name " &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -108,12 +107,14 @@ git &hellip;">
 所以要記錄下來。</p>
 
 <ul>
-<li>Setup Git
+<li>Setup Git (編輯 .gitconfig 或輸入指令)
 
 <ul>
 <li><code>git config --global user.name "Your Name Here"</code></li>
 <li><code>git config --global user.email "your_email@example.com"</code></li>
 <li>如果有多個帳號, 可以拿掉 <code>--global</code>，各自 repo 分別設定</li>
+<li><code>git config --global color.ui true</code></li>
+<li><code>git config --global core.editor "vi"</code></li>
 </ul>
 </li>
 <li>.gitignore
@@ -122,9 +123,9 @@ git &hellip;">
 <li>如果 .gitignore not working，有可能是原本已經被 tracked，所以必須做下列的動作先 untracked
 
 <ul>
-<li>git rm -r &#8211;cached .</li>
-<li>git add .</li>
-<li>git commit -m &#8220;.gitignore is now working&#8221;</li>
+<li><code>git rm -r --cached .</code></li>
+<li><code>git add .</code></li>
+<li><code>git commit -m ".gitignore is now working"</code></li>
 </ul>
 </li>
 </ul>
@@ -139,6 +140,66 @@ git &hellip;">
 <li>git add -f directory/.gitkeep</li>
 </ul>
 </li>
+</ul>
+</li>
+<li>HEAD 指向 current branch</li>
+<li>砍掉 untracked 檔案
+
+<ul>
+<li>列出打算要清除的檔案 <code>git clean -n</code></li>
+<li>清除檔案 <code>git clean -f</code></li>
+<li>清除目錄 <code>git clean -f -d</code></li>
+</ul>
+</li>
+<li>檢查多餘的空白
+
+<ul>
+<li><code>git diff --check</code></li>
+</ul>
+</li>
+<li>何時使用 branch
+
+<ul>
+<li>實驗</li>
+<li>實作新功能時</li>
+<li>Bug fix</li>
+<li>Refactor</li>
+</ul>
+</li>
+<li>Branch
+
+<ul>
+<li>git branch new_feature</li>
+<li>git check new_feature</li>
+<li>git checkout -b new_feature</li>
+<li>更名
+
+<ul>
+<li>git branch -m old_name new_name</li>
+</ul>
+</li>
+<li>刪除branch
+
+<ul>
+<li>git branch new_feature -d</li>
+</ul>
+</li>
+<li>合併branch
+
+<ul>
+<li>git checkout master</li>
+<li>git merge new_feature</li>
+<li>放棄合併:git reset &#8211;hard HEAD</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Stash
+
+<ul>
+<li>git stash</li>
+<li>git stash apply</li>
+<li>git stash clear</li>
 </ul>
 </li>
 </ul>
