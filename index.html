@@ -117,95 +117,15 @@
 <li><code>git config --global core.editor "vi"</code></li>
 </ul>
 </li>
-<li>.gitignore
+</ul>
 
-<ul>
-<li>如果 .gitignore not working，有可能是原本已經被 tracked，所以必須做下列的動作先 untracked
-
-<ul>
-<li><code>git rm -r --cached .</code></li>
-<li><code>git add .</code></li>
-<li><code>git commit -m ".gitignore is now working"</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>keep empty folder
-
-<ul>
-<li>因為 Git 不能 track empty directory, 所以必須放置 placekholder
-
-<ul>
-<li>touch directory/.gitkeep</li>
-<li>git add -f directory/.gitkeep</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>HEAD 指向 current branch</li>
-<li>砍掉 untracked 檔案
-
-<ul>
-<li>列出打算要清除的檔案 <code>git clean -n</code></li>
-<li>清除檔案 <code>git clean -f</code></li>
-<li>清除目錄 <code>git clean -f -d</code></li>
-</ul>
-</li>
-<li>檢查多餘的空白
-
-<ul>
-<li><code>git diff --check</code></li>
-</ul>
-</li>
-<li>何時使用 branch
-
-<ul>
-<li>實驗</li>
-<li>實作新功能時</li>
-<li>Bug fix</li>
-<li>Refactor</li>
-</ul>
-</li>
-<li>Branch
-
-<ul>
-<li>git branch new_feature</li>
-<li>git check new_feature</li>
-<li>git checkout -b new_feature</li>
-<li>更名
-
-<ul>
-<li>git branch -m old_name new_name</li>
-</ul>
-</li>
-<li>刪除branch
-
-<ul>
-<li>git branch new_feature -d</li>
-</ul>
-</li>
-<li>合併branch
-
-<ul>
-<li>git checkout master</li>
-<li>git merge new_feature</li>
-<li>放棄合併:git reset &#8211;hard HEAD</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Stash
-
-<ul>
-<li>git stash</li>
-<li>git stash apply</li>
-<li>git stash clear</li>
-</ul>
-</li>
-</ul>
 
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/05/13/git-notes/">Read on &rarr;</a>
+    </footer>
   
 
 
