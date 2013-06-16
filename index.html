@@ -9,11 +9,9 @@
   <meta name="author" content="Hank Chen">
 
   
-  <meta name="description" content="最近公司打算開始使用 Git,
-所以除了平常在家玩 Open Source 外，
-工作也可以使用 Git 了，
-發現自己有些觀念沒記下來也會忘記，
-所以要記錄下來。 Setup Git (編輯 .gitconfig 或輸入指令) git config --global user.name " &hellip;">
+  <meta name="description" content="最近在研究 FacebookSDK 的功能，
+發現在朋友的手機 iPhone3GS iOS 6.0 會出現下面這樣的錯誤： 1
+ld: file is universal (3 clices) but doest not contain a(n) armv7s slice 有可能是跟 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +67,137 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/16/ios-facebooksdk3-dot-0-armv7s-slice-builderror/">(iOS)FacebookSDK Armv7s Slice Error</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-16T13:52:00+08:00" pubdate data-updated="true">Jun 16<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/16/ios-facebooksdk3-dot-0-armv7s-slice-builderror/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近在研究 FacebookSDK 的功能，
+發現在朋友的手機 iPhone3GS iOS 6.0 會出現下面這樣的錯誤：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="nl">ld:</span> <span class="n">file</span> <span class="n">is</span> <span class="n">universal</span> <span class="p">(</span><span class="mi">3</span> <span class="n">clices</span><span class="p">)</span> <span class="n">but</span> <span class="n">doest</span> <span class="n">not</span> <span class="n">contain</span> <span class="n">a</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="n">armv7s</span> <span class="n">slice</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>有可能是跟 FacebookSDK 的版本有關，
+但目前先透過下面的方式可以解決。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">TARGETS</span> <span class="o">&gt;</span> <span class="n">Build</span> <span class="n">Settings</span> <span class="o">&gt;</span> <span class="n">Valid</span> <span class="n">Architectures</span> <span class="err">只留下</span> <span class="n">armv7</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/16/ios-detect-keyboard-size-change/">(iOS)偵測鍵盤大小變化</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-16T13:50:00+08:00" pubdate data-updated="true">Jun 16<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/16/ios-detect-keyboard-size-change/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>在 iOS 中，輸入時可以選擇英文或中文鍵盤，
+例如中文的使用者也可以新增注意鍵盤，
+而中文注意鍵盤的大小跟一般英文鍵盤的大小不同，
+如果擔心鍵盤的大小會擋到 UI，
+可以透過某些方式來得知鍵盤大小並進而調整 UI Layout。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="c1">// 註冊 UIKeyboardDidShowNotification 可以獲得 keyboard 的大小</span>
+</span><span class='line'><span class="p">[[</span><span class="n">NSNotificationCenter</span> <span class="n">defaultCenter</span><span class="p">]</span>
+</span><span class='line'>  <span class="nl">addObserver:</span><span class="n">self</span>
+</span><span class='line'>  <span class="nl">selector:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">keyboardDidShow:</span><span class="p">)</span>
+</span><span class='line'>  <span class="nl">name:</span><span class="n">UIKeyboardDidShowNotification</span>
+</span><span class='line'>  <span class="nl">object:</span><span class="nb">nil</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">keyboardWasShown:</span><span class="p">(</span><span class="n">NSNotification</span><span class="o">*</span><span class="p">)</span><span class="n">notification</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="c1">// userInfo提供了一些 keyboard 的訊息</span>
+</span><span class='line'>  <span class="c1">// UIKeyboardFrameBeginUserInfoKey</span>
+</span><span class='line'>  <span class="c1">// UIKeyboardFrameEndUserInfoKey</span>
+</span><span class='line'>  <span class="c1">// UIKeyboardAnimationDurationUserInfoKey</span>
+</span><span class='line'>  <span class="c1">// UIKeyboardAnimationCurveUserInfoKey</span>
+</span><span class='line'>  <span class="n">NSDictionary</span><span class="o">*</span> <span class="n">info</span> <span class="o">=</span> <span class="p">[</span><span class="n">notification</span> <span class="n">userInfo</span><span class="p">];</span>
+</span><span class='line'>  <span class="n">CGSize</span> <span class="n">kbSize</span> <span class="o">=</span> <span class="p">[[</span><span class="n">info</span> <span class="nl">objectForKey:</span><span class="n">UIKeyboardFrameEndUserInfoKey</span><span class="p">]</span> <span class="n">CGRectValue</span><span class="p">].</span><span class="n">size</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -572,94 +701,6 @@ dataSource 已經被釋放了，
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/16/i9000-ics/">Galaxy S 不死，更新至 ICS 4.0.4</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-16T10:05:00+08:00" pubdate data-updated="true">Jun 16<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/06/16/i9000-ics/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://farm6.staticflickr.com/5038/7378210724_6c4fded6fd.jpg" title="ScreenCapture1" alt="ScreenCapture1" /> <img src="http://farm6.staticflickr.com/5336/7378210814_75c0c1522a.jpg" title="ScreenCapture2" alt="ScreenCapture1" /></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/06/16/i9000-ics/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/12/rails-develop-environment/">Rails Develop Environment Setup</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-12T20:22:00+08:00" pubdate data-updated="true">Jun 12<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/06/12/rails-develop-environment/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>依照 Rails 101 的安裝步驟，但可能安裝的版本差太多，
-看起來會遇到不少問題，
-所以就一步一步筆記下來。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/06/12/rails-develop-environment/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -675,6 +716,14 @@ dataSource 已經被釋放了，
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/06/16/ios-facebooksdk3-dot-0-armv7s-slice-builderror/">(iOS)FacebookSDK armv7s slice error</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/16/ios-detect-keyboard-size-change/">(iOS)偵測鍵盤大小變化</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/05/13/git-notes/">Git Notes</a>
       </li>
     
@@ -686,20 +735,12 @@ dataSource 已經被釋放了，
         <a href="/blog/2013/02/20/arc-weak-reference/">iOS 5 以下不支援 weak reference 遇到的問題</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/10/17/how-to-build-plurk-bot/">如何寫一個噗浪機器人</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/10/17/change-uitable-scrollindicator-position/">UITableView 如何調整 Scroll Indicator 的位置？</a>
-      </li>
-    
   </ul>
 </section>
 
 <section>
 <h1>分類</h1>
-<span class='categories_tag'> <a href='/blog/categories/design-pattern' style='font-size: 107.5%'>Design-pattern(1)</a>  <a href='/blog/categories/git' style='font-size: 107.5%'>Git(1)</a>  <a href='/blog/categories/ios-app' style='font-size: 152.5%'>Ios app(7)</a>  <a href='/blog/categories/objective-c' style='font-size: 160.0%'>Objective-c(8)</a>  <a href='/blog/categories/octopress' style='font-size: 115.0%'>Octopress(2)</a>  <a href='/blog/categories/phone' style='font-size: 107.5%'>Phone(1)</a>  <a href='/blog/categories/plurk' style='font-size: 107.5%'>Plurk(1)</a>  <a href='/blog/categories/rails' style='font-size: 107.5%'>Rails(1)</a>  <a href='/blog/categories/ruby' style='font-size: 107.5%'>Ruby(1)</a>  <a href='/blog/categories/subl2' style='font-size: 107.5%'>Subl2(1)</a>  <a href='/blog/categories/tools' style='font-size: 115.0%'>Tools(2)</a>  <a href='/blog/categories/vim' style='font-size: 122.5%'>Vim(3)</a> </span>
+<span class='categories_tag'> <a href='/blog/categories/design-pattern' style='font-size: 106.0%'>Design-pattern(1)</a>  <a href='/blog/categories/git' style='font-size: 106.0%'>Git(1)</a>  <a href='/blog/categories/ios-app' style='font-size: 154.0%'>Ios app(9)</a>  <a href='/blog/categories/objective-c' style='font-size: 160.0%'>Objective-c(10)</a>  <a href='/blog/categories/octopress' style='font-size: 112.0%'>Octopress(2)</a>  <a href='/blog/categories/phone' style='font-size: 106.0%'>Phone(1)</a>  <a href='/blog/categories/plurk' style='font-size: 106.0%'>Plurk(1)</a>  <a href='/blog/categories/rails' style='font-size: 106.0%'>Rails(1)</a>  <a href='/blog/categories/ruby' style='font-size: 106.0%'>Ruby(1)</a>  <a href='/blog/categories/subl2' style='font-size: 106.0%'>Subl2(1)</a>  <a href='/blog/categories/tools' style='font-size: 112.0%'>Tools(2)</a>  <a href='/blog/categories/vim' style='font-size: 118.0%'>Vim(3)</a> </span>
 </section>
 
 

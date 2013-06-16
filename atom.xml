@@ -4,7 +4,7 @@
   <title><![CDATA[Hank學習筆記]]></title>
   <link href="http://bcswlmpke.github.io/atom.xml" rel="self"/>
   <link href="http://bcswlmpke.github.io/"/>
-  <updated>2013-05-14T23:43:18+08:00</updated>
+  <updated>2013-06-16T14:19:52+08:00</updated>
   <id>http://bcswlmpke.github.io/</id>
   <author>
     <name><![CDATA[Hank Chen]]></name>
@@ -12,6 +12,79 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[(iOS)FacebookSDK armv7s slice error]]></title>
+    <link href="http://bcswlmpke.github.io/blog/2013/06/16/ios-facebooksdk3-dot-0-armv7s-slice-builderror/"/>
+    <updated>2013-06-16T13:52:00+08:00</updated>
+    <id>http://bcswlmpke.github.io/blog/2013/06/16/ios-facebooksdk3-dot-0-armv7s-slice-builderror</id>
+    <content type="html"><![CDATA[<p>最近在研究 FacebookSDK 的功能，
+發現在朋友的手機 iPhone3GS iOS 6.0 會出現下面這樣的錯誤：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="nl">ld:</span> <span class="n">file</span> <span class="n">is</span> <span class="n">universal</span> <span class="p">(</span><span class="mi">3</span> <span class="n">clices</span><span class="p">)</span> <span class="n">but</span> <span class="n">doest</span> <span class="n">not</span> <span class="n">contain</span> <span class="n">a</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="n">armv7s</span> <span class="n">slice</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>有可能是跟 FacebookSDK 的版本有關，
+但目前先透過下面的方式可以解決。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">TARGETS</span> <span class="o">&gt;</span> <span class="n">Build</span> <span class="n">Settings</span> <span class="o">&gt;</span> <span class="n">Valid</span> <span class="n">Architectures</span> <span class="err">只留下</span> <span class="n">armv7</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[(iOS)偵測鍵盤大小變化]]></title>
+    <link href="http://bcswlmpke.github.io/blog/2013/06/16/ios-detect-keyboard-size-change/"/>
+    <updated>2013-06-16T13:50:00+08:00</updated>
+    <id>http://bcswlmpke.github.io/blog/2013/06/16/ios-detect-keyboard-size-change</id>
+    <content type="html"><![CDATA[<p>在 iOS 中，輸入時可以選擇英文或中文鍵盤，
+例如中文的使用者也可以新增注意鍵盤，
+而中文注意鍵盤的大小跟一般英文鍵盤的大小不同，
+如果擔心鍵盤的大小會擋到 UI，
+可以透過某些方式來得知鍵盤大小並進而調整 UI Layout。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="c1">// 註冊 UIKeyboardDidShowNotification 可以獲得 keyboard 的大小</span>
+</span><span class='line'><span class="p">[[</span><span class="n">NSNotificationCenter</span> <span class="n">defaultCenter</span><span class="p">]</span>
+</span><span class='line'>  <span class="nl">addObserver:</span><span class="n">self</span>
+</span><span class='line'>  <span class="nl">selector:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">keyboardDidShow:</span><span class="p">)</span>
+</span><span class='line'>  <span class="nl">name:</span><span class="n">UIKeyboardDidShowNotification</span>
+</span><span class='line'>  <span class="nl">object:</span><span class="nb">nil</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">keyboardWasShown:</span><span class="p">(</span><span class="n">NSNotification</span><span class="o">*</span><span class="p">)</span><span class="n">notification</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="c1">// userInfo提供了一些 keyboard 的訊息</span>
+</span><span class='line'>  <span class="c1">// UIKeyboardFrameBeginUserInfoKey</span>
+</span><span class='line'>  <span class="c1">// UIKeyboardFrameEndUserInfoKey</span>
+</span><span class='line'>  <span class="c1">// UIKeyboardAnimationDurationUserInfoKey</span>
+</span><span class='line'>  <span class="c1">// UIKeyboardAnimationCurveUserInfoKey</span>
+</span><span class='line'>  <span class="n">NSDictionary</span><span class="o">*</span> <span class="n">info</span> <span class="o">=</span> <span class="p">[</span><span class="n">notification</span> <span class="n">userInfo</span><span class="p">];</span>
+</span><span class='line'>  <span class="n">CGSize</span> <span class="n">kbSize</span> <span class="o">=</span> <span class="p">[[</span><span class="n">info</span> <span class="nl">objectForKey:</span><span class="n">UIKeyboardFrameEndUserInfoKey</span><span class="p">]</span> <span class="n">CGRectValue</span><span class="p">].</span><span class="n">size</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Git Notes]]></title>
@@ -1774,88 +1847,6 @@ A類別身上存著 BaseDataMgr 的指標，但使用時是產生 MyDataMgr 的�
 <li>git submodule sync</li>
 </ul>
 </li>
-</ul>
-</li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress的目錄結構]]></title>
-    <link href="http://bcswlmpke.github.io/blog/2012/01/14/octopress-directory-structure/"/>
-    <updated>2012-01-14T00:21:00+08:00</updated>
-    <id>http://bcswlmpke.github.io/blog/2012/01/14/octopress-directory-structure</id>
-    <content type="html"><![CDATA[<ul>
-<li>octopress/
-
-<ul>
-<li>_config.yml 可以做基本設定修改</li>
-</ul>
-</li>
-<li>octopress/plugins
-
-<ul>
-<li>放置外掛程式</li>
-</ul>
-</li>
-<li>octopress/source/_posts
-
-<ul>
-<li>放置你寫的文章</li>
-</ul>
-</li>
-<li>octopress/source/_includes/asides
-
-<ul>
-<li>修改_config.yml -> rake generate 會在這邊產生html檔案</li>
-</ul>
-</li>
-<li>octopress/source/new_page
-
-<ul>
-<li>rake new_page[&#8216;new page&#8217;]</li>
-</ul>
-</li>
-<li>octopress/source/_includes/custom/navigation.html
-
-<ul>
-<li>修改或加入link</li>
-</ul>
-</li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to use Octopress]]></title>
-    <link href="http://bcswlmpke.github.io/blog/2012/01/12/octopress-note/"/>
-    <updated>2012-01-12T21:53:00+08:00</updated>
-    <id>http://bcswlmpke.github.io/blog/2012/01/12/octopress-note</id>
-    <content type="html"><![CDATA[<ul>
-<li>安裝
-
-<ul>
-<li>請參考<a href="http://octopress.org/docs/setup/" title="Octopress Setup">Octopress官網</a></li>
-<li>設定Octopress請參考<a href="http://octopress.org/docs/configuring/" title="Configuring Octopress">Configuring Octopress</a></li>
-</ul>
-</li>
-<li>用 Markdown 寫文章
-
-<ul>
-<li>rake new_post[文章名稱]</li>
-<li>請參考<a href="http://markdown.tw" title="Markdown Syntax">Markdown中文文件</a></li>
-<li>rake generate -> rake preview -> 然後<a href="http://127.0.0.1:4000/">http://127.0.0.1:4000</a>可以看到預覽畫面</li>
-</ul>
-</li>
-<li>發佈
-
-<ul>
-<li>git checkout source</li>
-<li>git push origin source</li>
-<li>rake generate</li>
-<li>rake deploy</li>
 </ul>
 </li>
 </ul>

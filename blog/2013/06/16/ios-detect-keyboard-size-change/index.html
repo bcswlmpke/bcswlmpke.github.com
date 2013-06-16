@@ -5,14 +5,28 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>How to use Octopress - Hank學習筆記</title>
+  <title>(iOS)偵測鍵盤大小變化 - Hank學習筆記</title>
   <meta name="author" content="Hank Chen">
 
   
-  <meta name="description" content="安裝 請參考Octopress官網
-設定Octopress請參考Configuring Octopress 用 Markdown 寫文章 rake new_post[文章名稱]
-請參考Markdown中文文件
-rake generate -> rake preview -> 然後http:// &hellip;">
+  <meta name="description" content="在 iOS 中，輸入時可以選擇英文或中文鍵盤，
+例如中文的使用者也可以新增注意鍵盤，
+而中文注意鍵盤的大小跟一般英文鍵盤的大小不同，
+如果擔心鍵盤的大小會擋到 UI，
+可以透過某些方式來得知鍵盤大小並進而調整 UI Layout。 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +35,7 @@ rake generate -> rake preview -> 然後http:// &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://bcswlmpke.github.io/blog/2012/01/12/octopress-note">
+  <link rel="canonical" href="http://bcswlmpke.github.io/blog/2013/06/16/ios-detect-keyboard-size-change">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -71,7 +85,7 @@ rake generate -> rake preview -> 然後http:// &hellip;">
   
   <header>
     
-      <h1 class="entry-title">How to Use Octopress</h1>
+      <h1 class="entry-title">(iOS)偵測鍵盤大小變化</h1>
     
     
       <p class="meta">
@@ -87,7 +101,7 @@ rake generate -> rake preview -> 然後http:// &hellip;">
   
 
 
-<time datetime="2012-01-12T21:53:00+08:00" pubdate data-updated="true">Jan 12<span>th</span>, 2012</time>
+<time datetime="2013-06-16T13:50:00+08:00" pubdate data-updated="true">Jun 16<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -96,32 +110,47 @@ rake generate -> rake preview -> 然後http:// &hellip;">
   </header>
 
 
-<div class="entry-content"><ul>
-<li>安裝
+<div class="entry-content"><p>在 iOS 中，輸入時可以選擇英文或中文鍵盤，
+例如中文的使用者也可以新增注意鍵盤，
+而中文注意鍵盤的大小跟一般英文鍵盤的大小不同，
+如果擔心鍵盤的大小會擋到 UI，
+可以透過某些方式來得知鍵盤大小並進而調整 UI Layout。</p>
 
-<ul>
-<li>請參考<a href="http://octopress.org/docs/setup/" title="Octopress Setup">Octopress官網</a></li>
-<li>設定Octopress請參考<a href="http://octopress.org/docs/configuring/" title="Configuring Octopress">Configuring Octopress</a></li>
-</ul>
-</li>
-<li>用 Markdown 寫文章
-
-<ul>
-<li>rake new_post[文章名稱]</li>
-<li>請參考<a href="http://markdown.tw" title="Markdown Syntax">Markdown中文文件</a></li>
-<li>rake generate -> rake preview -> 然後<a href="http://127.0.0.1:4000/">http://127.0.0.1:4000</a>可以看到預覽畫面</li>
-</ul>
-</li>
-<li>發佈
-
-<ul>
-<li>git checkout source</li>
-<li>git push origin source</li>
-<li>rake generate</li>
-<li>rake deploy</li>
-</ul>
-</li>
-</ul>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="c1">// 註冊 UIKeyboardDidShowNotification 可以獲得 keyboard 的大小</span>
+</span><span class='line'><span class="p">[[</span><span class="n">NSNotificationCenter</span> <span class="n">defaultCenter</span><span class="p">]</span>
+</span><span class='line'>  <span class="nl">addObserver:</span><span class="n">self</span>
+</span><span class='line'>  <span class="nl">selector:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">keyboardDidShow:</span><span class="p">)</span>
+</span><span class='line'>  <span class="nl">name:</span><span class="n">UIKeyboardDidShowNotification</span>
+</span><span class='line'>  <span class="nl">object:</span><span class="nb">nil</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">keyboardWasShown:</span><span class="p">(</span><span class="n">NSNotification</span><span class="o">*</span><span class="p">)</span><span class="n">notification</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="c1">// userInfo提供了一些 keyboard 的訊息</span>
+</span><span class='line'>  <span class="c1">// UIKeyboardFrameBeginUserInfoKey</span>
+</span><span class='line'>  <span class="c1">// UIKeyboardFrameEndUserInfoKey</span>
+</span><span class='line'>  <span class="c1">// UIKeyboardAnimationDurationUserInfoKey</span>
+</span><span class='line'>  <span class="c1">// UIKeyboardAnimationCurveUserInfoKey</span>
+</span><span class='line'>  <span class="n">NSDictionary</span><span class="o">*</span> <span class="n">info</span> <span class="o">=</span> <span class="p">[</span><span class="n">notification</span> <span class="n">userInfo</span><span class="p">];</span>
+</span><span class='line'>  <span class="n">CGSize</span> <span class="n">kbSize</span> <span class="o">=</span> <span class="p">[[</span><span class="n">info</span> <span class="nl">objectForKey:</span><span class="n">UIKeyboardFrameEndUserInfoKey</span><span class="p">]</span> <span class="n">CGRectValue</span><span class="p">].</span><span class="n">size</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
@@ -145,12 +174,12 @@ rake generate -> rake preview -> 然後http:// &hellip;">
   
 
 
-<time datetime="2012-01-12T21:53:00+08:00" pubdate data-updated="true">Jan 12<span>th</span>, 2012</time>
+<time datetime="2013-06-16T13:50:00+08:00" pubdate data-updated="true">Jun 16<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/octopress/'>Octopress</a>
+    <a class='category' href='/blog/categories/objective-c/'>Objective-C</a>, <a class='category' href='/blog/categories/ios-app/'>iOS App</a>
   
 </span>
 
@@ -159,7 +188,7 @@ rake generate -> rake preview -> 然後http:// &hellip;">
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://bcswlmpke.github.io/blog/2012/01/12/octopress-note/" data-via="" data-counturl="http://bcswlmpke.github.io/blog/2012/01/12/octopress-note/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://bcswlmpke.github.io/blog/2013/06/16/ios-detect-keyboard-size-change/" data-via="" data-counturl="http://bcswlmpke.github.io/blog/2013/06/16/ios-detect-keyboard-size-change/" >Tweet</a>
   
   
   
@@ -168,8 +197,10 @@ rake generate -> rake preview -> 然後http:// &hellip;">
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/2013/05/13/git-notes/" title="Previous Post: Git Notes">&laquo; Git Notes</a>
       
-        <a class="basic-alignment right" href="/blog/2012/01/14/octopress-directory-structure/" title="next Post: Octopress的目錄結構">Octopress的目錄結構 &raquo;</a>
+      
+        <a class="basic-alignment right" href="/blog/2013/06/16/ios-facebooksdk3-dot-0-armv7s-slice-builderror/" title="next Post: (iOS)FacebookSDK armv7s slice error">(iOS)FacebookSDK armv7s slice error &raquo;</a>
       
     </p>
   </footer>
@@ -242,8 +273,8 @@ rake generate -> rake preview -> 然後http:// &hellip;">
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://bcswlmpke.github.io/blog/2012/01/12/octopress-note/';
-        var disqus_url = 'http://bcswlmpke.github.io/blog/2012/01/12/octopress-note/';
+        var disqus_identifier = 'http://bcswlmpke.github.io/blog/2013/06/16/ios-detect-keyboard-size-change/';
+        var disqus_url = 'http://bcswlmpke.github.io/blog/2013/06/16/ios-detect-keyboard-size-change/';
         var disqus_script = 'embed.js';
       
     (function () {

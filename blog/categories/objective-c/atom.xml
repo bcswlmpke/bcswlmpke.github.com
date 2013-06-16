@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Objective-C | Hank學習筆記]]></title>
   <link href="http://bcswlmpke.github.io/blog/categories/objective-c/atom.xml" rel="self"/>
   <link href="http://bcswlmpke.github.io/"/>
-  <updated>2013-05-14T23:43:18+08:00</updated>
+  <updated>2013-06-16T14:19:52+08:00</updated>
   <id>http://bcswlmpke.github.io/</id>
   <author>
     <name><![CDATA[Hank Chen]]></name>
@@ -12,6 +12,61 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[(iOS)FacebookSDK armv7s slice error]]></title>
+    <link href="http://bcswlmpke.github.io/blog/2013/06/16/ios-facebooksdk3-dot-0-armv7s-slice-builderror/"/>
+    <updated>2013-06-16T13:52:00+08:00</updated>
+    <id>http://bcswlmpke.github.io/blog/2013/06/16/ios-facebooksdk3-dot-0-armv7s-slice-builderror</id>
+    <content type="html"><![CDATA[<p>最近在研究 FacebookSDK 的功能，
+發現在朋友的手機 iPhone3GS iOS 6.0 會出現下面這樣的錯誤：
+<code>objc
+ld: file is universal (3 clices) but doest not contain a(n) armv7s slice
+</code></p>
+
+<p>有可能是跟 FacebookSDK 的版本有關，
+但目前先透過下面的方式可以解決。
+<code>objc
+TARGETS &gt; Build Settings &gt; Valid Architectures 只留下 armv7
+</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[(iOS)偵測鍵盤大小變化]]></title>
+    <link href="http://bcswlmpke.github.io/blog/2013/06/16/ios-detect-keyboard-size-change/"/>
+    <updated>2013-06-16T13:50:00+08:00</updated>
+    <id>http://bcswlmpke.github.io/blog/2013/06/16/ios-detect-keyboard-size-change</id>
+    <content type="html"><![CDATA[<p>在 iOS 中，輸入時可以選擇英文或中文鍵盤，
+例如中文的使用者也可以新增注意鍵盤，
+而中文注意鍵盤的大小跟一般英文鍵盤的大小不同，
+如果擔心鍵盤的大小會擋到 UI，
+可以透過某些方式來得知鍵盤大小並進而調整 UI Layout。</p>
+
+<p>```objc
+// 註冊 UIKeyboardDidShowNotification 可以獲得 keyboard 的大小
+[[NSNotificationCenter defaultCenter]
+  addObserver:self
+  selector:@selector(keyboardDidShow:)
+  name:UIKeyboardDidShowNotification
+  object:nil];</p>
+
+<ul>
+<li>(void)keyboardWasShown:(NSNotification<em>)notification
+{
+// userInfo提供了一些 keyboard 的訊息
+// UIKeyboardFrameBeginUserInfoKey
+// UIKeyboardFrameEndUserInfoKey
+// UIKeyboardAnimationDurationUserInfoKey
+// UIKeyboardAnimationCurveUserInfoKey
+NSDictionary</em> info = [notification userInfo];
+CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+}
+```</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[iOS 5 以下不支援 weak reference 遇到的問題]]></title>
@@ -104,125 +159,6 @@ top, left, bottom, right
 
 <pre><code>而是直接設定 UITableView 身上的 rowHeight property。
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Tap手勢的處理]]></title>
-    <link href="http://bcswlmpke.github.io/blog/2012/09/19/tap-gesture/"/>
-    <updated>2012-09-19T23:11:00+08:00</updated>
-    <id>http://bcswlmpke.github.io/blog/2012/09/19/tap-gesture</id>
-    <content type="html"><![CDATA[<p>要處理 Single Tap 與 Double Tap 的時候,
-除了下面這行要設定以外
-<code>objc
-  [_singleTap requireGestureRecognizerToFail:_doubleTap];
-</code>
-還必須設定
-<code>objc
-  [_singleTap setDelaysTouchesBegan:YES];
-  [_doubleTap setDelaysTouchesBegan:YES];
-</code>
-否則當 Double Tap trigger 時，也會觸發 Single Tap.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ARC 與 非ARC 在大量資料的情況下的執行速度相差數倍]]></title>
-    <link href="http://bcswlmpke.github.io/blog/2012/05/08/arc-nonarc-performance/"/>
-    <updated>2012-05-08T21:49:00+08:00</updated>
-    <id>http://bcswlmpke.github.io/blog/2012/05/08/arc-nonarc-performance</id>
-    <content type="html"><![CDATA[<p>將手邊的 iOS 專案轉換為 ARC，
-讓 XCode 於 Compile 時期安插必要的記憶體管理程式碼，
-但是它所產生的程式碼是否與我們所想的一樣，
-這個就未必了。</p>
-
-<p>我們應該盡可能讓 XCode 幫我們產生正確的記憶體管理程式碼，
-但必要時，我們也可以自己對程式碼進行改善！</p>
-
-<p>下面舉一個例子，同樣的程式碼，只是在「ARC」與「非ARC」的情況下編譯執行，
-但是兩者所需要的時間是相差數倍的！</p>
-
-<!-- more -->
-
-
-<p>```objc
-  int n = 600000, m = 10000000;</p>
-
-<pre><code>arr = [NSMutableArray new];
-
-for (int i = 0; i &lt; n; i++)
-    [arr addObject:[NSNumber numberWithInt:1]];
-
-CFAbsoluteTime start = CFAbsoluteTimeGetCurrent();
-
-id obj = nil;
-for (int j = 0; j &lt; m; j++)
-{
-    obj = [arr objectAtIndex:n - 1];
-}
-
-CFAbsoluteTime end = CFAbsoluteTimeGetCurrent();
-
-NSLog(@"end:%lf, start:%lf, diff:%lf", end, start, end - start);
-
-[arr release]; // -&gt; 這一行是「非ARC」需要加上的，但「ARC」沒有這行
-</code></pre>
-
-<p>```</p>
-
-<p>執行結果：
-<code>objc
-非ARC:  end:358178433.846184, start:358178433.753032, diff:0.093152
-ARC:    end:358178929.480108, start:358178928.841418, diff:0.638690
-可以看出「非ARC」的版本比「ARC」的版本快了近7倍！
-</code></p>
-
-<p>但實際上程式是慢在哪呢？
--> 慢在 <code>obj = [arr objectAtIndex:n - 1];</code> 這邊，
-XCode 在 Compile 的時候，幫我們安插了類似下面的程式，
-```objc
-  obj = [[arr objectAtIndex:n - 1] retain];
-  [obj autorelease];</p>
-
-<p>如果把「非ARC」的版本修改為上述的程式碼，
-則執行結果：
-非ARC:  end:358179022.496308, start:358179021.894909, diff:0.601399
-是不是就變慢了！
-```</p>
-
-<p>因此，XCode 在 Compile 的時候，我想它對於程式的記憶體管理是採取較保守的態度，
-如此看來，iOS 5 預設 property 為 strong 也就不意外了！</p>
-
-<p>那麼上面所舉的例子要怎麼解決呢？
--> 我們可以透過 <code>Toll-Free Bridged Types</code> 來解決！
-來看一下，我們將 ARC 的版本的程式碼改成下面這個樣子：
-將<code>NSArray</code>改成使用<code>CFArrayRef</code>，
-這是 Foundation class -> Core Foundation type 的轉換，
-這樣的轉換是 Toll-Free 的！
-```objc
-  __unsafe_unretained id obj;
-  for (int j = 0; j &lt; m; j++)
-  {</p>
-
-<pre><code>  obj = (__bridge __unsafe_unretained id)CFArrayGetValueAtIndex((__bridge CFArrayRef)arr, n - 1);
-</code></pre>
-
-<p>  }
-如果把「ARC」的版本修改為上述的程式碼，
-則執行結果：
-非ARC:  end:358179460.237259, start:358179460.004701, diff:0.232558
-是不是就變快了！(但還沒有辦法跟原本的「非ARC」版本一樣快！)
-```</p>
-
-<p>所以其實寫程式的時候要多想一下有沒有其它作法，
-因為不同的寫法雖然可能達成的結果相同，
-但所需要的時間是不同的，
-在使用 ARC 時，
-如果能清楚的知道自己所創建的物件是被 retain 的狀態，
-那麼在傳遞的過程中就可以視需求決定接收此物件是要 retain 或只是 assign，
-這樣可以讓 XCode 在 Compile 的時候，
-依照我們給它的指示去產生記憶體管理的程式碼，
-避免不必要或多餘的效能損失！</p>
 ]]></content>
   </entry>
   

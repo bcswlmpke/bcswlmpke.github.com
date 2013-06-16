@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Design-Pattern - Hank學習筆記</title>
+  <title>(iOS)FacebookSDK armv7s slice error - Hank學習筆記</title>
   <meta name="author" content="Hank Chen">
 
   
-  <meta name="description" content="Category: Design-Pattern">
+  <meta name="description" content="最近在研究 FacebookSDK 的功能，
+發現在朋友的手機 iPhone3GS iOS 6.0 會出現下面這樣的錯誤： 1
+ld: file is universal (3 clices) but doest not contain a(n) armv7s slice 有可能是跟 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://bcswlmpke.github.ioblog/categories/design-pattern">
+  <link rel="canonical" href="http://bcswlmpke.github.io/blog/2013/06/16/ios-facebooksdk3-dot-0-armv7s-slice-builderror">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -64,36 +66,107 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Design-Pattern</h1>
+    
+      <h1 class="entry-title">(iOS)FacebookSDK Armv7s Slice Error</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-16T13:52:00+08:00" pubdate data-updated="true">Jun 16<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>最近在研究 FacebookSDK 的功能，
+發現在朋友的手機 iPhone3GS iOS 6.0 會出現下面這樣的錯誤：</p>
 
-  
-  <h2>2012</h2>
-
-<article>
-  
-<h1><a href="/blog/2012/04/01/discuss-design-pattern/">程式開發時，類別間存取的設計方式</a></h1>
-<time datetime="2012-04-01T18:32:00+08:00" pubdate><span class='month'>Apr</span> <span class='day'>01</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/design-pattern/'>Design-Pattern</a></span>
-</footer>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="nl">ld:</span> <span class="n">file</span> <span class="n">is</span> <span class="n">universal</span> <span class="p">(</span><span class="mi">3</span> <span class="n">clices</span><span class="p">)</span> <span class="n">but</span> <span class="n">doest</span> <span class="n">not</span> <span class="n">contain</span> <span class="n">a</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="n">armv7s</span> <span class="n">slice</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-</article>
+<p>有可能是跟 FacebookSDK 的版本有關，
+但目前先透過下面的方式可以解決。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">TARGETS</span> <span class="o">&gt;</span> <span class="n">Build</span> <span class="n">Settings</span> <span class="o">&gt;</span> <span class="n">Valid</span> <span class="n">Architectures</span> <span class="err">只留下</span> <span class="n">armv7</span>
+</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Hank Chen</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-16T13:52:00+08:00" pubdate data-updated="true">Jun 16<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/objective-c/'>Objective-C</a>, <a class='category' href='/blog/categories/ios-app/'>iOS App</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://bcswlmpke.github.io/blog/2013/06/16/ios-facebooksdk3-dot-0-armv7s-slice-builderror/" data-via="" data-counturl="http://bcswlmpke.github.io/blog/2013/06/16/ios-facebooksdk3-dot-0-armv7s-slice-builderror/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/06/16/ios-detect-keyboard-size-change/" title="Previous Post: (iOS)偵測鍵盤大小變化">&laquo; (iOS)偵測鍵盤大小變化</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -155,7 +228,10 @@
       var disqus_shortname = 'bcswlmpke';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://bcswlmpke.github.io/blog/2013/06/16/ios-facebooksdk3-dot-0-armv7s-slice-builderror/';
+        var disqus_url = 'http://bcswlmpke.github.io/blog/2013/06/16/ios-facebooksdk3-dot-0-armv7s-slice-builderror/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
