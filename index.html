@@ -9,9 +9,22 @@
   <meta name="author" content="Hank Chen">
 
   
-  <meta name="description" content="最近在研究 FacebookSDK 的功能，
-發現在朋友的手機 iPhone3GS iOS 6.0 會出現下面這樣的錯誤： 1
-ld: file is universal (3 clices) but doest not contain a(n) armv7s slice 有可能是跟 &hellip;">
+  <meta name="description" content="假設原本有兩個 commit 如下 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+$ git log
+commit 98357430a2953262d75063d2711f6597dbdeb8bb
+Author: Hank Chen
+Date: Sat Jun 29 11:03:27 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +80,143 @@ ld: file is universal (3 clices) but doest not contain a(n) armv7s slice 有可�
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/29/how-to-cancel-git-reset/">如何取消 Git Reset</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-29T10:13:00+08:00" pubdate data-updated="true">Jun 29<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/29/how-to-cancel-git-reset/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>假設原本有兩個 commit 如下</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">git</span> <span class="n">log</span>
+</span><span class='line'><span class="n">commit</span> <span class="mi">98357430</span><span class="n">a2953262d75063d2711f6597dbdeb8bb</span>
+</span><span class='line'><span class="no">Author</span><span class="p">:</span> <span class="no">Hank</span> <span class="no">Chen</span>
+</span><span class='line'><span class="no">Date</span><span class="p">:</span>   <span class="no">Sat</span> <span class="no">Jun</span> <span class="mi">29</span> <span class="mi">11</span><span class="p">:</span><span class="mo">03</span><span class="p">:</span><span class="mi">27</span> <span class="mi">2013</span> <span class="o">+</span><span class="mi">0800</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">edit</span> <span class="n">file</span> <span class="n">a</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">commit</span> <span class="mi">8</span><span class="n">a50f7fb56411210cff2141c92a7a5bc2007adaa</span>
+</span><span class='line'><span class="no">Author</span><span class="p">:</span> <span class="no">Hank</span> <span class="no">Chen</span>
+</span><span class='line'><span class="no">Date</span><span class="p">:</span>   <span class="no">Sat</span> <span class="no">Jun</span> <span class="mi">29</span> <span class="mi">11</span><span class="p">:</span><span class="mo">02</span><span class="p">:</span><span class="mi">50</span> <span class="mi">2013</span> <span class="o">+</span><span class="mi">0800</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">add</span> <span class="n">file</span> <span class="n">a</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>後來執行了 <code>git reset</code>, 且 <code>git log</code> 的確只剩下一個 commit 記錄</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">git</span> <span class="n">reset</span> <span class="o">--</span><span class="n">soft</span> <span class="mi">8</span><span class="n">a50f7fb56411210cff2141c92a7a5bc2007adaa</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">$</span> <span class="n">git</span> <span class="n">log</span>
+</span><span class='line'><span class="n">commit</span> <span class="mi">8</span><span class="n">a50f7fb56411210cff2141c92a7a5bc2007adaa</span>
+</span><span class='line'><span class="no">Author</span><span class="p">:</span> <span class="no">Hank</span> <span class="no">Chen</span>
+</span><span class='line'><span class="no">Date</span><span class="p">:</span>   <span class="no">Sat</span> <span class="no">Jun</span> <span class="mi">29</span> <span class="mi">11</span><span class="p">:</span><span class="mo">02</span><span class="p">:</span><span class="mi">50</span> <span class="mi">2013</span> <span class="o">+</span><span class="mi">0800</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">add</span> <span class="n">file</span> <span class="n">a</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>但想要反悔剛剛的 <code>git reset</code>, 回到先前的 commit, 可以怎麼做？</p>
+
+<p>先透過 git reflog 列出目前 branch 被更新的記錄</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">git</span> <span class="n">reflog</span>
+</span><span class='line'><span class="mi">8</span><span class="n">a50f7f</span> <span class="no">HEAD</span><span class="err">@</span><span class="p">{</span><span class="mi">0</span><span class="p">}:</span> <span class="n">reset</span><span class="p">:</span> <span class="n">moving</span> <span class="n">to</span> <span class="mi">8</span><span class="n">a50f7fb56411210cff2141c92a7a5bc2007adaa</span>
+</span><span class='line'><span class="mi">9835743</span> <span class="no">HEAD</span><span class="err">@</span><span class="p">{</span><span class="mi">1</span><span class="p">}:</span> <span class="n">commit</span><span class="p">:</span> <span class="n">edit</span> <span class="n">file</span> <span class="n">a</span>
+</span><span class='line'><span class="mi">8</span><span class="n">a50f7f</span> <span class="no">HEAD</span><span class="err">@</span><span class="p">{</span><span class="mi">2</span><span class="p">}:</span> <span class="n">commit</span> <span class="p">(</span><span class="n">initial</span><span class="p">):</span> <span class="n">add</span> <span class="n">file</span> <span class="n">a</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然後再透過 <code>git reset</code> 選擇回到前一個 commit</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">git</span> <span class="n">reset</span> <span class="o">--</span><span class="n">hard</span> <span class="mi">9835743</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>看 <code>git log</code> 的結果如下：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">git</span> <span class="n">log</span>
+</span><span class='line'><span class="n">commit</span> <span class="mi">98357430</span><span class="n">a2953262d75063d2711f6597dbdeb8bb</span>
+</span><span class='line'><span class="no">Author</span><span class="p">:</span> <span class="no">Hank</span> <span class="no">Chen</span>
+</span><span class='line'><span class="no">Date</span><span class="p">:</span>   <span class="no">Sat</span> <span class="no">Jun</span> <span class="mi">29</span> <span class="mi">11</span><span class="p">:</span><span class="mo">03</span><span class="p">:</span><span class="mi">27</span> <span class="mi">2013</span> <span class="o">+</span><span class="mi">0800</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">edit</span> <span class="n">file</span> <span class="n">a</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">commit</span> <span class="mi">8</span><span class="n">a50f7fb56411210cff2141c92a7a5bc2007adaa</span>
+</span><span class='line'><span class="no">Author</span><span class="p">:</span> <span class="no">Hank</span> <span class="no">Chen</span>
+</span><span class='line'><span class="no">Date</span><span class="p">:</span>   <span class="no">Sat</span> <span class="no">Jun</span> <span class="mi">29</span> <span class="mi">11</span><span class="p">:</span><span class="mo">02</span><span class="p">:</span><span class="mi">50</span> <span class="mi">2013</span> <span class="o">+</span><span class="mi">0800</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">add</span> <span class="n">file</span> <span class="n">a</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -652,55 +802,6 @@ dataSource 已經被釋放了，
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/08/20/new-post/">XVim for XCode</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-20T22:42:00+08:00" pubdate data-updated="true">Aug 20<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/08/20/new-post/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul>
-<li>XVim 現在似乎比較穩定了
-
-<ul>
-<li>github: <a href="https://github.com/JugglerShu/XVim" title="github">https://github.com/JugglerShu/XVim</a></li>
-<li>package: <a href="http://programming.jugglershu.net/xvim/" title="package">http://programming.jugglershu.net/xvim/</a></li>
-</ul>
-</li>
-</ul>
-
-
-<p>下載最新的 package 然後重啟 XCode 就可以使用了！</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -714,6 +815,10 @@ dataSource 已經被釋放了，
     <section>
   <h1>最近的文章</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/06/29/how-to-cancel-git-reset/">如何取消 git reset</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/06/16/ios-facebooksdk3-dot-0-armv7s-slice-builderror/">(iOS)FacebookSDK armv7s slice error</a>
@@ -731,16 +836,12 @@ dataSource 已經被釋放了，
         <a href="/blog/2013/04/14/mac-terminal-open-macvim-subl2/">Mac Terminal 開啟 MacVim, Sublime Text 2</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/02/20/arc-weak-reference/">iOS 5 以下不支援 weak reference 遇到的問題</a>
-      </li>
-    
   </ul>
 </section>
 
 <section>
 <h1>分類</h1>
-<span class='categories_tag'> <a href='/blog/categories/design-pattern' style='font-size: 106.0%'>Design-pattern(1)</a>  <a href='/blog/categories/git' style='font-size: 106.0%'>Git(1)</a>  <a href='/blog/categories/ios-app' style='font-size: 154.0%'>Ios app(9)</a>  <a href='/blog/categories/objective-c' style='font-size: 160.0%'>Objective-c(10)</a>  <a href='/blog/categories/octopress' style='font-size: 112.0%'>Octopress(2)</a>  <a href='/blog/categories/phone' style='font-size: 106.0%'>Phone(1)</a>  <a href='/blog/categories/plurk' style='font-size: 106.0%'>Plurk(1)</a>  <a href='/blog/categories/rails' style='font-size: 106.0%'>Rails(1)</a>  <a href='/blog/categories/ruby' style='font-size: 106.0%'>Ruby(1)</a>  <a href='/blog/categories/subl2' style='font-size: 106.0%'>Subl2(1)</a>  <a href='/blog/categories/tools' style='font-size: 112.0%'>Tools(2)</a>  <a href='/blog/categories/vim' style='font-size: 118.0%'>Vim(3)</a> </span>
+<span class='categories_tag'> <a href='/blog/categories/design-pattern' style='font-size: 106.0%'>Design-pattern(1)</a>  <a href='/blog/categories/git' style='font-size: 112.0%'>Git(2)</a>  <a href='/blog/categories/ios-app' style='font-size: 154.0%'>Ios app(9)</a>  <a href='/blog/categories/objective-c' style='font-size: 160.0%'>Objective-c(10)</a>  <a href='/blog/categories/octopress' style='font-size: 112.0%'>Octopress(2)</a>  <a href='/blog/categories/phone' style='font-size: 106.0%'>Phone(1)</a>  <a href='/blog/categories/plurk' style='font-size: 106.0%'>Plurk(1)</a>  <a href='/blog/categories/rails' style='font-size: 106.0%'>Rails(1)</a>  <a href='/blog/categories/ruby' style='font-size: 106.0%'>Ruby(1)</a>  <a href='/blog/categories/subl2' style='font-size: 106.0%'>Subl2(1)</a>  <a href='/blog/categories/tools' style='font-size: 112.0%'>Tools(2)</a>  <a href='/blog/categories/vim' style='font-size: 118.0%'>Vim(3)</a> </span>
 </section>
 
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Hank學習筆記]]></title>
   <link href="http://bcswlmpke.github.io/atom.xml" rel="self"/>
   <link href="http://bcswlmpke.github.io/"/>
-  <updated>2013-06-16T14:19:52+08:00</updated>
+  <updated>2013-06-29T11:29:14+08:00</updated>
   <id>http://bcswlmpke.github.io/</id>
   <author>
     <name><![CDATA[Hank Chen]]></name>
@@ -12,6 +12,114 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[如何取消 git reset]]></title>
+    <link href="http://bcswlmpke.github.io/blog/2013/06/29/how-to-cancel-git-reset/"/>
+    <updated>2013-06-29T10:13:00+08:00</updated>
+    <id>http://bcswlmpke.github.io/blog/2013/06/29/how-to-cancel-git-reset</id>
+    <content type="html"><![CDATA[<p>假設原本有兩個 commit 如下</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">git</span> <span class="n">log</span>
+</span><span class='line'><span class="n">commit</span> <span class="mi">98357430</span><span class="n">a2953262d75063d2711f6597dbdeb8bb</span>
+</span><span class='line'><span class="no">Author</span><span class="p">:</span> <span class="no">Hank</span> <span class="no">Chen</span>
+</span><span class='line'><span class="no">Date</span><span class="p">:</span>   <span class="no">Sat</span> <span class="no">Jun</span> <span class="mi">29</span> <span class="mi">11</span><span class="p">:</span><span class="mo">03</span><span class="p">:</span><span class="mi">27</span> <span class="mi">2013</span> <span class="o">+</span><span class="mi">0800</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">edit</span> <span class="n">file</span> <span class="n">a</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">commit</span> <span class="mi">8</span><span class="n">a50f7fb56411210cff2141c92a7a5bc2007adaa</span>
+</span><span class='line'><span class="no">Author</span><span class="p">:</span> <span class="no">Hank</span> <span class="no">Chen</span>
+</span><span class='line'><span class="no">Date</span><span class="p">:</span>   <span class="no">Sat</span> <span class="no">Jun</span> <span class="mi">29</span> <span class="mi">11</span><span class="p">:</span><span class="mo">02</span><span class="p">:</span><span class="mi">50</span> <span class="mi">2013</span> <span class="o">+</span><span class="mi">0800</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">add</span> <span class="n">file</span> <span class="n">a</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>後來執行了 <code>git reset</code>, 且 <code>git log</code> 的確只剩下一個 commit 記錄</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">git</span> <span class="n">reset</span> <span class="o">--</span><span class="n">soft</span> <span class="mi">8</span><span class="n">a50f7fb56411210cff2141c92a7a5bc2007adaa</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">$</span> <span class="n">git</span> <span class="n">log</span>
+</span><span class='line'><span class="n">commit</span> <span class="mi">8</span><span class="n">a50f7fb56411210cff2141c92a7a5bc2007adaa</span>
+</span><span class='line'><span class="no">Author</span><span class="p">:</span> <span class="no">Hank</span> <span class="no">Chen</span>
+</span><span class='line'><span class="no">Date</span><span class="p">:</span>   <span class="no">Sat</span> <span class="no">Jun</span> <span class="mi">29</span> <span class="mi">11</span><span class="p">:</span><span class="mo">02</span><span class="p">:</span><span class="mi">50</span> <span class="mi">2013</span> <span class="o">+</span><span class="mi">0800</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">add</span> <span class="n">file</span> <span class="n">a</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>但想要反悔剛剛的 <code>git reset</code>, 回到先前的 commit, 可以怎麼做？</p>
+
+<p>先透過 git reflog 列出目前 branch 被更新的記錄</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">git</span> <span class="n">reflog</span>
+</span><span class='line'><span class="mi">8</span><span class="n">a50f7f</span> <span class="no">HEAD</span><span class="err">@</span><span class="p">{</span><span class="mi">0</span><span class="p">}:</span> <span class="n">reset</span><span class="p">:</span> <span class="n">moving</span> <span class="n">to</span> <span class="mi">8</span><span class="n">a50f7fb56411210cff2141c92a7a5bc2007adaa</span>
+</span><span class='line'><span class="mi">9835743</span> <span class="no">HEAD</span><span class="err">@</span><span class="p">{</span><span class="mi">1</span><span class="p">}:</span> <span class="n">commit</span><span class="p">:</span> <span class="n">edit</span> <span class="n">file</span> <span class="n">a</span>
+</span><span class='line'><span class="mi">8</span><span class="n">a50f7f</span> <span class="no">HEAD</span><span class="err">@</span><span class="p">{</span><span class="mi">2</span><span class="p">}:</span> <span class="n">commit</span> <span class="p">(</span><span class="n">initial</span><span class="p">):</span> <span class="n">add</span> <span class="n">file</span> <span class="n">a</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然後再透過 <code>git reset</code> 選擇回到前一個 commit</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">git</span> <span class="n">reset</span> <span class="o">--</span><span class="n">hard</span> <span class="mi">9835743</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>看 <code>git log</code> 的結果如下：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">git</span> <span class="n">log</span>
+</span><span class='line'><span class="n">commit</span> <span class="mi">98357430</span><span class="n">a2953262d75063d2711f6597dbdeb8bb</span>
+</span><span class='line'><span class="no">Author</span><span class="p">:</span> <span class="no">Hank</span> <span class="no">Chen</span>
+</span><span class='line'><span class="no">Date</span><span class="p">:</span>   <span class="no">Sat</span> <span class="no">Jun</span> <span class="mi">29</span> <span class="mi">11</span><span class="p">:</span><span class="mo">03</span><span class="p">:</span><span class="mi">27</span> <span class="mi">2013</span> <span class="o">+</span><span class="mi">0800</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">edit</span> <span class="n">file</span> <span class="n">a</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">commit</span> <span class="mi">8</span><span class="n">a50f7fb56411210cff2141c92a7a5bc2007adaa</span>
+</span><span class='line'><span class="no">Author</span><span class="p">:</span> <span class="no">Hank</span> <span class="no">Chen</span>
+</span><span class='line'><span class="no">Date</span><span class="p">:</span>   <span class="no">Sat</span> <span class="no">Jun</span> <span class="mi">29</span> <span class="mi">11</span><span class="p">:</span><span class="mo">02</span><span class="p">:</span><span class="mi">50</span> <span class="mi">2013</span> <span class="o">+</span><span class="mi">0800</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">add</span> <span class="n">file</span> <span class="n">a</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[(iOS)FacebookSDK armv7s slice error]]></title>
@@ -1737,116 +1845,6 @@ A類別身上存著 BaseDataMgr 的指標，但使用時是產生 MyDataMgr 的�
 <li>LINE</li>
 <li>海豚瀏覽器</li>
 <li>MoboPlayer</li>
-</ul>
-</li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[管理Vim plugins]]></title>
-    <link href="http://bcswlmpke.github.io/blog/2012/01/17/vim-setup/"/>
-    <updated>2012-01-17T00:19:00+08:00</updated>
-    <id>http://bcswlmpke.github.io/blog/2012/01/17/vim-setup</id>
-    <content type="html"><![CDATA[<ul>
-<li>產生Vim工作目錄
-
-<pre><code>- mkdir bcswlmpke-vim
-- cd bcswlmpke-vim
-- git init
-- touch README
-- git add README
-- git commit -m 'first commit'
-- git remote add origin git@github.com:bcswlmpke/bcswlmpke-vim.git
-- git push -u origin master
-</code></pre></li>
-</ul>
-
-
-<!-- more -->
-
-
-<ul>
-<li>用 pathogen 來管理 Vim plugin
-
-<ul>
-<li>每個 plugin 都獨立安裝在 ~/.vim/bundle 下</li>
-<li>每個 plugin 都以 git submodule 的方式來管理，請參考<a href="http://vimcasts.org/episodes/synchronizing-plugins-with-git-submodules-and-pathogen" title="Git submodules and pathogen">Git Submodules and pathogen</a>
-
-<ul>
-<li>cd bcswlmpke-vim</li>
-<li>touch vimrc</li>
-<li>touch gvimrc</li>
-<li>ln -s ~/bcswlmpke-vim/vimrc ~/.vimrc</li>
-<li>ln -s ~/bcswlmpke-vim/gvimrc ~/.gvimrc</li>
-<li>ln -s ~/bcswlmpke-vim ~/.vim</li>
-<li>安裝 pathogen，下載 pathogen.vim 放到 .vim/autoload</li>
-<li>Activate pathogen, 需要在 .vimrc 加入下列兩行：
-
-<ul>
-<li>call pathogen#runtime_append_all_bundles()</li>
-<li>call pathogen#helptags()</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>以 Submodule 的方式安裝 plugins
-
-<pre><code>- cd bcswlmpke-vim
-- mkdir bundle
-- git submodule add https://github.com/fholgado/minibufexpl.vim.git bundle/minibufexpl.vim
-</code></pre></li>
-<li>安裝 Vim configuraton 到其它電腦
-
-<pre><code>- cd ~
-- git clone http://github.com/username/dotvim.git ~/.vim
-- ln -s ~/.vim/vimrc ~/.vimrc
-- ln -s ~/.vim/gvimrc ~/.gvimrc
-- cd ~/.vim
-- git submodule init
-- git submodule update
-</code></pre></li>
-<li>升級 plugin bundle
-
-<pre><code>- cd minibufexpl.vim
-- git pull origin master
-</code></pre></li>
-<li>升級所有的 bundled plugins
-
-<pre><code>- git submodule foreach git pull origin master
-</code></pre></li>
-<li>移除 Submodule
-
-<ul>
-<li>砍掉目錄
-
-<ul>
-<li>git rm &#8211;cached [要移除的目錄]</li>
-<li>rm -rf [要移除的目錄]</li>
-</ul>
-</li>
-<li>修改 .gitmodules
-
-<ul>
-<li>將相關內容移除</li>
-</ul>
-</li>
-<li>Commit
-
-<ul>
-<li>git add .gitmodules</li>
-<li>git commit -m &#8220;Remove submodule xxx&#8221;</li>
-</ul>
-</li>
-<li>Sync
-
-<ul>
-<li>git submodule sync</li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>

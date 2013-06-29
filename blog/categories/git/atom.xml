@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git | Hank學習筆記]]></title>
   <link href="http://bcswlmpke.github.io/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://bcswlmpke.github.io/"/>
-  <updated>2013-06-16T14:19:52+08:00</updated>
+  <updated>2013-06-29T11:29:14+08:00</updated>
   <id>http://bcswlmpke.github.io/</id>
   <author>
     <name><![CDATA[Hank Chen]]></name>
@@ -12,6 +12,85 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[如何取消 git reset]]></title>
+    <link href="http://bcswlmpke.github.io/blog/2013/06/29/how-to-cancel-git-reset/"/>
+    <updated>2013-06-29T10:13:00+08:00</updated>
+    <id>http://bcswlmpke.github.io/blog/2013/06/29/how-to-cancel-git-reset</id>
+    <content type="html"><![CDATA[<p>假設原本有兩個 commit 如下</p>
+
+<p>```ruby
+$ git log
+commit 98357430a2953262d75063d2711f6597dbdeb8bb
+Author: Hank Chen
+Date:   Sat Jun 29 11:03:27 2013 +0800</p>
+
+<pre><code>edit file a
+</code></pre>
+
+<p>commit 8a50f7fb56411210cff2141c92a7a5bc2007adaa
+Author: Hank Chen
+Date:   Sat Jun 29 11:02:50 2013 +0800</p>
+
+<pre><code>add file a
+</code></pre>
+
+<p>```</p>
+
+<p>後來執行了 <code>git reset</code>, 且 <code>git log</code> 的確只剩下一個 commit 記錄</p>
+
+<p>```ruby
+$ git reset --soft 8a50f7fb56411210cff2141c92a7a5bc2007adaa</p>
+
+<p>$ git log
+commit 8a50f7fb56411210cff2141c92a7a5bc2007adaa
+Author: Hank Chen
+Date:   Sat Jun 29 11:02:50 2013 +0800</p>
+
+<pre><code>add file a
+</code></pre>
+
+<p>```</p>
+
+<p>但想要反悔剛剛的 <code>git reset</code>, 回到先前的 commit, 可以怎麼做？</p>
+
+<p>先透過 git reflog 列出目前 branch 被更新的記錄</p>
+
+<p><code>ruby
+$ git reflog
+8a50f7f HEAD@{0}: reset: moving to 8a50f7fb56411210cff2141c92a7a5bc2007adaa
+9835743 HEAD@{1}: commit: edit file a
+8a50f7f HEAD@{2}: commit (initial): add file a
+</code></p>
+
+<p>然後再透過 <code>git reset</code> 選擇回到前一個 commit</p>
+
+<p><code>ruby
+$ git reset --hard 9835743
+</code></p>
+
+<p>看 <code>git log</code> 的結果如下：</p>
+
+<p>```ruby
+$ git log
+commit 98357430a2953262d75063d2711f6597dbdeb8bb
+Author: Hank Chen
+Date:   Sat Jun 29 11:03:27 2013 +0800</p>
+
+<pre><code>edit file a
+</code></pre>
+
+<p>commit 8a50f7fb56411210cff2141c92a7a5bc2007adaa
+Author: Hank Chen
+Date:   Sat Jun 29 11:02:50 2013 +0800</p>
+
+<pre><code>add file a
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Git Notes]]></title>
