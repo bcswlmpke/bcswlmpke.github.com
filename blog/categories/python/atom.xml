@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Python | Hank學習筆記]]></title>
+  <link href="http://bcswlmpke.github.io/blog/categories/python/atom.xml" rel="self"/>
+  <link href="http://bcswlmpke.github.io/"/>
+  <updated>2013-07-14T00:17:08+08:00</updated>
+  <id>http://bcswlmpke.github.io/</id>
+  <author>
+    <name><![CDATA[Hank Chen]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Python版本管理工具]]></title>
+    <link href="http://bcswlmpke.github.io/blog/2013/07/13/pythonbrew/"/>
+    <updated>2013-07-13T23:13:00+08:00</updated>
+    <id>http://bcswlmpke.github.io/blog/2013/07/13/pythonbrew</id>
+    <content type="html"><![CDATA[<p>最近開始看 Python，首先就想要找一個類似 Ruby RVM 的工具，
+一開始是看<a href="http://tech.mozilla.com.tw/posts/2155/python-%E9%96%8B%E7%99%BC%E5%A5%BD%E5%B9%AB%E6%89%8B-virtualenv" title="virtualenv">virtualenv</a>，
+但後來找到了 <a href="https://github.com/utahta/pythonbrew" title="pythonbrew">pythonbrew</a>，
+這是一個 Python Environment Manager。</p>
+
+<p>安裝方式如下：
+<code>curl -kL http://xrl.us/pythonbrewinstall | bash</code></p>
+
+<p>.bashrc 加入：
+<code>[[ -s $HOME/.pythonbrew/etc/bashrc ]] &amp;&amp; source $HOME/.pythonbrew/etc/bashrc</code></p>
+
+<ul>
+<li>常用的操作如下：
+
+<ul>
+<li>顯示目前的 pythonbrew 版本 <code>pythonbrew version</code></li>
+<li>更新 pythonbrew 至最新版本 <code>pythonbrew update</code></li>
+<li>列出所有可安裝的 python 版本 <code>pythonbrew list -k</code></li>
+<li>列出目前已安裝的 python 版本 <code>pythonbrew list</code></li>
+<li>安裝指定的 python 版本 <code>pythonbrew install 3.2.3</code></li>
+<li>移除指定的 python 版本 <code>pythonbrew uninstall 2.7.2 3.2.3</code></li>
+<li>在目前 shell 使用某個指定的 python 版本 <code>pythonbrew use 3.2.3</code></li>
+<li>永久切換至某個指定的 python 版本 <code>pythonbrew switch 3.2.3</code></li>
+<li>切回系統的 python 環境 <code>pythonbrew off</code></li>
+</ul>
+</li>
+<li>註：在 Mac 環境下，XCode的 command line tools 要記得安裝，否則 pythonbrew install 會出現錯誤訊息
+<code>ruby
+ERROR: Failed to install Python-3.2.3. See /Users/hank/.pythonbrew/log/build.log to see why.
+</code></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

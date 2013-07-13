@@ -9,22 +9,11 @@
   <meta name="author" content="Hank Chen">
 
   
-  <meta name="description" content="假設原本有兩個 commit 如下 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-$ git log
-commit 98357430a2953262d75063d2711f6597dbdeb8bb
-Author: Hank Chen
-Date: Sat Jun 29 11:03:27 &hellip;">
+  <meta name="description" content="最近開始看 Python，首先就想要找一個類似 Ruby RVM 的工具，
+一開始是看virtualenv，
+但後來找到了 pythonbrew，
+這是一個 Python Environment Manager。 安裝方式如下：
+curl -kL http://xrl.us/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +69,79 @@ Date: Sat Jun 29 11:03:27 &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/13/pythonbrew/">Python版本管理工具</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-13T23:13:00+08:00" pubdate data-updated="true">Jul 13<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/13/pythonbrew/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近開始看 Python，首先就想要找一個類似 Ruby RVM 的工具，
+一開始是看<a href="http://tech.mozilla.com.tw/posts/2155/python-%E9%96%8B%E7%99%BC%E5%A5%BD%E5%B9%AB%E6%89%8B-virtualenv" title="virtualenv">virtualenv</a>，
+但後來找到了 <a href="https://github.com/utahta/pythonbrew" title="pythonbrew">pythonbrew</a>，
+這是一個 Python Environment Manager。</p>
+
+<p>安裝方式如下：
+<code>curl -kL http://xrl.us/pythonbrewinstall | bash</code></p>
+
+<p>.bashrc 加入：
+<code>[[ -s $HOME/.pythonbrew/etc/bashrc ]] &amp;&amp; source $HOME/.pythonbrew/etc/bashrc</code></p>
+
+<ul>
+<li>常用的操作如下：
+
+<ul>
+<li>顯示目前的 pythonbrew 版本 <code>pythonbrew version</code></li>
+<li>更新 pythonbrew 至最新版本 <code>pythonbrew update</code></li>
+<li>列出所有可安裝的 python 版本 <code>pythonbrew list -k</code></li>
+<li>列出目前已安裝的 python 版本 <code>pythonbrew list</code></li>
+<li>安裝指定的 python 版本 <code>pythonbrew install 3.2.3</code></li>
+<li>移除指定的 python 版本 <code>pythonbrew uninstall 2.7.2 3.2.3</code></li>
+<li>在目前 shell 使用某個指定的 python 版本 <code>pythonbrew use 3.2.3</code></li>
+<li>永久切換至某個指定的 python 版本 <code>pythonbrew switch 3.2.3</code></li>
+<li>切回系統的 python 環境 <code>pythonbrew off</code></li>
+</ul>
+</li>
+<li>註：在 Mac 環境下，XCode的 command line tools 要記得安裝，否則 pythonbrew install 會出現錯誤訊息</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">ERROR</span><span class="p">:</span> <span class="no">Failed</span> <span class="n">to</span> <span class="n">install</span> <span class="no">Python</span><span class="o">-</span><span class="mi">3</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">3</span><span class="o">.</span> <span class="no">See</span><span class="sr"> /Users/</span><span class="n">hank</span><span class="o">/.</span><span class="n">pythonbrew</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">build</span><span class="o">.</span><span class="n">log</span> <span class="n">to</span> <span class="n">see</span> <span class="n">why</span><span class="o">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -747,61 +809,6 @@ dataSource 已經被釋放了，
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/09/19/tap-gesture/">Tap手勢的處理</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-19T23:11:00+08:00" pubdate data-updated="true">Sep 19<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/09/19/tap-gesture/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>要處理 Single Tap 與 Double Tap 的時候,
-除了下面這行要設定以外</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'>  <span class="p">[</span><span class="n">_singleTap</span> <span class="nl">requireGestureRecognizerToFail:</span><span class="n">_doubleTap</span><span class="p">];</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>還必須設定</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'>  <span class="p">[</span><span class="n">_singleTap</span> <span class="nl">setDelaysTouchesBegan:</span><span class="n">YES</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">_doubleTap</span> <span class="nl">setDelaysTouchesBegan:</span><span class="n">YES</span><span class="p">];</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>否則當 Double Tap trigger 時，也會觸發 Single Tap.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -815,6 +822,10 @@ dataSource 已經被釋放了，
     <section>
   <h1>最近的文章</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/13/pythonbrew/">Python版本管理工具</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/06/29/how-to-cancel-git-reset/">如何取消 git reset</a>
@@ -832,16 +843,12 @@ dataSource 已經被釋放了，
         <a href="/blog/2013/05/13/git-notes/">Git Notes</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/04/14/mac-terminal-open-macvim-subl2/">Mac Terminal 開啟 MacVim, Sublime Text 2</a>
-      </li>
-    
   </ul>
 </section>
 
 <section>
 <h1>分類</h1>
-<span class='categories_tag'> <a href='/blog/categories/design-pattern' style='font-size: 106.0%'>Design-pattern(1)</a>  <a href='/blog/categories/git' style='font-size: 112.0%'>Git(2)</a>  <a href='/blog/categories/ios-app' style='font-size: 154.0%'>Ios app(9)</a>  <a href='/blog/categories/objective-c' style='font-size: 160.0%'>Objective-c(10)</a>  <a href='/blog/categories/octopress' style='font-size: 112.0%'>Octopress(2)</a>  <a href='/blog/categories/phone' style='font-size: 106.0%'>Phone(1)</a>  <a href='/blog/categories/plurk' style='font-size: 106.0%'>Plurk(1)</a>  <a href='/blog/categories/rails' style='font-size: 106.0%'>Rails(1)</a>  <a href='/blog/categories/ruby' style='font-size: 106.0%'>Ruby(1)</a>  <a href='/blog/categories/subl2' style='font-size: 106.0%'>Subl2(1)</a>  <a href='/blog/categories/tools' style='font-size: 112.0%'>Tools(2)</a>  <a href='/blog/categories/vim' style='font-size: 118.0%'>Vim(3)</a> </span>
+<span class='categories_tag'> <a href='/blog/categories/design-pattern' style='font-size: 106.0%'>Design-pattern(1)</a>  <a href='/blog/categories/git' style='font-size: 112.0%'>Git(2)</a>  <a href='/blog/categories/ios-app' style='font-size: 154.0%'>Ios app(9)</a>  <a href='/blog/categories/objective-c' style='font-size: 160.0%'>Objective-c(10)</a>  <a href='/blog/categories/octopress' style='font-size: 112.0%'>Octopress(2)</a>  <a href='/blog/categories/phone' style='font-size: 106.0%'>Phone(1)</a>  <a href='/blog/categories/plurk' style='font-size: 106.0%'>Plurk(1)</a>  <a href='/blog/categories/python' style='font-size: 106.0%'>Python(1)</a>  <a href='/blog/categories/rails' style='font-size: 106.0%'>Rails(1)</a>  <a href='/blog/categories/ruby' style='font-size: 106.0%'>Ruby(1)</a>  <a href='/blog/categories/subl2' style='font-size: 106.0%'>Subl2(1)</a>  <a href='/blog/categories/tools' style='font-size: 112.0%'>Tools(2)</a>  <a href='/blog/categories/vim' style='font-size: 118.0%'>Vim(3)</a> </span>
 </section>
 
 

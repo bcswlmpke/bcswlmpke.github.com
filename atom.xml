@@ -4,7 +4,7 @@
   <title><![CDATA[Hank學習筆記]]></title>
   <link href="http://bcswlmpke.github.io/atom.xml" rel="self"/>
   <link href="http://bcswlmpke.github.io/"/>
-  <updated>2013-06-29T11:29:14+08:00</updated>
+  <updated>2013-07-14T00:17:08+08:00</updated>
   <id>http://bcswlmpke.github.io/</id>
   <author>
     <name><![CDATA[Hank Chen]]></name>
@@ -12,6 +12,50 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Python版本管理工具]]></title>
+    <link href="http://bcswlmpke.github.io/blog/2013/07/13/pythonbrew/"/>
+    <updated>2013-07-13T23:13:00+08:00</updated>
+    <id>http://bcswlmpke.github.io/blog/2013/07/13/pythonbrew</id>
+    <content type="html"><![CDATA[<p>最近開始看 Python，首先就想要找一個類似 Ruby RVM 的工具，
+一開始是看<a href="http://tech.mozilla.com.tw/posts/2155/python-%E9%96%8B%E7%99%BC%E5%A5%BD%E5%B9%AB%E6%89%8B-virtualenv" title="virtualenv">virtualenv</a>，
+但後來找到了 <a href="https://github.com/utahta/pythonbrew" title="pythonbrew">pythonbrew</a>，
+這是一個 Python Environment Manager。</p>
+
+<p>安裝方式如下：
+<code>curl -kL http://xrl.us/pythonbrewinstall | bash</code></p>
+
+<p>.bashrc 加入：
+<code>[[ -s $HOME/.pythonbrew/etc/bashrc ]] &amp;&amp; source $HOME/.pythonbrew/etc/bashrc</code></p>
+
+<ul>
+<li>常用的操作如下：
+
+<ul>
+<li>顯示目前的 pythonbrew 版本 <code>pythonbrew version</code></li>
+<li>更新 pythonbrew 至最新版本 <code>pythonbrew update</code></li>
+<li>列出所有可安裝的 python 版本 <code>pythonbrew list -k</code></li>
+<li>列出目前已安裝的 python 版本 <code>pythonbrew list</code></li>
+<li>安裝指定的 python 版本 <code>pythonbrew install 3.2.3</code></li>
+<li>移除指定的 python 版本 <code>pythonbrew uninstall 2.7.2 3.2.3</code></li>
+<li>在目前 shell 使用某個指定的 python 版本 <code>pythonbrew use 3.2.3</code></li>
+<li>永久切換至某個指定的 python 版本 <code>pythonbrew switch 3.2.3</code></li>
+<li>切回系統的 python 環境 <code>pythonbrew off</code></li>
+</ul>
+</li>
+<li>註：在 Mac 環境下，XCode的 command line tools 要記得安裝，否則 pythonbrew install 會出現錯誤訊息</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">ERROR</span><span class="p">:</span> <span class="no">Failed</span> <span class="n">to</span> <span class="n">install</span> <span class="no">Python</span><span class="o">-</span><span class="mi">3</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">3</span><span class="o">.</span> <span class="no">See</span><span class="sr"> /Users/</span><span class="n">hank</span><span class="o">/.</span><span class="n">pythonbrew</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">build</span><span class="o">.</span><span class="n">log</span> <span class="n">to</span> <span class="n">see</span> <span class="n">why</span><span class="o">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[如何取消 git reset]]></title>
@@ -1767,88 +1811,6 @@ A類別身上存著 BaseDataMgr 的指標，但使用時是產生 MyDataMgr 的�
 而其它類別如果使用 MyClass，則可以用 age 這個 property 來進行操作。</p>
 
 <blockquote><p>如果要看更詳細的說明，可以參考官方文件<a href="http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/ObjectiveC/Chapters/ocProperties.html" title="ocProperties">Declared Properties</a></p></blockquote>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[我的工具箱]]></title>
-    <link href="http://bcswlmpke.github.io/blog/2012/01/30/my-toolbox/"/>
-    <updated>2012-01-30T22:33:00+08:00</updated>
-    <id>http://bcswlmpke.github.io/blog/2012/01/30/my-toolbox</id>
-    <content type="html"><![CDATA[<p>最近看到<a href="http://blog.eddie.com.tw/2012/01/04/my-toolbox/" title="高見龍的工具箱">高見龍的工具箱</a>與<a href="http://blog.gasolin.idv.tw/2012/01/blog-post.html?m=1" title="Gasolin的工具箱">Gasolin的工具箱</a>，
-於是自己也興起了念頭，整理一下目前自己常用的工具。</p>
-
-<!-- more -->
-
-
-<hr />
-
-<ul>
-<li><strong>實體工具</strong>
-
-<ul>
-<li>Mac Book Pro 13&#8221;</li>
-<li>Samsung i9000</li>
-</ul>
-</li>
-<li><strong>我的 MBP 不可缺少的軟體</strong>
-
-<ul>
-<li>TotalFinder</li>
-<li>Google Chrome
-
-<ul>
-<li>Plugins
-
-<ul>
-<li>Xmarks</li>
-<li>Google Dictionary</li>
-<li>VerticalTabs</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Adium</li>
-<li>Skype</li>
-<li>Dropbox</li>
-<li>iTerm2</li>
-<li>MPlayerX</li>
-<li>MacVim
-
-<ul>
-<li><a href="https://github.com/bcswlmpke/bcswlmpke-vim" title="Hank's vimrc">我常用的vim plugins</a></li>
-</ul>
-</li>
-<li>Eclipse</li>
-<li>XCode</li>
-<li>Alfred</li>
-<li>無蝦米</li>
-</ul>
-</li>
-<li><strong>我的 i9000 不可缺少的軟體</strong>
-
-<ul>
-<li>ES 檔案瀏覽器</li>
-<li>Fancy Widget</li>
-<li>Quick Settings</li>
-<li>Advanced Task Killer</li>
-<li>條碼掃描器</li>
-<li>RealCalc</li>
-<li>SwiFTP</li>
-<li>快圖瀏覽</li>
-<li>Fast Image View</li>
-<li>Adobe Reader</li>
-<li>Camera360</li>
-<li>Google+</li>
-<li>Facebook</li>
-<li>噗浪肉骨獸</li>
-<li>LINE</li>
-<li>海豚瀏覽器</li>
-<li>MoboPlayer</li>
-</ul>
-</li>
-</ul>
-
 ]]></content>
   </entry>
   

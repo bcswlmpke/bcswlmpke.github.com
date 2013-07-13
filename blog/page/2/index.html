@@ -9,10 +9,9 @@
   <meta name="author" content="Hank Chen">
 
   
-  <meta name="description" content="
-XVim 現在似乎比較穩定了 github: https://github.com/JugglerShu/XVim
-package: http://programming.jugglershu.net/xvim/ 下載最新的 package 然後重啟 XCode 就可以使用了！
-">
+  <meta name="description" content="要處理 Single Tap 與 Double Tap 的時候,
+除了下面這行要設定以外 1 [_singleTap requireGestureRecognizerToFail:_doubleTap]; 還必須設定 1
+2 [_singleTap setDelaysTouchesBegan: &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +67,61 @@ package: http://programming.jugglershu.net/xvim/ 下載最新的 package 然後�
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/09/19/tap-gesture/">Tap手勢的處理</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-19T23:11:00+08:00" pubdate data-updated="true">Sep 19<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/09/19/tap-gesture/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>要處理 Single Tap 與 Double Tap 的時候,
+除了下面這行要設定以外</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'>  <span class="p">[</span><span class="n">_singleTap</span> <span class="nl">requireGestureRecognizerToFail:</span><span class="n">_doubleTap</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>還必須設定</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'>  <span class="p">[</span><span class="n">_singleTap</span> <span class="nl">setDelaysTouchesBegan:</span><span class="n">YES</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">_doubleTap</span> <span class="nl">setDelaysTouchesBegan:</span><span class="n">YES</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>否則當 Double Tap trigger 時，也會觸發 Single Tap.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -697,50 +751,6 @@ A類別身上存著 BaseDataMgr 的指標，但使用時是產生 MyDataMgr 的�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/30/my-toolbox/">我的工具箱</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-30T22:33:00+08:00" pubdate data-updated="true">Jan 30<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/01/30/my-toolbox/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>最近看到<a href="http://blog.eddie.com.tw/2012/01/04/my-toolbox/" title="高見龍的工具箱">高見龍的工具箱</a>與<a href="http://blog.gasolin.idv.tw/2012/01/blog-post.html?m=1" title="Gasolin的工具箱">Gasolin的工具箱</a>，
-於是自己也興起了念頭，整理一下目前自己常用的工具。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/01/30/my-toolbox/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -758,6 +768,10 @@ A類別身上存著 BaseDataMgr 的指標，但使用時是產生 MyDataMgr 的�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/07/13/pythonbrew/">Python版本管理工具</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/06/29/how-to-cancel-git-reset/">如何取消 git reset</a>
       </li>
     
@@ -773,16 +787,12 @@ A類別身上存著 BaseDataMgr 的指標，但使用時是產生 MyDataMgr 的�
         <a href="/blog/2013/05/13/git-notes/">Git Notes</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/04/14/mac-terminal-open-macvim-subl2/">Mac Terminal 開啟 MacVim, Sublime Text 2</a>
-      </li>
-    
   </ul>
 </section>
 
 <section>
 <h1>分類</h1>
-<span class='categories_tag'> <a href='/blog/categories/design-pattern' style='font-size: 106.0%'>Design-pattern(1)</a>  <a href='/blog/categories/git' style='font-size: 112.0%'>Git(2)</a>  <a href='/blog/categories/ios-app' style='font-size: 154.0%'>Ios app(9)</a>  <a href='/blog/categories/objective-c' style='font-size: 160.0%'>Objective-c(10)</a>  <a href='/blog/categories/octopress' style='font-size: 112.0%'>Octopress(2)</a>  <a href='/blog/categories/phone' style='font-size: 106.0%'>Phone(1)</a>  <a href='/blog/categories/plurk' style='font-size: 106.0%'>Plurk(1)</a>  <a href='/blog/categories/rails' style='font-size: 106.0%'>Rails(1)</a>  <a href='/blog/categories/ruby' style='font-size: 106.0%'>Ruby(1)</a>  <a href='/blog/categories/subl2' style='font-size: 106.0%'>Subl2(1)</a>  <a href='/blog/categories/tools' style='font-size: 112.0%'>Tools(2)</a>  <a href='/blog/categories/vim' style='font-size: 118.0%'>Vim(3)</a> </span>
+<span class='categories_tag'> <a href='/blog/categories/design-pattern' style='font-size: 106.0%'>Design-pattern(1)</a>  <a href='/blog/categories/git' style='font-size: 112.0%'>Git(2)</a>  <a href='/blog/categories/ios-app' style='font-size: 154.0%'>Ios app(9)</a>  <a href='/blog/categories/objective-c' style='font-size: 160.0%'>Objective-c(10)</a>  <a href='/blog/categories/octopress' style='font-size: 112.0%'>Octopress(2)</a>  <a href='/blog/categories/phone' style='font-size: 106.0%'>Phone(1)</a>  <a href='/blog/categories/plurk' style='font-size: 106.0%'>Plurk(1)</a>  <a href='/blog/categories/python' style='font-size: 106.0%'>Python(1)</a>  <a href='/blog/categories/rails' style='font-size: 106.0%'>Rails(1)</a>  <a href='/blog/categories/ruby' style='font-size: 106.0%'>Ruby(1)</a>  <a href='/blog/categories/subl2' style='font-size: 106.0%'>Subl2(1)</a>  <a href='/blog/categories/tools' style='font-size: 112.0%'>Tools(2)</a>  <a href='/blog/categories/vim' style='font-size: 118.0%'>Vim(3)</a> </span>
 </section>
 
 

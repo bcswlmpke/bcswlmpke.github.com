@@ -5,14 +5,15 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Rails Develop Environment Setup - Hank學習筆記</title>
+  <title>Python版本管理工具 - Hank學習筆記</title>
   <meta name="author" content="Hank Chen">
 
   
-  <meta name="description" content="依照 Rails 101 的安裝步驟，但可能安裝的版本差太多，
-看起來會遇到不少問題，
-所以就一步一步筆記下來。 Homebrew ruby -e &#8220;$(curl -fsSL https://raw.github.com/gist/323731)&#8221;
-brew install &hellip;">
+  <meta name="description" content="最近開始看 Python，首先就想要找一個類似 Ruby RVM 的工具，
+一開始是看virtualenv，
+但後來找到了 pythonbrew，
+這是一個 Python Environment Manager。 安裝方式如下：
+curl -kL http://xrl.us/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +22,7 @@ brew install &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://bcswlmpke.github.io/blog/2012/06/12/rails-develop-environment">
+  <link rel="canonical" href="http://bcswlmpke.github.io/blog/2013/07/13/pythonbrew">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -71,7 +72,7 @@ brew install &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Rails Develop Environment Setup</h1>
+      <h1 class="entry-title">Python版本管理工具</h1>
     
     
       <p class="meta">
@@ -87,7 +88,7 @@ brew install &hellip;">
   
 
 
-<time datetime="2012-06-12T20:22:00+08:00" pubdate data-updated="true">Jun 12<span>th</span>, 2012</time>
+<time datetime="2013-07-13T23:13:00+08:00" pubdate data-updated="true">Jul 13<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -96,47 +97,41 @@ brew install &hellip;">
   </header>
 
 
-<div class="entry-content"><p>依照 Rails 101 的安裝步驟，但可能安裝的版本差太多，
-看起來會遇到不少問題，
-所以就一步一步筆記下來。</p>
+<div class="entry-content"><p>最近開始看 Python，首先就想要找一個類似 Ruby RVM 的工具，
+一開始是看<a href="http://tech.mozilla.com.tw/posts/2155/python-%E9%96%8B%E7%99%BC%E5%A5%BD%E5%B9%AB%E6%89%8B-virtualenv" title="virtualenv">virtualenv</a>，
+但後來找到了 <a href="https://github.com/utahta/pythonbrew" title="pythonbrew">pythonbrew</a>，
+這是一個 Python Environment Manager。</p>
 
-<!-- more -->
+<p>安裝方式如下：
+<code>curl -kL http://xrl.us/pythonbrewinstall | bash</code></p>
 
+<p>.bashrc 加入：
+<code>[[ -s $HOME/.pythonbrew/etc/bashrc ]] &amp;&amp; source $HOME/.pythonbrew/etc/bashrc</code></p>
 
 <ul>
-<li>Homebrew
+<li>常用的操作如下：
 
 <ul>
-<li>ruby -e &#8220;$(curl -fsSL https://raw.github.com/gist/323731)&#8221;</li>
-<li>brew install git (安裝 Git)</li>
-<li>brew update (更新套件清單)</li>
-<li>brew search (搜尋套件)</li>
-<li>留意 /usr/local/Library/Formula/</li>
+<li>顯示目前的 pythonbrew 版本 <code>pythonbrew version</code></li>
+<li>更新 pythonbrew 至最新版本 <code>pythonbrew update</code></li>
+<li>列出所有可安裝的 python 版本 <code>pythonbrew list -k</code></li>
+<li>列出目前已安裝的 python 版本 <code>pythonbrew list</code></li>
+<li>安裝指定的 python 版本 <code>pythonbrew install 3.2.3</code></li>
+<li>移除指定的 python 版本 <code>pythonbrew uninstall 2.7.2 3.2.3</code></li>
+<li>在目前 shell 使用某個指定的 python 版本 <code>pythonbrew use 3.2.3</code></li>
+<li>永久切換至某個指定的 python 版本 <code>pythonbrew switch 3.2.3</code></li>
+<li>切回系統的 python 環境 <code>pythonbrew off</code></li>
 </ul>
 </li>
-<li>ImageMagick
+<li>註：在 Mac 環境下，XCode的 command line tools 要記得安裝，否則 pythonbrew install 會出現錯誤訊息</li>
+</ul>
 
-<ul>
-<li>brew install imagemagick (會自行處理相依套件問題)</li>
-</ul>
-</li>
-<li>MySQL Community Server
 
-<ul>
-<li>mysql-5.5.25-osx10.6-x86_64.dmg</li>
-</ul>
-</li>
-<li>RVM</li>
-<li>REE</li>
-<li>Ruby gems</li>
-<li>HTTP Server
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">ERROR</span><span class="p">:</span> <span class="no">Failed</span> <span class="n">to</span> <span class="n">install</span> <span class="no">Python</span><span class="o">-</span><span class="mi">3</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">3</span><span class="o">.</span> <span class="no">See</span><span class="sr"> /Users/</span><span class="n">hank</span><span class="o">/.</span><span class="n">pythonbrew</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">build</span><span class="o">.</span><span class="n">log</span> <span class="n">to</span> <span class="n">see</span> <span class="n">why</span><span class="o">.</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<ul>
-<li>Pow</li>
-<li>Powder</li>
-</ul>
-</li>
-</ul>
+
 
 </div>
 
@@ -160,12 +155,12 @@ brew install &hellip;">
   
 
 
-<time datetime="2012-06-12T20:22:00+08:00" pubdate data-updated="true">Jun 12<span>th</span>, 2012</time>
+<time datetime="2013-07-13T23:13:00+08:00" pubdate data-updated="true">Jul 13<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/rails/'>Rails</a>
+    <a class='category' href='/blog/categories/python/'>Python</a>
   
 </span>
 
@@ -174,7 +169,7 @@ brew install &hellip;">
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://bcswlmpke.github.io/blog/2012/06/12/rails-develop-environment/" data-via="" data-counturl="http://bcswlmpke.github.io/blog/2012/06/12/rails-develop-environment/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://bcswlmpke.github.io/blog/2013/07/13/pythonbrew/" data-via="" data-counturl="http://bcswlmpke.github.io/blog/2013/07/13/pythonbrew/" >Tweet</a>
   
   
   
@@ -183,10 +178,8 @@ brew install &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/05/08/arc-nonarc-performance/" title="Previous Post: ARC 與 非ARC 在大量資料的情況下的執行速度相差數倍">&laquo; ARC 與 非ARC 在大量資料的情況下的執行速度相差數倍</a>
+        <a class="basic-alignment left" href="/blog/2013/06/29/how-to-cancel-git-reset/" title="Previous Post: 如何取消 git reset">&laquo; 如何取消 git reset</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/06/16/i9000-ics/" title="next Post: Galaxy S 不死，更新至 ICS 4.0.4">Galaxy S 不死，更新至 ICS 4.0.4 &raquo;</a>
       
     </p>
   </footer>
@@ -259,8 +252,8 @@ brew install &hellip;">
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://bcswlmpke.github.io/blog/2012/06/12/rails-develop-environment/';
-        var disqus_url = 'http://bcswlmpke.github.io/blog/2012/06/12/rails-develop-environment/';
+        var disqus_identifier = 'http://bcswlmpke.github.io/blog/2013/07/13/pythonbrew/';
+        var disqus_url = 'http://bcswlmpke.github.io/blog/2013/07/13/pythonbrew/';
         var disqus_script = 'embed.js';
       
     (function () {
