@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Objective-C | Hank學習筆記]]></title>
   <link href="http://bcswlmpke.github.io/blog/categories/objective-c/atom.xml" rel="self"/>
   <link href="http://bcswlmpke.github.io/"/>
-  <updated>2013-07-14T00:17:08+08:00</updated>
+  <updated>2013-07-16T21:56:57+08:00</updated>
   <id>http://bcswlmpke.github.io/</id>
   <author>
     <name><![CDATA[Hank Chen]]></name>
@@ -12,6 +12,24 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[(iOS)url encode / decode]]></title>
+    <link href="http://bcswlmpke.github.io/blog/2013/07/16/ios-urlencode/"/>
+    <updated>2013-07-16T21:51:00+08:00</updated>
+    <id>http://bcswlmpke.github.io/blog/2013/07/16/ios-urlencode</id>
+    <content type="html"><![CDATA[<p>網址含有中文時，要將網址先編碼。收到的時候再對應解碼即可。</p>
+
+<p><code>ruby
+// 編碼
+- (NSString *)stringByAddingPercentEscapesUsingEncoding:(NSStringEncoding)enc;
+// 解碼
+- (NSString *)stringByReplacingPercentEscapesUsingEncoding:(NSStringEncoding)enc;
+</code></p>
+
+<p>NSStringEncoding 有很多類型，例如常用的：<code>NSUTF8StringEncoding</code>, <code>NSASCIIStringEncoding</code>, ...等。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[(iOS)FacebookSDK armv7s slice error]]></title>
@@ -137,28 +155,6 @@ _tableView.showsVerticalScrollIndicator = YES;
 top, left, bottom, right
 </code>
 接下來要怎麼調整，就看個人需求囉！</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[UITableView 顯示上萬筆資料時，reloadData 很慢的問題]]></title>
-    <link href="http://bcswlmpke.github.io/blog/2012/10/02/uitableview-reloaddata-slow/"/>
-    <updated>2012-10-02T22:09:00+08:00</updated>
-    <id>http://bcswlmpke.github.io/blog/2012/10/02/uitableview-reloaddata-slow</id>
-    <content type="html"><![CDATA[<p>執行 UITableView reloadData，實作 numberOfRowsInSection 回傳 10000：
-<code>objc
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-</code>
-但實際可視畫面的範圍可能只有 10 列資料顯示，
-如果 heightForRowAtIndexPath 有實作，是會被呼叫 10000 次的。
-<code>objc
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-</code>
-- 當資料量愈多，UI 實際顯示前的所需時間會愈久，
-  - 解決方式為不要去覆寫 heightForRowAtIndexPath，</p>
-
-<pre><code>而是直接設定 UITableView 身上的 rowHeight property。
-</code></pre>
 ]]></content>
   </entry>
   

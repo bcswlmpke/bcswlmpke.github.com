@@ -9,9 +9,8 @@
   <meta name="author" content="Hank Chen">
 
   
-  <meta name="description" content="要處理 Single Tap 與 Double Tap 的時候,
-除了下面這行要設定以外 1 [_singleTap requireGestureRecognizerToFail:_doubleTap]; 還必須設定 1
-2 [_singleTap setDelaysTouchesBegan: &hellip;">
+  <meta name="description" content="執行 UITableView reloadData，實作 numberOfRowsInSection 回傳 10000： 1
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger) &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +66,68 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/10/02/uitableview-reloaddata-slow/">UITableView 顯示上萬筆資料時，reloadData 很慢的問題</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-02T22:09:00+08:00" pubdate data-updated="true">Oct 2<span>nd</span>, 2012</time>
+        
+         | <a href="/blog/2012/10/02/uitableview-reloaddata-slow/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>執行 UITableView reloadData，實作 numberOfRowsInSection 回傳 10000：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">-</span> <span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nl">tableView:</span><span class="p">(</span><span class="n">UITableView</span> <span class="o">*</span><span class="p">)</span><span class="n">tableView</span> <span class="nl">numberOfRowsInSection:</span><span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span><span class="n">section</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>但實際可視畫面的範圍可能只有 10 列資料顯示，
+如果 heightForRowAtIndexPath 有實作，是會被呼叫 10000 次的。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">-</span> <span class="p">(</span><span class="n">CGFloat</span><span class="p">)</span><span class="nl">tableView:</span><span class="p">(</span><span class="n">UITableView</span> <span class="o">*</span><span class="p">)</span><span class="n">tableView</span> <span class="nl">heightForRowAtIndexPath:</span><span class="p">(</span><span class="n">NSIndexPath</span> <span class="o">*</span><span class="p">)</span><span class="n">indexPath</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>當資料量愈多，UI 實際顯示前的所需時間會愈久，
+
+<ul>
+<li>解決方式為不要去覆寫 heightForRowAtIndexPath，
+而是直接設定 UITableView 身上的 rowHeight property。</li>
+</ul>
+</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -704,53 +765,6 @@ A類別身上存著 BaseDataMgr 的指標，但使用時是產生 MyDataMgr 的�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/02/01/objective-c-declared-properties-feature/">About Objective-C Declared Properties Feature</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-01T21:54:00+08:00" pubdate data-updated="true">Feb 1<span>st</span>, 2012</time>
-        
-         | <a href="/blog/2012/02/01/objective-c-declared-properties-feature/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>剛開始接觸 iOS 應用程式開發時，
-曾經對 @synthesize window = _window 所表達的意義有疑問，
-查過資料卻沒記下來，
-今天剛好同事問到，
-所以這次一定要做一下筆記。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/02/01/objective-c-declared-properties-feature/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -768,6 +782,10 @@ A類別身上存著 BaseDataMgr 的指標，但使用時是產生 MyDataMgr 的�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/07/16/ios-urlencode/">(iOS)url encode / decode</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/07/13/pythonbrew/">Python版本管理工具</a>
       </li>
     
@@ -783,16 +801,12 @@ A類別身上存著 BaseDataMgr 的指標，但使用時是產生 MyDataMgr 的�
         <a href="/blog/2013/06/16/ios-detect-keyboard-size-change/">(iOS)偵測鍵盤大小變化</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/05/13/git-notes/">Git Notes</a>
-      </li>
-    
   </ul>
 </section>
 
 <section>
 <h1>分類</h1>
-<span class='categories_tag'> <a href='/blog/categories/design-pattern' style='font-size: 106.0%'>Design-pattern(1)</a>  <a href='/blog/categories/git' style='font-size: 112.0%'>Git(2)</a>  <a href='/blog/categories/ios-app' style='font-size: 154.0%'>Ios app(9)</a>  <a href='/blog/categories/objective-c' style='font-size: 160.0%'>Objective-c(10)</a>  <a href='/blog/categories/octopress' style='font-size: 112.0%'>Octopress(2)</a>  <a href='/blog/categories/phone' style='font-size: 106.0%'>Phone(1)</a>  <a href='/blog/categories/plurk' style='font-size: 106.0%'>Plurk(1)</a>  <a href='/blog/categories/python' style='font-size: 106.0%'>Python(1)</a>  <a href='/blog/categories/rails' style='font-size: 106.0%'>Rails(1)</a>  <a href='/blog/categories/ruby' style='font-size: 106.0%'>Ruby(1)</a>  <a href='/blog/categories/subl2' style='font-size: 106.0%'>Subl2(1)</a>  <a href='/blog/categories/tools' style='font-size: 112.0%'>Tools(2)</a>  <a href='/blog/categories/vim' style='font-size: 118.0%'>Vim(3)</a> </span>
+<span class='categories_tag'> <a href='/blog/categories/design-pattern' style='font-size: 105.45454545454545%'>Design-pattern(1)</a>  <a href='/blog/categories/git' style='font-size: 110.9090909090909%'>Git(2)</a>  <a href='/blog/categories/ios-app' style='font-size: 154.54545454545456%'>Ios app(10)</a>  <a href='/blog/categories/objective-c' style='font-size: 160.0%'>Objective-c(11)</a>  <a href='/blog/categories/octopress' style='font-size: 110.9090909090909%'>Octopress(2)</a>  <a href='/blog/categories/phone' style='font-size: 105.45454545454545%'>Phone(1)</a>  <a href='/blog/categories/plurk' style='font-size: 105.45454545454545%'>Plurk(1)</a>  <a href='/blog/categories/python' style='font-size: 105.45454545454545%'>Python(1)</a>  <a href='/blog/categories/rails' style='font-size: 105.45454545454545%'>Rails(1)</a>  <a href='/blog/categories/ruby' style='font-size: 105.45454545454545%'>Ruby(1)</a>  <a href='/blog/categories/subl2' style='font-size: 105.45454545454545%'>Subl2(1)</a>  <a href='/blog/categories/tools' style='font-size: 110.9090909090909%'>Tools(2)</a>  <a href='/blog/categories/vim' style='font-size: 116.36363636363636%'>Vim(3)</a> </span>
 </section>
 
 

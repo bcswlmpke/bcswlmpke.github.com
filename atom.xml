@@ -4,7 +4,7 @@
   <title><![CDATA[Hank學習筆記]]></title>
   <link href="http://bcswlmpke.github.io/atom.xml" rel="self"/>
   <link href="http://bcswlmpke.github.io/"/>
-  <updated>2013-07-14T00:17:08+08:00</updated>
+  <updated>2013-07-16T21:56:57+08:00</updated>
   <id>http://bcswlmpke.github.io/</id>
   <author>
     <name><![CDATA[Hank Chen]]></name>
@@ -12,6 +12,28 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[(iOS)url encode / decode]]></title>
+    <link href="http://bcswlmpke.github.io/blog/2013/07/16/ios-urlencode/"/>
+    <updated>2013-07-16T21:51:00+08:00</updated>
+    <id>http://bcswlmpke.github.io/blog/2013/07/16/ios-urlencode</id>
+    <content type="html"><![CDATA[<p>網址含有中文時，要將網址先編碼。收到的時候再對應解碼即可。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="sr">//</span> <span class="err">編碼</span>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="no">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">stringByAddingPercentEscapesUsingEncoding</span><span class="p">:(</span><span class="no">NSStringEncoding</span><span class="p">)</span><span class="n">enc</span><span class="p">;</span><span class="sr"></span>
+</span><span class='line'><span class="sr">// 解碼</span>
+</span><span class='line'><span class="sr">- (NSString *)stringByReplacingPercentEscapesUsingEncoding:(NSStringEncoding)enc;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>NSStringEncoding 有很多類型，例如常用的：<code>NSUTF8StringEncoding</code>, <code>NSASCIIStringEncoding</code>, &#8230;等。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Python版本管理工具]]></title>
@@ -1661,156 +1683,6 @@ A類別身上存著 BaseDataMgr 的指標，但使用時是產生 MyDataMgr 的�
 
 
 <blockquote><p>更詳細的說明可以參考官方文件：<a href="https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/MemoryMgmt/Articles/MemoryMgmt.html" title="About Memory Management">About Memory Management</a></p></blockquote>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[About Objective-C Declared Properties Feature]]></title>
-    <link href="http://bcswlmpke.github.io/blog/2012/02/01/objective-c-declared-properties-feature/"/>
-    <updated>2012-02-01T21:54:00+08:00</updated>
-    <id>http://bcswlmpke.github.io/blog/2012/02/01/objective-c-declared-properties-feature</id>
-    <content type="html"><![CDATA[<p>剛開始接觸 iOS 應用程式開發時，
-曾經對 @synthesize window = _window 所表達的意義有疑問，
-查過資料卻沒記下來，
-今天剛好同事問到，
-所以這次一定要做一下筆記。</p>
-
-<!-- more -->
-
-
-<ul>
-<li><strong>Property Declaratoin</strong></li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'>  <span class="k">@property</span> <span class="p">(</span><span class="n">attributes</span><span class="p">)</span> <span class="n">type</span> <span class="n">name</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">@interface</span> <span class="nc">MyClass</span> : <span class="nc">NSObject</span>
-</span><span class='line'>  <span class="k">@property</span> <span class="kt">float</span> <span class="n">value</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>@property float value; 相等於</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'>  <span class="o">-</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">value</span><span class="p">;</span>
-</span><span class='line'>  <span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">setValue:</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">newValue</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>而 property 的宣告也可以放在 class extensions (也就是 anonymous categories)</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'>  <span class="k">@interface</span> <span class="nc">MyClass</span> : <span class="nc">NSObject</span>
-</span><span class='line'>  <span class="k">@property</span> <span class="p">(</span><span class="n">retain</span><span class="p">,</span> <span class="n">readonly</span><span class="p">)</span> <span class="kt">float</span> <span class="n">value</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">@end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">@interface</span> <span class="nc">MyClass</span><span class="p">()</span> <span class="c1">// Private extension</span>
-</span><span class='line'>  <span class="k">@property</span> <span class="p">(</span><span class="n">retain</span><span class="p">,</span> <span class="n">readwrite</span><span class="p">)</span> <span class="kt">float</span> <span class="n">value</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li><strong>Property Declaratoin Attributes</strong></li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'>  <span class="k">@property</span> <span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="p">[,</span> <span class="n">attribute2</span><span class="p">,</span> <span class="p">...])</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li><strong>Accessor Method Names</strong></li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'>  <span class="n">getter</span><span class="o">=</span><span class="n">getterName</span>
-</span><span class='line'>  <span class="n">setter</span><span class="o">=</span><span class="n">setterName</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li><strong>Writability</strong>
-
-<ul>
-<li>readwrite</li>
-<li>readonly</li>
-</ul>
-</li>
-<li><strong>Setter Semantics</strong>
-
-<ul>
-<li>strong</li>
-<li>weak (OS X v10.6 and iOS 4 not support)</li>
-<li>copy</li>
-<li>assign (Default)</li>
-<li>retain</li>
-</ul>
-</li>
-<li><strong>Atomicity</strong>
-
-<ul>
-<li>nonatomic</li>
-<li>atomic (Default)</li>
-</ul>
-</li>
-<li><strong>Property Implementation Directives</strong></li>
-</ul>
-
-
-<p>用 property=ivar 可以指定特別的 instance variable 來讓 property 使用。
-不指定的情況如下，@synthesize value; 其實等同於 @synthesize value = value;</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'>  <span class="k">@interface</span> <span class="nc">MyClass</span> : <span class="nc">NSObject</span>
-</span><span class='line'>  <span class="k">@property</span> <span class="p">(</span><span class="n">copy</span><span class="p">,</span> <span class="n">readwrite</span><span class="p">)</span> <span class="n">NSString</span> <span class="o">*</span><span class="n">value</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">@end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">@implementation</span> <span class="nc">MyClass</span>
-</span><span class='line'>  <span class="k">@synthesize</span> <span class="n">value</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>有指定的情況如下：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'>  <span class="k">@implementation</span> <span class="nc">MyClass</span>
-</span><span class='line'>  <span class="k">@synthesize</span> <span class="n">firstName</span><span class="p">,</span> <span class="n">lastName</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="n">yearsOld</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>age 是用 yearsOld 這個 instance variable 來表示。
-所以在 MyClass 內部使用時，可以用 yearsOld 來進行操作，
-而其它類別如果使用 MyClass，則可以用 age 這個 property 來進行操作。</p>
-
-<blockquote><p>如果要看更詳細的說明，可以參考官方文件<a href="http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/ObjectiveC/Chapters/ocProperties.html" title="ocProperties">Declared Properties</a></p></blockquote>
 ]]></content>
   </entry>
   

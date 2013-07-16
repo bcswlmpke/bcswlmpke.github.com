@@ -5,11 +5,18 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Octopress - Hank學習筆記</title>
+  <title>(iOS)url encode / decode - Hank學習筆記</title>
   <meta name="author" content="Hank Chen">
 
   
-  <meta name="description" content="Category: Octopress">
+  <meta name="description" content="網址含有中文時，要將網址先編碼。收到的時候再對應解碼即可。 1
+2
+3
+4
+// 編碼
+- (NSString *)stringByAddingPercentEscapesUsingEncoding:(NSStringEncoding)enc;
+// 解碼
+- (NSString *) &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +25,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://bcswlmpke.github.ioblog/categories/octopress">
+  <link rel="canonical" href="http://bcswlmpke.github.io/blog/2013/07/16/ios-urlencode">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -64,50 +71,106 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Octopress</h1>
+    
+      <h1 class="entry-title">(iOS)url Encode / Decode</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-16T21:51:00+08:00" pubdate data-updated="true">Jul 16<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>網址含有中文時，要將網址先編碼。收到的時候再對應解碼即可。</p>
 
-  
-  <h2>2012</h2>
-
-<article>
-  
-<h1><a href="/blog/2012/01/14/octopress-directory-structure/">Octopress的目錄結構</a></h1>
-<time datetime="2012-01-14T00:21:00+08:00" pubdate><span class='month'>Jan</span> <span class='day'>14</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/octopress/'>Octopress</a></span>
-</footer>
-
-
-</article>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="sr">//</span> <span class="err">編碼</span>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="no">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">stringByAddingPercentEscapesUsingEncoding</span><span class="p">:(</span><span class="no">NSStringEncoding</span><span class="p">)</span><span class="n">enc</span><span class="p">;</span><span class="sr"></span>
+</span><span class='line'><span class="sr">// 解碼</span>
+</span><span class='line'><span class="sr">- (NSString *)stringByReplacingPercentEscapesUsingEncoding:(NSStringEncoding)enc;</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-
-<article>
-  
-<h1><a href="/blog/2012/01/12/octopress-note/">How to use Octopress</a></h1>
-<time datetime="2012-01-12T21:53:00+08:00" pubdate><span class='month'>Jan</span> <span class='day'>12</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/octopress/'>Octopress</a></span>
-</footer>
-
-
-</article>
-
+<p>NSStringEncoding 有很多類型，例如常用的：<code>NSUTF8StringEncoding</code>, <code>NSASCIIStringEncoding</code>, &#8230;等。</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Hank Chen</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-16T21:51:00+08:00" pubdate data-updated="true">Jul 16<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/objective-c/'>Objective-C</a>, <a class='category' href='/blog/categories/ios-app/'>iOS App</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://bcswlmpke.github.io/blog/2013/07/16/ios-urlencode/" data-via="" data-counturl="http://bcswlmpke.github.io/blog/2013/07/16/ios-urlencode/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/07/13/pythonbrew/" title="Previous Post: Python版本管理工具">&laquo; Python版本管理工具</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -169,7 +232,10 @@
       var disqus_shortname = 'bcswlmpke';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://bcswlmpke.github.io/blog/2013/07/16/ios-urlencode/';
+        var disqus_url = 'http://bcswlmpke.github.io/blog/2013/07/16/ios-urlencode/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
